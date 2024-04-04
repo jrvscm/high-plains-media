@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
 import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { useRouter } from 'next/router'
@@ -13,6 +12,7 @@ import { FaInstagram } from "react-icons/fa6";
 import { FaXTwitter } from "react-icons/fa6";
 import { FaLinkedin } from "react-icons/fa6";
 import { useScrollPosition } from './hooks/ScrollPosition';
+import useResponsive from '../components/hooks/useResponsive';
 
 const StyledContainer = styled(Container)`
     background: ${({ theme }) => theme.colors.blue};
@@ -44,6 +44,10 @@ const LowerNav = styled.div`
 `;
 
 const StyledNavbar = styled(Navbar)`
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
     flex-direction: column;
     padding-top: 0px;
     padding-bottom: 0px;
@@ -118,7 +122,7 @@ const StyledLink = styled(Link)`
 
 const List = styled.ul`
     display: flex;
-    flex-direction: row;
+    flex-direction: ${({ isOpen }) => (isOpen ? 'column' : 'row')};
     list-style: none;
     margin: 0;
 `;
@@ -126,37 +130,35 @@ const List = styled.ul`
 const Li = styled.li`
     padding: 10px 0;
     transition: 0.3s;
-    position: relative;
-    margin-right: 20px;
-    
-    &:hover {
-        a {
-            color: ${({ theme }) => theme.colors.blue};
-        }
-        a::after {
-            width: 100%;
-        }
+
+    &:not(:last-of-type) {
+        margin-right: 20px;
     }
     
     a {
-        padding: 0 3px;
-        text-decoration: none !important;
-        font-size: 15px !important;
+        text-decoration: none;
+        font-size: 15px;
+        color: ${({ theme, $active }) => ($active ? theme.colors.blue : theme.colors.black)};
         position: relative;
-        color: ${({theme, $active}) => $active ? theme.colors.blue : theme.colors.black};
-    }
-    
-    a::after {
-        content: '';
-        position: absolute;
-        bottom: -8px;
-        left: 0;
-        width: 0;
-        height: 2px;
-        background-color: ${({ theme }) => theme.colors.blue};
-        transition: width 0.3s ease;
 
-        width: ${({ $active }) => $active ? '100%' : ''};
+        &:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: ${({ $active }) => ($active ? '100%' : '0')};
+            height: 2px;
+            background-color: ${({ theme }) => theme.colors.blue};
+            transition: width 0.3s ease;
+        }
+
+        &:hover {
+            color: ${({ theme }) => theme.colors.blue};
+
+            &:after {
+                width: 100%;
+            }
+        }
     }
 `;
 
@@ -164,6 +166,7 @@ const Navigation = () => {
     const { pathname } = useRouter();
     const [isScrolled, setIsScrolled] = useState(false);
     const scrollPosition = useScrollPosition();
+    const { isDesktop } = useResponsive();
     useEffect(() => {
         if (scrollPosition > 40) {
             setIsScrolled(true);
@@ -172,8 +175,11 @@ const Navigation = () => {
         }
     }, [scrollPosition]);
 
+    const [isOpen, setIsOpen] = useState(false);
+    const toggleMenu = () => setIsOpen(!isOpen);
+
     return (
-        <StyledNavbar expand="lg" className="bg-body-tertiary">
+        <StyledNavbar collapseOnSelect expand="lg" className="bg-body-tertiary">
             <Wrapper>
                 <StyledContainer>
                     <UpperNav>
@@ -187,7 +193,7 @@ const Navigation = () => {
                                 <a href="tel:13076806321">1 307 680 6321</a>
                             </IconGroup>
                         </NavSection>
-                        <NavSection>
+                        {isDesktop && (<NavSection>
                             <IconWrapper>
                                 <MdOutlineFacebook size={'16px'} />
                             </IconWrapper>
@@ -200,20 +206,20 @@ const Navigation = () => {
                             <IconWrapper>
                                 <FaLinkedin size={'16px'} />
                             </IconWrapper>
-                        </NavSection>
+                        </NavSection>)}
                     </UpperNav>
                 </StyledContainer>
             </Wrapper>
             <LowerNav $isScrolled={isScrolled}>
                 <Container className="d-flex align-items-center justify-content-between">
-                    <div>
+                    <div style={{paddingLeft: '0px'}} className="d-flex align-items-center justify-content-between container-fluid">
                         <StyledNavbarBrand href="#home">Peak Digital<span>.</span></StyledNavbarBrand>
-                        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                        <Navbar.Toggle onClick={toggleMenu} aria-controls="nav" />
                     </div>
                     <div className="d-flex justify-content-end">
-                        <Navbar.Collapse id="basic-navbar-nav">
+                        <Navbar.Collapse id="nav">
                             <Nav>
-                                <List>
+                                <List isOpen={isOpen}>
                                     <Li $active={pathname == "/"}>
                                         <StyledLink href="/">Home</StyledLink>
                                     </Li>
