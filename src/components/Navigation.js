@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import Link from 'next/link';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
@@ -13,9 +13,14 @@ import { FaXTwitter } from "react-icons/fa6";
 import { FaLinkedin } from "react-icons/fa6";
 import { useScrollPosition } from './hooks/ScrollPosition';
 import useResponsive from '../components/hooks/useResponsive';
+import { device } from '../styles/breakpoints';
 
 const StyledContainer = styled(Container)`
     background: ${({ theme }) => theme.colors.blue};
+`;
+
+const Stackable = styled(Container)`
+    flex-direction: ${({ $isOpen }) => $isOpen ? 'column' : 'row'};
 `;
 
 const UpperNav = styled.div`
@@ -122,7 +127,9 @@ const StyledLink = styled(Link)`
 
 const List = styled.ul`
     display: flex;
-    flex-direction: ${({ isOpen }) => (isOpen ? 'column' : 'row')};
+    flex-direction: ${({ $isOpen }) => ($isOpen ? 'column' : 'row')};
+    align-items: ${({ $isOpen }) => ($isOpen ? 'center' : '')};
+    padding: ${({ $isOpen }) => ($isOpen ? '0px' : '')};
     list-style: none;
     margin: 0;
 `;
@@ -133,6 +140,8 @@ const Li = styled.li`
 
     &:not(:last-of-type) {
         margin-right: 20px;
+
+        ${({ $isOpen }) => $isOpen && css`margin-right: 0px`}
     }
     
     a {
@@ -175,8 +184,16 @@ const Navigation = () => {
         }
     }, [scrollPosition]);
 
-    const [isOpen, setIsOpen] = useState(false);
-    const toggleMenu = () => setIsOpen(!isOpen);
+    const [$isOpen, setIsOpen] = useState(false);
+    const toggleMenu = () => { //TODO: fix this hacky shit with actual transitions
+        if($isOpen) {
+            setTimeout(() => {
+                setIsOpen(!$isOpen)
+            }, 400)
+        } else {
+            setIsOpen(!$isOpen)
+        }
+    }
 
     return (
         <StyledNavbar collapseOnSelect expand="lg" className="bg-body-tertiary">
@@ -211,7 +228,7 @@ const Navigation = () => {
                 </StyledContainer>
             </Wrapper>
             <LowerNav $isScrolled={isScrolled}>
-                <Container className="d-flex align-items-center justify-content-between">
+                <Stackable $isOpen={$isOpen} className="d-flex align-items-center justify-content-between">
                     <div style={{paddingLeft: '0px'}} className="d-flex align-items-center justify-content-between container-fluid">
                         <StyledNavbarBrand href="#home">Peak Digital<span>.</span></StyledNavbarBrand>
                         <Navbar.Toggle onClick={toggleMenu} aria-controls="nav" />
@@ -219,27 +236,27 @@ const Navigation = () => {
                     <div className="d-flex justify-content-end">
                         <Navbar.Collapse id="nav">
                             <Nav>
-                                <List isOpen={isOpen}>
-                                    <Li $active={pathname == "/"}>
+                                <List $isOpen={$isOpen}>
+                                    <Li $isOpen={$isOpen} $active={pathname == "/"}>
                                         <StyledLink href="/">Home</StyledLink>
                                     </Li>
-                                    <Li $active={pathname == "/work"}>
+                                    <Li $isOpen={$isOpen} $active={pathname == "/work"}>
                                         <StyledLink href="/work">Work</StyledLink>
                                     </Li>
-                                    <Li $active={pathname == "/contact"}>
+                                    <Li $isOpen={$isOpen} $active={pathname == "/contact"}>
                                         <StyledLink href="/contact">Contact</StyledLink>
                                     </Li>
-                                    <Li $active={pathname == "/services"}>
+                                    <Li $isOpen={$isOpen} $active={pathname == "/services"}>
                                         <StyledLink href="/services">Services</StyledLink>
                                     </Li>
-                                    <Li $active={pathname == "/payment"}>
+                                    <Li $isOpen={$isOpen} $active={pathname == "/payment"}>
                                         <StyledLink href="/payment">Payment</StyledLink>
                                     </Li>
                                 </List>
                             </Nav>
                         </Navbar.Collapse>
                     </div>
-                </Container>
+                </Stackable>
             </LowerNav>
         </StyledNavbar>
     );
