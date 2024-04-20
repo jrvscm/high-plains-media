@@ -56,6 +56,7 @@ const StyledNavbar = styled(Navbar)`
     flex-direction: column;
     padding-top: 0px;
     padding-bottom: 0px;
+    z-index: 1;
 `;
 
 const IconGroup = styled.div`

@@ -1,11 +1,111 @@
 import Head from "next/head";
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import { useInView } from 'react-intersection-observer';
+import Container from 'react-bootstrap/Container';
+import Button from '../components/Button';
 
-const TempContainer = styled.div`
-  min-height: 120vh;
+const Hero = styled.div`
+  height: 75vh;
+  background: url('/images/hero-bg.jpeg') top left;
+  background-size: cover;
+  background-attachment: fixed;
+  position: relative;
+
+  &:before {
+    content: "";
+    background: rgba(255, 255, 255, 0.6);
+    position: absolute;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+`;
+
+const StyledContainer = styled(Container)`
+  opacity: 0;
+  height: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  position: relative;
+  flex-direction: column;
+
+  ${({ $isVisible }) => $isVisible && fadeInUpAnimation}
+`;
+
+const Span = styled.span`
+  color: ${({ theme }) => theme.colors.blue};
+`;
+
+const H1 = styled.h1`
+  ${({ theme }) => theme.fonts.font48ExtraBold};
+`;
+
+const H2 = styled.h1`
+  ${({ theme }) => theme.fonts.fontBody24Regular};
+`;
+
+const ButtonsWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const primaryButtonStyle = css`
+  margin: ${({theme}) => `${theme.spacing.lg} 0px ${theme.spacing.smd} 0px`};
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const primaryHoverStyle = css`
+  border: ${({ theme }) => `1px solid ${theme.colors.blue}`};
+  background: transparent;
+  filter: blur(1px); 
+`;
+
+const secondaryButtonStyle = css`
+  margin: ${({theme}) => `${theme.spacing.lg} 0px ${theme.spacing.smd} ${theme.spacing.smd}`};
+  border: ${({theme}) => `1px solid ${theme.colors.blue}`};
+  color: ${({theme}) => theme.colors.blue};
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const secondaryHoverStyle = css`
+  filter: blur(1px); 
+`;
+
+const Temp = styled.div`
+  height: 100vh
+`;
+
+const fadeInUpAnimation = css`
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  animation: fadeInUp 1s ease-out forwards;
 `;
 
 export default function Home() {
+
+  const { ref, inView } = useInView({
+    triggerOnce: true,  // Only trigger animation once
+    threshold: 0.5,     // Trigger when 50% of the element is in view
+  });
+
   return (
     <>
       <Head>
@@ -14,7 +114,17 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <TempContainer />
+      <Hero ref={ref}>
+        <StyledContainer $isVisible={inView}>
+          <H1>Welcome to <Span>Peak Digital</Span></H1>
+          <H2>We are team of talented engineers building projects for the web</H2>
+          <ButtonsWrapper>
+            <Button variant="primary" $style={primaryButtonStyle} $hoverStyle={primaryHoverStyle} onClick={() => console.log('clickkkkked')}>Click Me</Button>
+            <Button variant="secondary" $style={secondaryButtonStyle} $hoverStyle={secondaryHoverStyle} onClick={() => console.log('clickkkkked')}>Do sumtn crayz</Button>
+          </ButtonsWrapper>
+        </StyledContainer>
+      </Hero>
+      <Temp />
     </>
   );
 }
