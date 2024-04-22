@@ -2,7 +2,14 @@ import Head from "next/head";
 import styled, { css } from 'styled-components';
 import { useInView } from 'react-intersection-observer';
 import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
 import Button from '../components/Button';
+import Card from '../components/Card';
+import { MdOutlinePhoneIphone } from "react-icons/md";
+import { FaLaptopCode } from "react-icons/fa";
+import { IoMdAnalytics } from "react-icons/io";
+import { GrIntegration } from "react-icons/gr";
+import { device } from '../styles/breakpoints';
 
 const Hero = styled.div`
   height: 75vh;
@@ -31,7 +38,7 @@ const StyledContainer = styled(Container)`
   position: relative;
   flex-direction: column;
 
-  ${({ $isVisible }) => $isVisible && fadeInUpAnimation}
+  ${({ $isVisible, theme }) => $isVisible && theme.tokens.fadeInUpAnimation}
 `;
 
 const Span = styled.span`
@@ -80,32 +87,64 @@ const secondaryHoverStyle = css`
   filter: blur(1px); 
 `;
 
-const Temp = styled.div`
-  height: 100vh
+const Services = styled.section`
+  padding: ${({ theme }) => theme.spacing.xxxlg};
+  background: ${({ theme }) => theme.colors.white};
+
+  @media ${device.tablet} {
+    padding: ${({ theme }) => `${theme.spacing.xlg} ${theme.spacing.sm}`};
+  }
 `;
 
-const fadeInUpAnimation = css`
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  animation: fadeInUp 1s ease-out forwards;
+const StyledRow = styled(Row)`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; // Ensures cards are centered horizontally in the container
+  gap: ${({ theme }) => theme.spacing.md}; // Provides consistent spacing between cards
+  margin: 0 auto; // Centers the row within the container if necessary
+  width: 100%; // Ensures the row takes full width to contain all cards properly
 `;
 
 export default function Home() {
 
-  const { ref, inView } = useInView({
-    triggerOnce: true,  // Only trigger animation once
-    threshold: 0.5,     // Trigger when 50% of the element is in view
+  const cards = [
+    {
+      title: 'Mobile Applications', 
+      Icon: MdOutlinePhoneIphone,
+      text: "Custom mobile solutions for iOS and Android that enhance engagement."
+    },
+    {
+      title: "Website Development", 
+      Icon: FaLaptopCode,
+      text: "Responsive and engaging websites that elevate your online presence."
+    },
+    {
+      title: "Digital Marketing", 
+      Icon: IoMdAnalytics,
+      text:  "Strategic digital marketing that boosts visibility and conversions."
+    },
+    {
+      title: "Software Integration", 
+      Icon: GrIntegration,
+      text: "Streamline operations with efficient software integrations."
+    }
+  ]
+
+  const {
+    ref: heroRef, 
+    inView: heroInView
+  } = useInView({
+    triggerOnce: true,
+    threshold: 0.5  // Adjusted for your specific need, maybe 1 for full visibility
   });
 
+  const {
+    ref: rowRef, 
+    inView: rowInView
+  } = useInView({
+    triggerOnce: true,
+    threshold: 1.0
+  });
   return (
     <>
       <Head>
@@ -114,8 +153,8 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Hero ref={ref}>
-        <StyledContainer $isVisible={inView}>
+      <Hero ref={heroRef}>
+        <StyledContainer $isVisible={heroInView}>
           <H1>Welcome to <Span>Peak Digital</Span></H1>
           <H2>We are team of talented engineers building projects for the web</H2>
           <ButtonsWrapper>
@@ -124,7 +163,13 @@ export default function Home() {
           </ButtonsWrapper>
         </StyledContainer>
       </Hero>
-      <Temp />
+      <Services ref={rowRef}>
+        <Container>
+          <StyledRow>
+            {rowInView && cards?.length && cards.map(({title, Icon, text}, index) => <Card title={title} Icon={Icon} text={text} $delay={0.2 * index} $isVisible={rowInView} />)}
+          </StyledRow>
+        </Container>
+      </Services>
     </>
   );
 }

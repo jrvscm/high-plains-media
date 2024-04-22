@@ -23,6 +23,13 @@ const fonts = {
         color: ${colors.black};
     `,
 
+    font18Bold: css`
+        font-family: Poppins, sans-seriff;
+        font-size: 18px;
+        font-weight: 700;
+        color: ${colors.black};
+    `,
+
     font30Bold: css`
         font-family: Poppins, sans-seriff;
         font-size: 30px;
@@ -52,6 +59,20 @@ const fonts = {
         font-family: "Roboto", sans-serif;
         color: ${colors.gray};
     `,
+
+    fontBody18Bold: css`
+        font-family: "Roboto", sans-seriff;
+        font-size: 18px;
+        font-weight: 700;
+        color: ${colors.black};
+    `,
+
+    font15TextRegular: css`
+        font-family: "Open Sans", sans-seriff;
+        font-size: 15px;
+        font-weight: 400;
+        color: ${colors.black};
+    `
 }
 
 const spacing = {
@@ -60,11 +81,33 @@ const spacing = {
     sm: '8px',
     smd: '16px',
     md: '18px',
-    lg: '30px'
+    lg: '30px',
+    xlg: '36px',
+    xxlg: '50px',
+    xxxlg: '60px'
+}
+
+const tokens = {
+    cardBoxShadow: css`rgba(68, 88, 144, 0.12) 0px 0px 29px 0px`,
+    fadeInUpAnimation: css`
+        @keyframes fadeInUp {
+            from {
+            opacity: 0;
+            transform: translateY(30px);
+            }
+            to {
+            opacity: 1;
+            transform: translateY(0);
+            }
+        }
+
+        animation: fadeInUp 1s ease-out forwards;
+    `
 }
 
 export const theme = {
     fonts,
     colors, 
-    spacing
+    spacing, 
+    tokens
 }
