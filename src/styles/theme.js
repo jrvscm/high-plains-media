@@ -102,6 +102,13 @@ const fonts = {
         color: ${colors.black};
     `,
 
+    font13TextRegular: css`
+        font-family: "Open Sans", sans-seriff;
+        font-size: 13px;
+        font-weight: 400;
+        color: ${colors.textGray};
+    `,
+
     font16TextRegular: css`
         font-family: "Open Sans", sans-seriff;
         font-size: 16px;
@@ -134,6 +141,7 @@ const fonts = {
 }
 
 const spacing = {
+    xxxs: '1px',
     xxs: '4px',
     xs: '6px',
     sm: '8px',

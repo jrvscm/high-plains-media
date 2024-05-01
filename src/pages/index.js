@@ -9,9 +9,10 @@ import ImageLeftContentRight from '../components/ImageLeftContentRight';
 import { MdOutlinePhoneIphone } from "react-icons/md";
 import { FaLaptopCode } from "react-icons/fa";
 import { IoMdAnalytics } from "react-icons/io";
-import { GrIntegration } from "react-icons/gr";
+import { MdOutlineShoppingCart, MdOutlineBrush, MdOutlineContentCopy, MdOutlineTrendingUp,  MdFilterList } from "react-icons/md";
 import { device } from '../styles/breakpoints';
 import useResponsive from '../components/hooks/useResponsive';
+import TeamSection from '../components/TeamSection';
 
 const Hero = styled.div`
   height: 75vh;
@@ -126,10 +127,30 @@ export default function Home() {
       text:  "Strategic digital marketing that boosts visibility and increases conversions."
     },
     {
-      title: "Software Integration", 
-      Icon: GrIntegration,
-      text: "Streamline operations with custom software integrations and automation."
-    }
+      title: "E-commerce", 
+      Icon: MdOutlineShoppingCart,
+      text: "Seamless e-commerce solutions solutions tailored for growth so you can start selling today."
+    },
+    {
+      title: "Content Strategy",
+      Icon: MdOutlineContentCopy,
+      text: "Content strategy that engages your audience, enhances SEO, and drives traffic to your site."
+    },
+    {
+      title: "Funnel Creation",
+      Icon:  MdFilterList,
+      text: "Design effective marketing funnels that convert visitors into customers."
+    },
+    {
+      title: "SEO Optimization",
+      Icon: MdOutlineTrendingUp,
+      text: "Boost search engine ranking and increase visibility with our expert SEO strategies."
+    },
+    {
+      title: "Graphic Design",
+      Icon: MdOutlineBrush,
+      text: "Transform your projects and and bring them to life with our graphic design services."
+    }    
   ]
 
   const {
@@ -161,7 +182,7 @@ export default function Home() {
       <Hero ref={heroRef}>
         <StyledContainer $isVisible={heroInView}>
           <H1>Welcome to <Span>Peak Digital</Span></H1>
-          <H2>We are team of talented engineers building projects for the web</H2>
+          <H2>We are team of talented engineers and designers building projects for the web</H2>
           <ButtonsWrapper>
             <Button variant="primary" $style={primaryButtonStyle} $hoverStyle={primaryHoverStyle} onClick={() => console.log('clickkkkked')}>Click Me</Button>
             <Button variant="secondary" $style={secondaryButtonStyle} $hoverStyle={secondaryHoverStyle} onClick={() => console.log('clickkkkked')}>Do sumtn crayz</Button>
@@ -182,6 +203,13 @@ export default function Home() {
         headline={'how our process '}
         spanText={'works'}
         subhead={headerMsg}
+      />
+
+      <TeamSection  
+        title={'experience'}
+        headline={'our exceptional '}
+        spanText={'Team'}
+        subhead={'Leverage nearly two decades of product development expertise for your web projects. Our seasoned team combines rich experience with the latest technology to ensure your digital solutions are crafted to the highest of standards.'}
       />
     </>
   );

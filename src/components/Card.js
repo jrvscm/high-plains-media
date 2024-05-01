@@ -20,6 +20,7 @@ const CardContainer = styled.div`
   align-items: flex-start; // Center content inside each card
   text-align: left; // Ensures text within the card is centered
 
+  ${({ $image }) => $image && css`padding: 0`};
   ${({theme}) => theme.tokens.fadeInUpAnimation};
 
   @media ${device.tablet} {
@@ -63,7 +64,7 @@ const Content = styled.div`
   }
 
   & p {
-        transition: color 0.2s ease;
+      transition: color 0.2s ease;
       ${({ theme }) => theme.fonts.font15TextRegular};
       color: ${({ $isHovered, theme }) => $isHovered ? theme.colors.white : theme.colors.textGray};
       line-height: 28px;
@@ -75,28 +76,44 @@ const Title = styled.h3`
     color: ${({ $isHovered, theme }) => $isHovered ? theme.colors.white : theme.colors.black};
     margin-top: ${({theme}) => theme.spacing.lg};
     margin-bottom: ${({theme}) => theme.spacing.md};
+    ${({$image, theme}) => $image && css`
+      padding: 0 ${theme.spacing.smd};
+      margin-bottom: ${theme.spacing.xxs}
+    `};
 `;
 
 const Text = styled.p`
+  ${({$image, theme}) => $image && css`
+    padding: 0 ${theme.spacing.smd};
+    ${theme.fonts.font13TextRegular};
+  `};
 `;
 
 const IconWrapper = styled.div`
     margin-bottom: ${({theme}) => theme.spacing.md};
 `;
 
-const ServiceCard = ({ Icon, title, text, $delay, $isVisible }) => {
+const Image = styled.img`
+  width: 100%;
+  border-top-right-radius: 8px;
+  border-top-left-radius: 8px;
+`;
+
+//only pass image if you want the image variant
+const ServiceCard = ({ Icon, title, text, $delay, $isVisible, image = null }) => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <CardContainer $delay={$delay} $isVisible={$isVisible} className="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0"
+    <CardContainer $image={image} $delay={$delay} $isVisible={$isVisible} className="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0"
     onMouseEnter={() => setIsHovered(true)}
     onMouseLeave={() => setIsHovered(false)}
     >
         <Background $isHovered={isHovered} />
         <Content $isHovered={isHovered}>
-        <IconWrapper>{Icon && <Icon size={'48px'} />}</IconWrapper>
-            <Title $isHovered={isHovered}>{title}</Title>
-            <Text $isHovered={isHovered}>{text}</Text>
+          {image && <Image src={image} />}
+          {Icon && <IconWrapper><Icon size={'48px'} /></IconWrapper>}
+          {title && <Title $image={image}  $isHovered={isHovered}>{title}</Title>}
+          {text && <Text  $image={image} $isHovered={isHovered}>{text}</Text>}
         </Content>
     </CardContainer>
   );
