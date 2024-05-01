@@ -5,11 +5,13 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Button from '../components/Button';
 import Card from '../components/Card';
+import ImageLeftContentRight from '../components/ImageLeftContentRight';
 import { MdOutlinePhoneIphone } from "react-icons/md";
 import { FaLaptopCode } from "react-icons/fa";
 import { IoMdAnalytics } from "react-icons/io";
 import { GrIntegration } from "react-icons/gr";
 import { device } from '../styles/breakpoints';
+import useResponsive from '../components/hooks/useResponsive';
 
 const Hero = styled.div`
   height: 75vh;
@@ -121,12 +123,12 @@ export default function Home() {
     {
       title: "Digital Marketing", 
       Icon: IoMdAnalytics,
-      text:  "Strategic digital marketing that boosts visibility and conversions."
+      text:  "Strategic digital marketing that boosts visibility and increases conversions."
     },
     {
       title: "Software Integration", 
       Icon: GrIntegration,
-      text: "Streamline operations with efficient software integrations."
+      text: "Streamline operations with custom software integrations and automation."
     }
   ]
 
@@ -145,6 +147,8 @@ export default function Home() {
     triggerOnce: true,
     threshold: 1.0
   });
+  const { isMobile } = useResponsive();
+  const headerMsg = !isMobile ? 'Enhance your online reach and increase conversions through our AI-powered, project build-out. Our approach leverages the latest in AI technology to ensure every aspect of your project is optimized for success.' : 'Enhance your online reach and increase conversions through our AI-powered, project build-out.'
   return (
     <>
       <Head>
@@ -153,6 +157,7 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+
       <Hero ref={heroRef}>
         <StyledContainer $isVisible={heroInView}>
           <H1>Welcome to <Span>Peak Digital</Span></H1>
@@ -163,6 +168,7 @@ export default function Home() {
           </ButtonsWrapper>
         </StyledContainer>
       </Hero>
+
       <Services ref={rowRef}>
         <Container>
           <StyledRow>
@@ -170,6 +176,13 @@ export default function Home() {
           </StyledRow>
         </Container>
       </Services>
+
+      <ImageLeftContentRight 
+        title={'process'}
+        headline={'how our process '}
+        spanText={'works'}
+        subhead={headerMsg}
+      />
     </>
   );
 }

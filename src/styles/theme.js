@@ -60,6 +60,34 @@ const fonts = {
         color: ${colors.gray};
     `,
 
+    font32RobotoBold: css`
+        font-size: 32px;
+        font-weight: 700;
+        font-family: "Roboto", sans-serif;
+        color: ${colors.textGray};
+    `,
+
+    font30RobotoSemiBold: css`
+        font-size: 32px;
+        font-weight: 700;
+        font-family: "Roboto", sans-serif;
+        color: ${colors.textGray};
+    `,
+
+    font26RobotoSemiBold: css`
+        font-size: 26px;
+        font-weight: 600;
+        font-family: "Roboto", sans-serif;
+        color: ${colors.textGray};
+    `,
+
+    font18RobotoSemiBold: css`
+        font-size: 18px;
+        font-weight: 500;
+        font-family: "Roboto", sans-serif;
+        color: ${colors.textGray};
+    `,
+
     fontBody18Bold: css`
         font-family: "Roboto", sans-seriff;
         font-size: 18px;
@@ -72,6 +100,36 @@ const fonts = {
         font-size: 15px;
         font-weight: 400;
         color: ${colors.black};
+    `,
+
+    font16TextRegular: css`
+        font-family: "Open Sans", sans-seriff;
+        font-size: 16px;
+        font-weight: 400;
+        color: ${colors.textGray};
+    `,
+
+
+    font13Bold: css`
+        font-family: "Roboto", sans-seriff;
+        font-size: 13px;
+        font-weight: 700;
+        color: ${colors.black};
+    `,
+
+    font16TextSemiBold: css`
+        font-family: "Open Sans", sans-seriff;
+        font-size: 16px;
+        font-weight: 600;
+        color: ${colors.textGray};
+    `,
+
+    font16RegularItalic: css`
+        font-family: "Open Sans", sans-seriff;
+        font-size: 16px;
+        font-weight: 400;
+        font-style: italic;
+        color: ${colors.textGray};
     `
 }
 
