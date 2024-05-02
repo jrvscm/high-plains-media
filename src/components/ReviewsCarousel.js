@@ -67,7 +67,7 @@ const reviews = [
 
 export const ReviewsCarousel = ({ imageSrc }) => {
     return (
-        <Section $imageSrc={imageSrc}>
+        <Section $imageSrc={imageSrc} className="py-5">
             <SContainer>
                 <Carousel className="pb-5">
                     {reviews.map((review, index) => (

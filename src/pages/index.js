@@ -193,10 +193,10 @@ export default function Home() {
       />
 
       <ReviewsCarousel imageSrc={'/images/tetons.jpg'} />
-      
-      <NewsletterSection />
 
       <ContactSection />
+
+      <NewsletterSection />
     </>
   );
 }

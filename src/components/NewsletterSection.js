@@ -46,14 +46,14 @@ const StyledButton = styled(BootstrapButton)`
     border-bottom-left-radius: 0;  
 `;
 
-export const NewsletterSection = ({ imageSrc }) => {
+export const NewsletterSection = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log('Form submitted!');
   };
 
   return (
-    <Section style={{ backgroundImage: `url(${imageSrc})` }}>
+    <Section className="py-5">
       <Container>
         <Row>
             <TitleWithPill title={'Subscribe'} headline={'Join Our Newsletter'} subhead={'Subscribe for deals, free tools, and the occasional give away.'} spanText={''} />

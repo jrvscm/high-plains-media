@@ -1,4 +1,5 @@
 import Navigation from './Navigation';
+import Footer from './Footer';
 import { useLoading } from './contexts/LoadingContext';
 import styled from 'styled-components';
 import Loader from '../components/Loader';
@@ -13,6 +14,7 @@ export const Layout = ({ children }) => {
         <Wrapper>
             <Navigation />
             {children}
+            <Footer />
             {isLoading && <Loader />}
         </Wrapper>
     )

@@ -25,13 +25,6 @@ const IconWrapper = styled.div`
     align-items: center;
     justify-content: center;
     border: 5px dotted ${({ theme }) => theme.colors.accentBlue};
-    
-    @media ${device.tablet} {
-        height: 42px;
-        width: 42px;
-        border-radius: 21px;
-        padding: 10px;
-    }
 `;
 
 const H3 = styled.h3`
@@ -57,7 +50,7 @@ const Image = styled.img`
 
 export const ContactSection = () => {
     return (
-        <Section>
+        <Section className="pb-5">
             <Container>
                 <Row className="py-5">
                     <TitleWithPill title={'Contact'} headline={''} subhead={'Shoot us a message about your project. We will respond within one business day!'} spanText={'Contact Us'} />
@@ -95,7 +88,7 @@ export const ContactSection = () => {
                 <Row>
                     <Col lg={6} sm={12} className="my-3">
                         <ShadowDiv className="">
-                            <Image src="/images/office-workers.jpg" />
+                            <Image src="/images/office-workers-two.jpg" alt="man in office explaining" />
                         </ShadowDiv>
                     </Col>
                     <Col lg={6} sm={12} className="my-3">

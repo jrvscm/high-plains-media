@@ -13,7 +13,6 @@ import { FaXTwitter } from "react-icons/fa6";
 import { FaLinkedin } from "react-icons/fa6";
 import { useScrollPosition } from './hooks/ScrollPosition';
 import useResponsive from '../components/hooks/useResponsive';
-import { device } from '../styles/breakpoints';
 
 const StyledContainer = styled(Container)`
     background: ${({ theme }) => theme.colors.blue};
