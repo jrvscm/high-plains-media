@@ -3,7 +3,12 @@ import styled, { css } from 'styled-components';
 import { useInView } from 'react-intersection-observer';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
-import Button from '../components/Button';
+import Button, { 
+  primaryHoverStyle, 
+  primaryButtonStyle, 
+  secondaryButtonStyle, 
+  secondaryHoverStyle 
+} from '../components/Button';
 import Card from '../components/Card';
 import ImageLeftContentRight from '../components/ImageLeftContentRight';
 import { MdOutlinePhoneIphone } from "react-icons/md";
@@ -13,6 +18,9 @@ import { MdOutlineShoppingCart, MdOutlineBrush, MdOutlineContentCopy, MdOutlineT
 import { device } from '../styles/breakpoints';
 import useResponsive from '../components/hooks/useResponsive';
 import TeamSection from '../components/TeamSection';
+import ReviewsCarousel from '../components/ReviewsCarousel';
+import NewsletterSection from '../components/NewsletterSection';
+import ContactSection from '../components/ContactSection';
 
 const Hero = styled.div`
   height: 75vh;
@@ -60,34 +68,6 @@ const ButtonsWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-`;
-
-const primaryButtonStyle = css`
-  margin: ${({theme}) => `${theme.spacing.lg} 0px ${theme.spacing.smd} 0px`};
-  height: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-const primaryHoverStyle = css`
-  border: ${({ theme }) => `1px solid ${theme.colors.blue}`};
-  background: transparent;
-  filter: blur(1px); 
-`;
-
-const secondaryButtonStyle = css`
-  margin: ${({theme}) => `${theme.spacing.lg} 0px ${theme.spacing.smd} ${theme.spacing.smd}`};
-  border: ${({theme}) => `1px solid ${theme.colors.blue}`};
-  color: ${({theme}) => theme.colors.blue};
-  height: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-const secondaryHoverStyle = css`
-  filter: blur(1px); 
 `;
 
 const Services = styled.section`
@@ -193,7 +173,7 @@ export default function Home() {
       <Services ref={rowRef}>
         <Container>
           <StyledRow>
-            {rowInView && cards?.length && cards.map(({title, Icon, text}, index) => <Card title={title} Icon={Icon} text={text} $delay={0.2 * index} $isVisible={rowInView} />)}
+            {rowInView && cards?.length && cards.map(({title, Icon, text}, index) => <Card title={title} Icon={Icon} text={text} $delay={0.2 * index} $isVisible={rowInView} key={'service_'+index} />)}
           </StyledRow>
         </Container>
       </Services>
@@ -211,6 +191,12 @@ export default function Home() {
         spanText={'Team'}
         subhead={'Leverage nearly two decades of product development expertise for your web projects. Our seasoned team combines rich experience with the latest technology to ensure your digital solutions are crafted to the highest of standards.'}
       />
+
+      <ReviewsCarousel imageSrc={'/images/tetons.jpg'} />
+      
+      <NewsletterSection />
+
+      <ContactSection />
     </>
   );
 }

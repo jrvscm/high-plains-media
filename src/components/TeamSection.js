@@ -25,8 +25,16 @@ const StyledRow = styled(Row)`
   width: 100%; // Ensures the row takes full width to contain all cards properly
 `;
 
-const StyledContainer = styled(Container)``;
+const StyledContainer = styled(Container)`
+  height: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  position: relative;
+  flex-direction: column;
 
+  ${({ $isVisible, theme }) => $isVisible && theme.tokens.fadeInUpAnimation}
+`;
 
 
 export const TeamSection = ({title, headline, subhead, spanText}) => {
@@ -57,7 +65,7 @@ export const TeamSection = ({title, headline, subhead, spanText}) => {
           image: '/images/headshot.jpeg',
           text: "Qualty Assurance Team Lead"
         },
-      ]
+      ];
 
     return (
         <Section>
@@ -68,7 +76,7 @@ export const TeamSection = ({title, headline, subhead, spanText}) => {
             </StyledContainer>
             <Container ref={containerRef}>
                 <StyledRow>
-                    {rowInView && cards?.length && cards.map(({title, Icon, text, image}, index) => <Card title={title} Icon={Icon} text={text} $delay={0.2 * index} $isVisible={rowInView} image={image} />)}
+                    {rowInView && cards?.length && cards.map(({title, Icon, text, image}, index) => <Card title={title} Icon={Icon} text={text} $delay={0.2 * index} $isVisible={rowInView} image={image} key={'card_'+index} />)}
                 </StyledRow>
             </Container>
         </Section>

@@ -1,4 +1,32 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+
+export const primaryButtonStyle = css`
+  margin: ${({theme}) => `${theme.spacing.lg} 0px ${theme.spacing.smd} 0px`};
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const primaryHoverStyle = css`
+  border: ${({ theme }) => `1px solid ${theme.colors.blue}`};
+  background: transparent;
+  filter: blur(1px); 
+`;
+
+export const secondaryButtonStyle = css`
+  margin: ${({theme}) => `${theme.spacing.lg} 0px ${theme.spacing.smd} ${theme.spacing.smd}`};
+  border: ${({theme}) => `1px solid ${theme.colors.blue}`};
+  color: ${({theme}) => theme.colors.blue};
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const secondaryHoverStyle = css`
+  filter: blur(1px); 
+`;
 
 const CalloutButton = styled.button.attrs({className: 'roboto-regular'})`
     cursor: pointer;

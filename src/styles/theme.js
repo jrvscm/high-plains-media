@@ -102,6 +102,13 @@ const fonts = {
         color: ${colors.black};
     `,
 
+    font20TextBold: css`
+        font-family: "Open Sans", sans-seriff;
+        font-size: 20px;
+        font-weight: 600;
+        color: ${colors.black};
+    `,
+
     font13TextRegular: css`
         font-family: "Open Sans", sans-seriff;
         font-size: 13px;
