@@ -40,12 +40,14 @@ const P = styled.p`
 const ShadowDiv = styled.div`
     border-radius: 8px;
     box-shadow: ${({ theme }) => theme.tokens.cardBoxShadow};
+    background: ${({ theme }) => theme.colors.white};
 `;
 
 const Image = styled.img`
     width: 100%;
     border-radius: 8px;
     box-shadow: ${({ theme }) => theme.tokens.cardBoxShadow};
+    will-change: transform; 
 `;
 
 export const ContactSection = () => {
@@ -55,7 +57,7 @@ export const ContactSection = () => {
                 <Row className="py-5">
                     <TitleWithPill title={'Contact'} headline={''} subhead={'Shoot us a message about your project. We will respond within one business day!'} spanText={'Contact Us'} />
                 </Row>
-                <Row classNames="justify-content-center align-items-center">
+                <Row className="justify-content-center align-items-center">
                     <Col lg={6} md={6} sm={12}>
                         <ShadowDiv className="text-center py-3 my-3">
                             <IconWrapper className="my-3 mx-auto">
@@ -87,7 +89,7 @@ export const ContactSection = () => {
 
                 <Row>
                     <Col lg={6} sm={12} className="my-3">
-                        <ShadowDiv className="">
+                        <ShadowDiv>
                             <Image src="/images/office-workers-two.jpg" alt="man in office explaining" />
                         </ShadowDiv>
                     </Col>

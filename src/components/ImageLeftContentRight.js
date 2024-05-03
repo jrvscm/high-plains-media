@@ -37,6 +37,7 @@ const IMG = styled.img`
     width: 100%;
     margin: ${({ theme }) => `0 auto ${theme.spacing.lg} 0`};
     display: block;
+    will-change: transform; 
 `;
 
 const P2 = styled.p`

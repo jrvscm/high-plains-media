@@ -7,10 +7,21 @@ const Section = styled.section`
     position: relative;
     height: 100%;
     width: 100%;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.5) 100%),
+    overflow: hidden;
+
+    &::before {
+        background: linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.5) 100%),
                 url(${({$imageSrc}) => $imageSrc}) no-repeat center center;
-    background-size: cover;
-    background-attachment: fixed;
+        background-size: cover;
+        content: '';
+        height: 100%;
+        left: 0;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        will-change: transform;
+        z-index: -1;
+    }
 `;
 
 const SContainer = styled(Container)`
@@ -69,7 +80,7 @@ export const ReviewsCarousel = ({ imageSrc }) => {
     return (
         <Section $imageSrc={imageSrc} className="py-5">
             <SContainer>
-                <Carousel className="pb-5">
+                <Carousel className="pb-5" interval={null}>
                     {reviews.map((review, index) => (
                         <Carousel.Item key={index}>
                             <Row className="justify-content-center align-items-center pt-5 pb-4">

@@ -21,7 +21,6 @@ const CardContainer = styled.div`
   text-align: left; // Ensures text within the card is centered
 
   ${({ $image }) => $image && css`padding: 0`};
-  ${({theme}) => theme.tokens.fadeInUpAnimation};
 
   @media ${device.tablet} {
       min-width: 100%;

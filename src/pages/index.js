@@ -26,8 +26,11 @@ const Hero = styled.div`
   height: 75vh;
   background: url('/images/hero-bg.jpeg') top left;
   background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   background-attachment: fixed;
   position: relative;
+
 
   &:before {
     content: "";
@@ -164,8 +167,8 @@ export default function Home() {
           <H1>Welcome to <Span>Peak Digital</Span></H1>
           <H2>We are team of talented engineers and designers building projects for the web</H2>
           <ButtonsWrapper>
-            <Button variant="primary" $style={primaryButtonStyle} $hoverStyle={primaryHoverStyle} onClick={() => console.log('clickkkkked')}>Click Me</Button>
-            <Button variant="secondary" $style={secondaryButtonStyle} $hoverStyle={secondaryHoverStyle} onClick={() => console.log('clickkkkked')}>Do sumtn crayz</Button>
+            <Button variant="primary" $style={primaryButtonStyle} $hoverStyle={primaryHoverStyle} onClick={() => console.log('clickkkkked')}>Schedule a Call</Button>
+            <Button variant="secondary" $style={secondaryButtonStyle} $hoverStyle={secondaryHoverStyle} onClick={() => console.log('clickkkkked')}>Send an Email</Button>
           </ButtonsWrapper>
         </StyledContainer>
       </Hero>

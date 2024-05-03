@@ -10,6 +10,7 @@ import TitleWithPill from '../components/TitleWithPill';
 const Section = styled.section`
     background: ${({ theme }) => theme.colors.white};
     padding: ${({ theme }) => theme.spacing.xxxlg};
+    height: 100%;
 
     @media ${device.tablet} {
         padding: ${({ theme }) => `${theme.spacing.smd} ${theme.spacing.xs}`};
@@ -39,11 +40,11 @@ const StyledContainer = styled(Container)`
 
 export const TeamSection = ({title, headline, subhead, spanText}) => {
     const {
-        ref: containerRef, 
+        ref: sectionRef, 
         inView: rowInView
       } = useInView({
         triggerOnce: true,
-        threshold: 1.0
+        threshold: .75
       });
 
     const cards = [
@@ -74,8 +75,8 @@ export const TeamSection = ({title, headline, subhead, spanText}) => {
                     <TitleWithPill title={title} headline={headline} subhead={subhead} spanText={spanText} />
                 </Row>
             </StyledContainer>
-            <Container ref={containerRef}>
-                <StyledRow>
+            <Container>
+                <StyledRow ref={sectionRef}>
                     {rowInView && cards?.length && cards.map(({title, Icon, text, image}, index) => <Card title={title} Icon={Icon} text={text} $delay={0.2 * index} $isVisible={rowInView} image={image} key={'card_'+index} />)}
                 </StyledRow>
             </Container>

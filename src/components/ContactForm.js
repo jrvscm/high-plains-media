@@ -6,11 +6,19 @@ import styled from 'styled-components';
 const StyledForm = styled(Form)`
   .form-floating {
     margin-bottom: 20px;
+
+    label {
+      color: ${({ theme }) => theme.colors.lightGray};
+    }
   }
 
   .btn-primary {
-    background-color: #007bff;
-    border-color: #007bff;
+    background-color: ${({ theme }) => theme.colors.blue};
+    border-color: ${({ theme }) => theme.colors.blue};
+
+    &:hover {
+      filter: brightness(90%);
+    }
   }
 `;
 
@@ -60,7 +68,7 @@ export const ContactForm = () => {
         </Form.Floating>
         
         <div className="text-center">
-          <Button type="submit" className="mt-2">Send Message</Button>
+          <Button type="submit" className="mt-2 btn-primary">Send Message</Button>
         </div>
       </StyledForm>
     </Container>

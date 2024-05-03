@@ -27,6 +27,10 @@ const NewsletterForm = styled(Form)`
         border-top-left-radius: 10px;  /* Apply radius to the top-right corner */
         border-bottom-left-radius: 10px; 
     }
+
+    label {
+      color: ${({ theme }) => theme.colors.lightGray};
+    }
   }
 
   @media ${device.tablet} {
