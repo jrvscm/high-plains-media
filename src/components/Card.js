@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Link from 'next/link';
 import styled, { css } from 'styled-components';
 import { device } from '../styles/breakpoints';
 
@@ -98,15 +99,33 @@ const Image = styled.img`
   border-top-left-radius: 8px;
 `;
 
+const StyledLink = styled(Link)`
+  text-decoration: none;
+`;
+
 //only pass image if you want the image variant
 const ServiceCard = ({ Icon, title, text, $delay, $isVisible, image = null }) => {
   const [isHovered, setIsHovered] = useState(false);
+  const slugify = (text) => {
+    return text
+        .toString()
+        .toLowerCase()
+        .trim()
+        .replace(/\s+/g, '-')           // Replace spaces with -
+        .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
+        .replace(/\-\-+/g, '-');        // Replace multiple - with single -
+  } 
 
   return (
-    <CardContainer $image={image} $delay={$delay} $isVisible={$isVisible} className="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0"
-    onMouseEnter={() => setIsHovered(true)}
-    onMouseLeave={() => setIsHovered(false)}
+    <CardContainer 
+      $image={image} 
+      $delay={$delay} 
+      $isVisible={$isVisible} 
+      className="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
+      <StyledLink href={`/posts/${slugify(title)}`}>
         <Background $isHovered={isHovered} />
         <Content $isHovered={isHovered}>
           {image && <Image src={image} />}
@@ -114,6 +133,7 @@ const ServiceCard = ({ Icon, title, text, $delay, $isVisible, image = null }) =>
           {title && <Title $image={image}  $isHovered={isHovered}>{title}</Title>}
           {text && <Text  $image={image} $isHovered={isHovered}>{text}</Text>}
         </Content>
+      </StyledLink>
     </CardContainer>
   );
 };

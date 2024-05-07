@@ -230,7 +230,7 @@ const Navigation = () => {
             <LowerNav $isScrolled={isScrolled}>
                 <Stackable $isOpen={$isOpen} className="d-flex align-items-center justify-content-between">
                     <div style={{paddingLeft: '0px'}} className="d-flex align-items-center justify-content-between container-fluid">
-                        <StyledNavbarBrand href="#home">Peak Digital<span>.</span></StyledNavbarBrand>
+                        <StyledNavbarBrand href="/">Peak Digital<span>.</span></StyledNavbarBrand>
                         <Navbar.Toggle onClick={toggleMenu} aria-controls="nav" />
                     </div>
                     <div className="d-flex justify-content-end">
