@@ -38,6 +38,22 @@ const fonts = {
         color: ${colors.black};
     `,
 
+    font24Bold: css`
+        font-family: Poppins, sans-seriff;
+        font-size: 24px;
+        font-weight: 600;
+        letter-spacing: 0.8px;
+        color: ${colors.black};
+    `,
+
+    font36Bold: css`
+        font-family: Poppins, sans-seriff;
+        font-size: 36px;
+        font-weight: 600;
+        letter-spacing: 0.8px;
+        color: ${colors.black};
+    `,
+
     font48ExtraBold: css`
         font-family: Poppins, sans-seriff;
         font-size: 48px;

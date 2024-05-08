@@ -1,14 +1,47 @@
 import React from 'react';
+import styled from 'styled-components';
 import { getBlogPostBySlug, getBlogPosts } from '../../utils/contentful';
 import ReactMarkdown from 'react-markdown';
+import Container from 'react-bootstrap/Container';
+
+const Section = styled.section``;
+
+const PostHero = styled.div`
+  background-image: url(${({ $imageSrc }) => $imageSrc});
+  background-size: cover;
+  background-position: center;
+  height: 400px;
+  margin-bottom: 100px;
+`;
+
+const StyledContainer = styled(Container)`
+  h1 {
+    ${({ theme }) => theme.fonts.font36Bold};
+    margin-bottom: 100px;
+  }
+  h2 {
+    ${({ theme }) => theme.fonts.font30Bold};
+    margin-bottom: 24px;
+  }
+  h3 {
+    ${({ theme }) => theme.fonts.font24Bold};
+    margin-bottom: 24px;
+  }
+
+  p {
+    ${({ theme }) => theme.fonts.fontBody24Regular};
+    margin-bottom: 20px;
+  }
+`;
 
 const Post = ({ post }) => {
   return (
-    <div logger={console.log('post',post.fields.hero.fields)}>
-      {post?.fields?.hero?.fields?.file?.url && <div style={{ backgroundImage: `url(${post.fields.hero.fields.file.url})`, height: '400px', backgroundSize: 'cover' }} />}
-      {post?.fields?.title && <h1>{post.fields.title}</h1>}
-      {post?.fields?.content && <div><ReactMarkdown>{post.fields.content}</ReactMarkdown></div>}
-    </div>
+    <Section logger={console.log('post',post.fields.hero.fields)}>
+      {post?.fields?.hero?.fields?.file?.url && <PostHero $imageSrc={post.fields.hero.fields.file.url} />}
+      <StyledContainer>
+        {post?.fields?.content && <div><ReactMarkdown>{post.fields.content}</ReactMarkdown></div>}
+      </StyledContainer>
+    </Section>
   );
 };
 
