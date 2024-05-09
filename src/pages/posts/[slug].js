@@ -15,6 +15,7 @@ const PostHero = styled.div`
 `;
 
 const StyledContainer = styled(Container)`
+  width: 50%;
   h1 {
     ${({ theme }) => theme.fonts.font36Bold};
     margin-bottom: 100px;
@@ -32,6 +33,18 @@ const StyledContainer = styled(Container)`
     ${({ theme }) => theme.fonts.fontBody24Regular};
     margin-bottom: 20px;
   }
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+`;
+
+const H1 = styled.h1`
+  text-align: left;
+  border-top: 8px solid #000;
+  border-bottom: 8px solid #000;
+  padding: 16px 0;
 `;
 
 const Post = ({ post }) => {
@@ -39,6 +52,7 @@ const Post = ({ post }) => {
     <Section logger={console.log('post',post.fields.hero.fields)}>
       {post?.fields?.hero?.fields?.file?.url && <PostHero $imageSrc={post.fields.hero.fields.file.url} />}
       <StyledContainer>
+        {post?.fields?.title && <H1>{post?.fields?.title}</H1>}
         {post?.fields?.content && <div><ReactMarkdown>{post.fields.content}</ReactMarkdown></div>}
       </StyledContainer>
     </Section>
