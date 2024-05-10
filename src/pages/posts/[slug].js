@@ -18,7 +18,7 @@ const StyledContainer = styled(Container)`
   width: 50%;
   h1 {
     ${({ theme }) => theme.fonts.font36Bold};
-    margin-bottom: 100px;
+    margin-bottom: 80px;
   }
   h2 {
     ${({ theme }) => theme.fonts.font30Bold};
@@ -26,12 +26,22 @@ const StyledContainer = styled(Container)`
   }
   h3 {
     ${({ theme }) => theme.fonts.font24Bold};
-    margin-bottom: 24px;
+    margin-bottom: 20px;
+    font-weight: 500;
+  }
+
+  h4 {
+    font-style: italic;
   }
 
   p {
     ${({ theme }) => theme.fonts.fontBody24Regular};
-    margin-bottom: 20px;
+    margin-bottom: 48px;
+
+    &:last-of-type {
+      padding-bottom: 48px;
+      border-bottom: 8px solid ${({ theme }) => theme.colors.black};
+    }
   }
 
   img {
@@ -42,8 +52,8 @@ const StyledContainer = styled(Container)`
 
 const H1 = styled.h1`
   text-align: left;
-  border-top: 8px solid #000;
-  border-bottom: 8px solid #000;
+  border-top: 8px solid ${({ theme }) => theme.colors.black};
+  border-bottom: 8px solid ${({ theme }) => theme.colors.black};
   padding: 16px 0;
 `;
 
