@@ -4,8 +4,10 @@ import styled, { css } from 'styled-components';
 import { device } from '../styles/breakpoints';
 
 const CardContainer = styled.div`
-  flex: 0 1 300px; // Base width of each card
-  max-width: 300px;
+  flex: 0 1 ${({ $overrideWidth }) => $overrideWidth ? $overrideWidth : '300px'}; // Base width of each card
+  max-width: ${({ $overrideWidth }) => $overrideWidth ? $overrideWidth : '300px'};
+  ${'' /* flex: 0 1 300px; // Base width of each card
+  max-width: 300px; */}
   height: auto;
   border-radius: 8px;
   overflow: hidden;
@@ -35,6 +37,10 @@ const CardContainer = styled.div`
   opacity: 0; // Start with the card invisible
   transform: translateY(30px);
   visibility: ${({ $isVisible }) => $isVisible ? 'visible' : 'hidden'};
+
+  &:hover {
+    box-shadow: ${({ theme, $overrideBackground }) => $overrideBackground ? theme.tokens.cardHoveredBoxShadow : theme.tokens.cardBoxShadow};
+  }
 `;
 
 const Background = styled.div`
@@ -86,6 +92,8 @@ const Text = styled.p`
   ${({$image, theme}) => $image && css`
     padding: 0 ${theme.spacing.smd};
     ${theme.fonts.font13TextRegular};
+    filter: ${({ $isBlur }) => $isBlur ? 'blur(5px)' : 'none'};
+    padding-bottom: ${({ $overrideBackground, theme }) => $overrideBackground ? theme.spacing.xxs : '0px'};
   `};
 `;
 
@@ -94,9 +102,11 @@ const IconWrapper = styled.div`
 `;
 
 const Image = styled.img`
+  will-change: transform;
   width: 100%;
   border-top-right-radius: 8px;
   border-top-left-radius: 8px;
+  filter: ${({ $isBlur }) => $isBlur ? 'blur(10px)' : 'none'};
 `;
 
 const StyledLink = styled(Link)`
@@ -104,8 +114,9 @@ const StyledLink = styled(Link)`
 `;
 
 //only pass image if you want the image variant
-const ServiceCard = ({ Icon, title, text, $delay, $isVisible, image = null }) => {
+const Card = ({ Icon, title, text, $delay, $isVisible, image = null, overrideWidth = null, overrideHeight = null, isBlur = null, overrideBackground = null, overrideHref = null }) => {
   const [isHovered, setIsHovered] = useState(false);
+
   const slugify = (text) => {
     return text
         .toString()
@@ -118,24 +129,27 @@ const ServiceCard = ({ Icon, title, text, $delay, $isVisible, image = null }) =>
 
   return (
     <CardContainer 
+      $overrideBackground={overrideBackground}
+      $overrideHeight={overrideHeight}
+      $overrideWidth={overrideWidth}
       $image={image} 
       $delay={$delay} 
       $isVisible={$isVisible} 
       className="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      onMouseEnter={() => overrideBackground ? setIsHovered(false) : setIsHovered(true)}
+      onMouseLeave={() => overrideBackground ? setIsHovered(false) : setIsHovered(false)}
     >
-      <StyledLink href={`/posts/${slugify(title)}`}>
-        <Background $isHovered={isHovered} />
+      <StyledLink href={overrideHref ? overrideHref : `/posts/${slugify(title)}`}>
+        {!isBlur && <Background $isHovered={isHovered} />}
         <Content $isHovered={isHovered}>
-          {image && <Image src={image} />}
+          {image && <Image $isBlur={isBlur} src={image} />}
           {Icon && <IconWrapper><Icon size={'48px'} /></IconWrapper>}
           {title && <Title $image={image}  $isHovered={isHovered}>{title}</Title>}
-          {text && <Text  $image={image} $isHovered={isHovered}>{text}</Text>}
+          {text && <Text $isBlur={isBlur} $image={image} $isHovered={isHovered} $overrideBackground={overrideBackground}>{text}</Text>}
         </Content>
       </StyledLink>
     </CardContainer>
   );
 };
 
-export default ServiceCard;
+export default Card;

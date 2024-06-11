@@ -84,10 +84,12 @@ const SocialLink = styled.a`
 
 const CopyWrapper = styled(Row)`
     background: ${({ theme }) => theme.colors.sectionBackground};
-
+    width: 100vw;
+    margin: 0;
     p {
         ${({ theme }) => theme.fonts.font13TextRegular};
         margin: 0;
+        padding: 0;
     }
 `;
 

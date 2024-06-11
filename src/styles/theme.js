@@ -178,6 +178,7 @@ const spacing = {
 
 const tokens = {
     cardBoxShadow: css`rgba(68, 88, 144, 0.12) 0px 0px 29px 0px`,
+    cardHoveredBoxShadow: css`rgba(68, 88, 144, 0.4) 0px 0px 29px 0px`,
     fadeInUpAnimation: css`
         @keyframes fadeInUp {
             from {

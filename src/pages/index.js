@@ -1,26 +1,23 @@
+import { useEffect } from 'react';
 import Head from "next/head";
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { useInView } from 'react-intersection-observer';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
-import Button, { 
-  primaryHoverStyle, 
-  primaryButtonStyle, 
-  secondaryButtonStyle, 
-  secondaryHoverStyle 
-} from '../components/Button';
+import Button, { primaryHoverStyle, primaryButtonStyle, secondaryButtonStyle, secondaryHoverStyle } from '../components/Button';
 import Card from '../components/Card';
 import ImageLeftContentRight from '../components/ImageLeftContentRight';
-import { MdOutlinePhoneIphone } from "react-icons/md";
-import { FaLaptopCode } from "react-icons/fa";
-import { IoMdAnalytics } from "react-icons/io";
-import { MdOutlineShoppingCart, MdOutlineBrush, MdOutlineContentCopy, MdOutlineTrendingUp,  MdFilterList } from "react-icons/md";
+import { MdOutlinePhoneIphone, MdLaptop, MdOutlineShoppingCart, MdOutlineBrush, MdOutlineContentCopy, MdOutlineTrendingUp, MdFilterList } from "react-icons/md";
+import { IoMdAnalytics } from 'react-icons/io';
 import { device } from '../styles/breakpoints';
 import useResponsive from '../components/hooks/useResponsive';
-import TeamSection from '../components/TeamSection';
+import WorkSection from '../components/WorkSection';
 import ReviewsCarousel from '../components/ReviewsCarousel';
 import NewsletterSection from '../components/NewsletterSection';
 import ContactSection from '../components/ContactSection';
+import { useRouter } from 'next/router';
+import { useHash } from '../components/contexts/HashContext';
+import { updateHash } from '../utils/routerUtil';
 
 const Hero = styled.div`
   height: 75vh;
@@ -30,7 +27,6 @@ const Hero = styled.div`
   background-repeat: no-repeat;
   background-attachment: fixed;
   position: relative;
-
 
   &:before {
     content: "";
@@ -71,6 +67,18 @@ const ButtonsWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  @media ${device.tablet} {
+    flex-direction: column;
+    margin: 0 auto;
+
+    button {
+      min-width: 90vw;
+      &:last-of-type {
+        margin: 0px 0px 16px 0px;
+      }
+    }
+  }
 `;
 
 const Services = styled.section`
@@ -85,74 +93,58 @@ const Services = styled.section`
 const StyledRow = styled(Row)`
   display: flex;
   flex-wrap: wrap;
-  justify-content: center; // Ensures cards are centered horizontally in the container
-  gap: ${({ theme }) => theme.spacing.md}; // Provides consistent spacing between cards
-  margin: 0 auto; // Centers the row within the container if necessary
-  width: 100%; // Ensures the row takes full width to contain all cards properly
+  justify-content: center;
+  gap: ${({ theme }) => theme.spacing.md};
+  margin: 0 auto;
+  width: 100%;
 `;
 
 export default function Home() {
+  const { hash, setHash } = useHash(); // Consume hash state from context
+  const router = useRouter();
 
   const cards = [
-    {
-      title: 'Mobile Applications', 
-      Icon: MdOutlinePhoneIphone,
-      text: "Custom mobile solutions for iOS and Android that enhance engagement."
-    },
-    {
-      title: "Website Development", 
-      Icon: FaLaptopCode,
-      text: "Responsive and engaging websites that elevate your online presence."
-    },
-    {
-      title: "Digital Marketing", 
-      Icon: IoMdAnalytics,
-      text:  "Strategic digital marketing that boosts visibility and increases conversions."
-    },
-    {
-      title: "E-commerce", 
-      Icon: MdOutlineShoppingCart,
-      text: "Seamless e-commerce solutions solutions tailored for growth so you can start selling today."
-    },
-    {
-      title: "Content Strategy",
-      Icon: MdOutlineContentCopy,
-      text: "Content strategy that engages your audience, enhances SEO, and drives traffic to your site."
-    },
-    {
-      title: "Funnel Creation",
-      Icon:  MdFilterList,
-      text: "Design effective marketing funnels that convert visitors into customers."
-    },
-    {
-      title: "SEO Optimization",
-      Icon: MdOutlineTrendingUp,
-      text: "Boost search engine ranking and increase visibility with our expert SEO strategies."
-    },
-    {
-      title: "Graphic Design",
-      Icon: MdOutlineBrush,
-      text: "Transform your projects and and bring them to life with our graphic design services."
-    }    
-  ]
+    { title: 'Mobile Applications', Icon: MdOutlinePhoneIphone, text: "Custom mobile solutions for iOS and Android that enhance engagement." },
+    { title: "Website Development", Icon: MdLaptop, text: "Responsive and engaging websites that elevate your online presence." },
+    { title: "Digital Marketing", Icon: IoMdAnalytics, text: "Strategic digital marketing that boosts visibility and increases conversions." },
+    { title: "E-commerce", Icon: MdOutlineShoppingCart, text: "Seamless e-commerce solutions tailored for growth so you can start selling today." },
+    { title: "Content Strategy", Icon: MdOutlineContentCopy, text: "Content strategy that engages your audience, enhances SEO, and drives traffic to your site." },
+    { title: "Funnel Creation", Icon: MdFilterList, text: "Design effective marketing funnels that convert visitors into customers." },
+    { title: "SEO Optimization", Icon: MdOutlineTrendingUp, text: "Boost search engine ranking and increase visibility with our expert SEO strategies." },
+    { title: "Graphic Design", Icon: MdOutlineBrush, text: "Transform your projects and bring them to life with our graphic design services." }
+  ];
 
-  const {
-    ref: heroRef, 
-    inView: heroInView
-  } = useInView({
-    triggerOnce: true,
-    threshold: 0.5  // Adjusted for your specific need, maybe 1 for full visibility
-  });
+  const { ref: servicesRef, inView: servicesInView } = useInView({ threshold: 0.5, triggerOnce: false });
+  const { ref: heroRef, inView: heroInView } = useInView({ threshold: 0.5, triggerOnce: false });
 
-  const {
-    ref: rowRef, 
-    inView: rowInView
-  } = useInView({
-    triggerOnce: true,
-    threshold: 1.0
-  });
+  useEffect(() => {
+    if (servicesInView) {
+      updateHash('services', setHash); // Pass setHash to update the context
+    } else if (heroInView) {
+      updateHash('', setHash);
+    }
+  }, [heroInView, servicesInView, setHash]);
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      const newHash = window.location.hash.substring(1);
+      setHash(newHash);
+    };
+
+    router.events.on('hashChangeComplete', handleHashChange);
+
+    handleHashChange(); // Handle initial load
+
+    return () => {
+      router.events.off('hashChangeComplete', handleHashChange);
+    };
+  }, [router, setHash]);
+
   const { isMobile } = useResponsive();
-  const headerMsg = !isMobile ? 'Enhance your online reach and increase conversions through our AI-powered, project build-out. Our approach leverages the latest in AI technology to ensure every aspect of your project is optimized for success.' : 'Enhance your online reach and increase conversions through our AI-powered, project build-out.'
+  const headerMsg = !isMobile
+    ? 'Enhance your online reach and increase conversions through our AI-powered, project build-out. Our approach leverages the latest in AI technology to ensure every aspect of your project is optimized for success.'
+    : 'Enhance your online reach and increase conversions through our AI-powered, project build-out.'
+
   return (
     <>
       <Head>
@@ -165,7 +157,7 @@ export default function Home() {
       <Hero ref={heroRef}>
         <StyledContainer $isVisible={heroInView}>
           <H1>Welcome to <Span>Peak Digital</Span></H1>
-          <H2>We are team of talented engineers and designers building projects for the web</H2>
+          <H2>We are a team of talented engineers and designers building projects for the web</H2>
           <ButtonsWrapper>
             <Button variant="primary" $style={primaryButtonStyle} $hoverStyle={primaryHoverStyle} onClick={() => console.log('clickkkkked')}>Schedule a Call</Button>
             <Button variant="secondary" $style={secondaryButtonStyle} $hoverStyle={secondaryHoverStyle} onClick={() => console.log('clickkkkked')}>Send an Email</Button>
@@ -173,10 +165,12 @@ export default function Home() {
         </StyledContainer>
       </Hero>
 
-      <Services ref={rowRef}>
+      <Services ref={servicesRef} id="services" style={{ minHeight: '695px' }}>
         <Container>
           <StyledRow>
-            {rowInView && cards?.length && cards.map(({title, Icon, text}, index) => <Card title={title} Icon={Icon} text={text} $delay={0.2 * index} $isVisible={rowInView} key={'service_'+index} />)}
+            {(servicesInView || isMobile) && cards.map(({ title, Icon, text }, index) => (
+              <Card title={title} Icon={Icon} text={text} $delay={0.2 * index} $isVisible={servicesInView || isMobile} key={'service_' + index} />
+            ))}
           </StyledRow>
         </Container>
       </Services>
@@ -188,11 +182,11 @@ export default function Home() {
         subhead={headerMsg}
       />
 
-      <TeamSection  
-        title={'experience'}
-        headline={'our exceptional '}
-        spanText={'Team'}
-        subhead={'Leverage nearly two decades of product development expertise for your web projects. Our seasoned team combines rich experience with the latest technology to ensure your digital solutions are crafted to the highest of standards.'}
+      <WorkSection
+        title={'work'}
+        headline={"projects we've"}
+        spanText={' Built'}
+        subhead={'Our experienced team leverages cutting-edge technology and in-depth knowledge to deliver exceptional digital solutions tailored to your needs.'}
       />
 
       <ReviewsCarousel imageSrc={'/images/tetons.jpg'} />
