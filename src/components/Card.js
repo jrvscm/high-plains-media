@@ -142,7 +142,7 @@ const Card = ({ Icon, title, text, $delay, $isVisible, image = null, overrideWid
       <StyledLink href={overrideHref ? overrideHref : `/posts/${slugify(title)}`}>
         {!isBlur && <Background $isHovered={isHovered} />}
         <Content $isHovered={isHovered}>
-          {image && <Image $isBlur={isBlur} src={image} />}
+          {image && <Image $isBlur={isBlur} src={image} alt={alt || ''} />}
           {Icon && <IconWrapper><Icon size={'48px'} /></IconWrapper>}
           {title && <Title $image={image}  $isHovered={isHovered}>{title}</Title>}
           {text && <Text $isBlur={isBlur} $image={image} $isHovered={isHovered} $overrideBackground={overrideBackground}>{text}</Text>}

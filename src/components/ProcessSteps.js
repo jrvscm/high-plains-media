@@ -71,7 +71,7 @@ export const ProcessSteps = () => {
           </IconWrapper>
           <TextContainer>
             <Heading>Collaborate with Our Engineers and Designers</Heading>
-            <Text>During this initial phase, you'll work closely with our expert engineers and designers to define clear goals and develop a tailored content strategy for your project.</Text>
+            <Text>During this initial phase, you&apos;ll work closely with our expert engineers and designers to define clear goals and develop a tailored content strategy for your project.</Text>
           </TextContainer>
         </ListItem>
         <ListItem>

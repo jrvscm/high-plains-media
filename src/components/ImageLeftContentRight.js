@@ -58,10 +58,10 @@ export const ImageLeftContentRight = ({title, headline, subhead, spanText}) => {
                         <IMG src={imagePath} alt="tech office worker coding"/>
                     </Col>
                     <Col className="col-lg-6 col-12 justify-content-center">
-                        <H3Title>The project begins with a discovery call, where you'll discuss your vision and requirements directly with our leading engineers and designers.</H3Title>
+                        <H3Title>The project begins with a discovery call, where you&apos;ll discuss your vision and requirements directly with our leading engineers and designers.</H3Title>
                         <Italic>This initial conversation is crucial as it helps us understand your goals, explore your needs, and align our strategies to ensure that we deliver tailored solutions that exceed your expectations.</Italic>
                         <ProcessSteps />
-                        <P2>Throughout each phase of the project, you'll enjoy continuous communication with our team. We provide instant access to our dedicated communication channels, ensuring you're kept in the loop at every step. This commitment to open dialogue, allows for real-time updates and feedback. Our exceptional communication practices ensure that you are always informed and confident in the progress of your project.</P2>
+                        <P2>Throughout each phase of the project, you&apos;ll enjoy continuous communication with our team. We provide instant access to our dedicated communication channels, ensuring you&apos;re kept in the loop at every step. This commitment to open dialogue, allows for real-time updates and feedback. Our exceptional communication practices ensure that you are always informed and confident in the progress of your project.</P2>
                     </Col>
                 </Row>
             </StyledContainer>

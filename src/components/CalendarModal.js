@@ -10,11 +10,11 @@ function CalendarModal() {
 
     return (
         <>
-            <Button variant="primary" onClick={handleShow}>  // Button that triggers modal open
+            <Button variant="primary" onClick={handleShow}>
                 Schedule a Call
             </Button>
 
-            <Modal show={show} onHide={handleClose} size="lg">  // Modal visibility controlled by 'show'
+            <Modal show={show} onHide={handleClose} size="lg">
                 <Modal.Header closeButton>
                     <Modal.Title>Schedule Your Call</Modal.Title>
                 </Modal.Header>
