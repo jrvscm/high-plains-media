@@ -72,14 +72,12 @@ const Post = ({ post }) => {
 export async function getStaticPaths() {
   // Fetch necessary data to build the paths with `slug`
   const posts = await getBlogPosts();
-  console.log('posts',posts)
   const paths = posts.map(post => ({ params: { slug: post.fields.slug } }));
 
   return { paths, fallback: 'blocking' };
 }
 
 export async function getStaticProps({ params }) {
-    console.log('params', params.slug)
     const post = await getBlogPostBySlug(params.slug);
     if (!post) {
       return { notFound: true };
