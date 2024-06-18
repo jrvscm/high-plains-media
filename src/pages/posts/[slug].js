@@ -59,7 +59,7 @@ const H1 = styled.h1`
 
 const Post = ({ post }) => {
   return (
-    <Section logger={console.log('post',post.fields.hero.fields)}>
+    <Section>
       {post?.fields?.hero?.fields?.file?.url && <PostHero $imageSrc={post.fields.hero.fields.file.url} />}
       <StyledContainer>
         {post?.fields?.title && <H1>{post?.fields?.title}</H1>}
