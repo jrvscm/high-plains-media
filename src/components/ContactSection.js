@@ -59,7 +59,7 @@ export const ContactSection = () => {
 
   const { ref: contactRef, inView: contactInView } = useInView({
     threshold: 0.5,
-    triggerOnce: false,
+    triggerOnce: true,
   });
 
   useEffect(() => {

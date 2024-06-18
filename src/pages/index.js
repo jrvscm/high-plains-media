@@ -114,8 +114,8 @@ export default function Home() {
     { title: "Graphic Design", Icon: MdOutlineBrush, text: "Transform your projects and bring them to life with our graphic design services." }
   ];
 
-  const { ref: servicesRef, inView: servicesInView } = useInView({ threshold: 0.5, triggerOnce: false });
-  const { ref: heroRef, inView: heroInView } = useInView({ threshold: 0.5, triggerOnce: false });
+  const { ref: servicesRef, inView: servicesInView } = useInView({ threshold: 0.5, triggerOnce: true });
+  const { ref: heroRef, inView: heroInView } = useInView({ threshold: 0.5, triggerOnce: true });
 
   useEffect(() => {
     if (servicesInView) {
@@ -169,7 +169,7 @@ export default function Home() {
         <Container>
           <StyledRow>
             {(servicesInView || isMobile) && cards.map(({ title, Icon, text }, index) => (
-              <Card title={title} Icon={Icon} text={text} $delay={0.2 * index} $isVisible={servicesInView || isMobile} key={'service_' + index} />
+              <Card title={title} Icon={Icon} text={text} $delay={0.2 * index} $isVisible={servicesInView || isMobile} key={'service_' + index} overrideHref={'#services'} />
             ))}
           </StyledRow>
         </Container>

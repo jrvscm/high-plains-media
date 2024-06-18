@@ -46,7 +46,7 @@ export const WorkSection = ({ title, headline, subhead, spanText }) => {
   const { isMobile } = useResponsive();
 
   const { ref: sectionRef, inView: workInView } = useInView({
-    triggerOnce: false,
+    triggerOnce: true,
     threshold: 0.5
   });
 
