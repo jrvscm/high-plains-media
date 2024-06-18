@@ -114,7 +114,7 @@ const StyledLink = styled(Link)`
 `;
 
 //only pass image if you want the image variant
-const Card = ({ Icon, title, text, $delay, $isVisible, image = null, overrideWidth = null, overrideHeight = null, isBlur = null, overrideBackground = null, overrideHref = null }) => {
+const Card = ({ Icon, title, text, $delay, $isVisible, image = null, overrideWidth = null, overrideHeight = null, isBlur = null, overrideBackground = null, overrideHref = null, alt = '' }) => {
   const [isHovered, setIsHovered] = useState(false);
 
   const slugify = (text) => {
@@ -142,7 +142,7 @@ const Card = ({ Icon, title, text, $delay, $isVisible, image = null, overrideWid
       <StyledLink href={overrideHref ? overrideHref : `/posts/${slugify(title)}`}>
         {!isBlur && <Background $isHovered={isHovered} />}
         <Content $isHovered={isHovered}>
-          {image && <Image $isBlur={isBlur} src={image} alt={alt || ''} />}
+          {image && <Image $isBlur={isBlur} src={image} alt={alt} />}
           {Icon && <IconWrapper><Icon size={'48px'} /></IconWrapper>}
           {title && <Title $image={image}  $isHovered={isHovered}>{title}</Title>}
           {text && <Text $isBlur={isBlur} $image={image} $isHovered={isHovered} $overrideBackground={overrideBackground}>{text}</Text>}
