@@ -78,6 +78,7 @@ export const ContactForm = () => {
         method="POST" 
         data-netlify="true" 
         data-netlify-honeypot="bot-field"
+        netlify
       >
         {/* Hidden field for Netlify */}
         <input type="hidden" name="form-name" value="contact-peak-digital" />
