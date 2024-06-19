@@ -1,0 +1,4 @@
+[[headers]]
+  for = "/*"
+  [headers.values]
+  Content-Security-Policy = "script-src 'self' https://js.stripe.com; connect-src 'self' https://api.stripe.com;"
