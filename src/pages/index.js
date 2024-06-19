@@ -102,17 +102,20 @@ const StyledRow = styled(Row)`
 export default function Home() {
   const { hash, setHash } = useHash(); // Consume hash state from context
   const router = useRouter();
-
+  const { isMobile } = useResponsive();
   const cards = [
     { title: 'Mobile Applications', Icon: MdOutlinePhoneIphone, text: "Custom mobile solutions for iOS and Android that enhance engagement." },
     { title: "Website Development", Icon: MdLaptop, text: "Responsive and engaging websites that elevate your online presence." },
     { title: "Digital Marketing", Icon: IoMdAnalytics, text: "Strategic digital marketing that boosts visibility and increases conversions." },
     { title: "E-commerce", Icon: MdOutlineShoppingCart, text: "Seamless e-commerce solutions tailored for growth so you can start selling today." },
-    { title: "Content Strategy", Icon: MdOutlineContentCopy, text: "Content strategy that engages your audience, enhances SEO, and drives traffic to your site." },
-    { title: "Funnel Creation", Icon: MdFilterList, text: "Design effective marketing funnels that convert visitors into customers." },
-    { title: "SEO Optimization", Icon: MdOutlineTrendingUp, text: "Boost search engine ranking and increase visibility with our expert SEO strategies." },
-    { title: "Graphic Design", Icon: MdOutlineBrush, text: "Transform your projects and bring them to life with our graphic design services." }
+    ...(!isMobile ? [
+      { title: "Content Strategy", Icon: MdOutlineContentCopy, text: "Content strategy that engages your audience, enhances SEO, and drives traffic to your site." },
+      { title: "Funnel Creation", Icon: MdFilterList, text: "Design effective marketing funnels that convert visitors into customers." },
+      { title: "SEO Optimization", Icon: MdOutlineTrendingUp, text: "Boost search engine ranking and increase visibility with our expert SEO strategies." },
+      { title: "Graphic Design", Icon: MdOutlineBrush, text: "Transform your projects and bring them to life with our graphic design services." }
+    ] : []), // Use an empty array if not mobile to spread nothing
   ];
+  
 
   const { ref: servicesRef, inView: servicesInView } = useInView({ threshold: 0.5, triggerOnce: true });
   const { ref: heroRef, inView: heroInView } = useInView({ threshold: 0.5, triggerOnce: true });
@@ -140,7 +143,6 @@ export default function Home() {
     };
   }, [router, setHash]);
 
-  const { isMobile } = useResponsive();
   const headerMsg = !isMobile
     ? 'Enhance your online reach and increase conversions through our AI-powered, project build-out. Our approach leverages the latest in AI technology to ensure every aspect of your project is optimized for success.'
     : 'Enhance your online reach and increase conversions through our AI-powered, project build-out.'
