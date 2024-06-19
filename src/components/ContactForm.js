@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { useLoading } from '../components/contexts/LoadingContext';
 
 // Optional: Styled component for custom styles
-const StyledForm = styled(Form)`
+const StyledForm = styled.form`
   .form-floating {
     margin-bottom: 20px;
 
