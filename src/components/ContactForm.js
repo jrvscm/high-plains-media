@@ -48,7 +48,7 @@ export const ContactForm = () => {
       if (response.ok) {
         setFormData({
           ...formData,
-          'message-name': '',
+          'name': '',
           'email': '',
           'subject': '',
           'message': ''
@@ -85,8 +85,8 @@ export const ContactForm = () => {
         <Row>
           <Col md={6}>
             <Form.Floating>
-              <Form.Control type="text" id="message-name" name="message-name" placeholder="Your Name" onChange={handleChange} value={formData.name} required />
-              <label htmlFor="message-name">Your Name</label>
+              <Form.Control type="text" id="name" name="name" placeholder="Your Name" onChange={handleChange} value={formData.name} required />
+              <label htmlFor="name">Your Name</label>
             </Form.Floating>
           </Col>
           <Col md={6}>
