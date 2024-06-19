@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import { Container, Form, Button, Row, Col } from 'react-bootstrap';
 import styled from 'styled-components';
+
+import { useLoading } from '../components/contexts/LoadingContext';
 
 // Optional: Styled component for custom styles
 const StyledForm = styled(Form)`
@@ -23,11 +25,53 @@ const StyledForm = styled(Form)`
 `;
 
 export const ContactForm = () => {
+    const formSubmittedRef = useRef(false); // Ref to track if form has been submitted
+    const [formData, setFormData] = useState({
+      'bot-field': '', // Honeypot field
+      'form-name': 'contact-form', // Required for Netlify to recognize the form
+      'name': '',
+      'email': '',
+      'subject': '',
+      'message': ''
+  });
+  const { startLoading, stopLoading } = useLoading();
   // Form submit handler
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    // Implement submission logic here, for now, just logs to console
-    console.log("Form submitted");
+    if (formSubmittedRef.current) return; // Prevent sending if already submitted
+    formSubmittedRef.current = true; // Mark as submitted
+    startLoading();
+    try {
+      const response = await fetch('/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams(formData).toString(),
+      });
+
+      if (response.ok) {
+        setFormData({
+          ...formData,
+          'name': '',
+          'email': '',
+          'subject': '',
+          'message': ''
+        })
+      } else {
+          // Handle errors
+          console.error('Form submission error');
+      }
+  } catch (error) {
+    console.error('Form submission error', error);
+  }
+    stopLoading();
+  };
+  
+
+  const handleChange = (e) => {
+    const value = (e.target.name != 'message' && e.target.name != 'subject') ? e.target.value.trim() : e.target.value;
+    setFormData({ ...formData, [e.target.name]: value });
+
+    console.log(formData)
   };
 
   return (
@@ -40,30 +84,30 @@ export const ContactForm = () => {
       >
         {/* Hidden field for Netlify */}
         <input type="hidden" name="form-name" value="contact" />
-        <input type="hidden" name="bot-field" />
+        <input type="hidden" name="bot-field" onChange={handleChange} />
 
         <Row>
           <Col md={6}>
             <Form.Floating>
-              <Form.Control type="text" id="name" name="name" placeholder="Your Name" required />
+              <Form.Control type="text" id="name" name="name" placeholder="Your Name" onChange={handleChange} value={formData.name} required />
               <label htmlFor="name">Your Name</label>
             </Form.Floating>
           </Col>
           <Col md={6}>
             <Form.Floating>
-              <Form.Control type="email" id="email" name="email" placeholder="Your Email" required />
+              <Form.Control type="email" id="email" name="email" placeholder="Your Email" onChange={handleChange} value={formData.email} required />
               <label htmlFor="email">Your Email</label>
             </Form.Floating>
           </Col>
         </Row>
         
         <Form.Floating>
-          <Form.Control type="text" id="subject" name="subject" placeholder="Subject" required />
+          <Form.Control type="text" id="subject" name="subject" placeholder="Subject" onChange={handleChange} value={formData.subject} required />
           <label htmlFor="subject">Subject</label>
         </Form.Floating>
         
         <Form.Floating>
-          <Form.Control as="textarea" id="message" name="message" placeholder="Message" style={{ height: '120px' }} required />
+          <Form.Control as="textarea" id="message" name="message" placeholder="Message" style={{ height: '120px' }} onChange={handleChange} value={formData.message} required />
           <label htmlFor="message">Message</label>
         </Form.Floating>
         
