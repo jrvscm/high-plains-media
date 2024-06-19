@@ -48,7 +48,7 @@ export const ContactForm = () => {
       if (response.ok) {
         setFormData({
           'bot-field': '', // Honeypot field
-          'form-name': 'contact-form', 
+          'form-name': 'contact-peak-digital', 
           'name': '',
           'email': '',
           'subject': '',
