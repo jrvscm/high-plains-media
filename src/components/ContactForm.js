@@ -25,11 +25,10 @@ const StyledForm = styled(Form)`
 `;
 
 export const ContactForm = () => {
-    const formSubmittedRef = useRef(false); // Ref to track if form has been submitted
     const [formData, setFormData] = useState({
       'bot-field': '', // Honeypot field
       'form-name': 'contact-form', // Required for Netlify to recognize the form
-      'name': '',
+      'message-name': '',
       'email': '',
       'subject': '',
       'message': ''
@@ -38,8 +37,6 @@ export const ContactForm = () => {
   // Form submit handler
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (formSubmittedRef.current) return; // Prevent sending if already submitted
-    formSubmittedRef.current = true; // Mark as submitted
     startLoading();
     try {
       const response = await fetch('/', {
