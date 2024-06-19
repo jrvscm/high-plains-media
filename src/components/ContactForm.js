@@ -51,7 +51,7 @@ export const ContactForm = () => {
       if (response.ok) {
         setFormData({
           ...formData,
-          'name': '',
+          'message-name': '',
           'email': '',
           'subject': '',
           'message': ''
@@ -70,8 +70,6 @@ export const ContactForm = () => {
   const handleChange = (e) => {
     const value = (e.target.name != 'message' && e.target.name != 'subject') ? e.target.value.trim() : e.target.value;
     setFormData({ ...formData, [e.target.name]: value });
-
-    console.log(formData)
   };
 
   return (
@@ -90,8 +88,8 @@ export const ContactForm = () => {
         <Row>
           <Col md={6}>
             <Form.Floating>
-              <Form.Control type="text" id="name" name="name" placeholder="Your Name" onChange={handleChange} value={formData.name} required />
-              <label htmlFor="name">Your Name</label>
+              <Form.Control type="text" id="message-name" name="message-name" placeholder="Your Name" onChange={handleChange} value={formData.name} required />
+              <label htmlFor="message-name">Your Name</label>
             </Form.Floating>
           </Col>
           <Col md={6}>
