@@ -28,7 +28,7 @@ export const ContactForm = () => {
     const [formData, setFormData] = useState({
       'bot-field': '', // Honeypot field
       'form-name': 'contact-form', // Required for Netlify to recognize the form
-      'message-name': '',
+      'name': '',
       'email': '',
       'subject': '',
       'message': ''
