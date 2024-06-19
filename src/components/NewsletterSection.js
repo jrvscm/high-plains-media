@@ -65,7 +65,7 @@ export const NewsletterSection = () => {
         <Row className="justify-content-center">
           <Col>
             <NewsletterForm 
-                className="mx-auto"
+              className="mx-auto"
               name="email-subscription" 
               method="POST" 
               data-netlify="true" 
@@ -73,6 +73,7 @@ export const NewsletterSection = () => {
               onSubmit={handleSubmit}
             >
               <input type="hidden" name="form-name" value="email-subscription" />
+              <input type="hidden" name="bot-field" />
               <FloatingLabel controlId="floatingInput" label="Email">
                 <Form.Control type="email" placeholder="Email address" required />
               </FloatingLabel>

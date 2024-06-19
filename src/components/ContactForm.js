@@ -72,7 +72,7 @@ export const ContactForm = () => {
   return (
     <Container>
       <StyledForm 
-        name='contact-form'
+        name="contact-form"
         onSubmit={handleSubmit} 
         method="POST" 
         data-netlify="true" 
@@ -80,7 +80,7 @@ export const ContactForm = () => {
       >
         {/* Hidden field for Netlify */}
         <input type="hidden" name="form-name" value="contact-form" />
-        <input type="hidden" name="bot-field" onChange={handleChange} />
+        <input type="hidden" name="bot-field" onChange={handleChange} /> {/* Honeypot field */}
 
         <Row>
           <Col md={6}>
