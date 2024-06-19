@@ -27,7 +27,7 @@ const StyledForm = styled(Form)`
 export const ContactForm = () => {
     const [formData, setFormData] = useState({
       'bot-field': '', // Honeypot field
-      'form-name': 'contact-form', // Required for Netlify to recognize the form
+      'form-name': 'contact-peak-digital', // Required for Netlify to recognize the form
       'name': '',
       'email': '',
       'subject': '',
@@ -47,7 +47,8 @@ export const ContactForm = () => {
 
       if (response.ok) {
         setFormData({
-          ...formData,
+          'bot-field': '', // Honeypot field
+          'form-name': 'contact-form', 
           'name': '',
           'email': '',
           'subject': '',
@@ -72,14 +73,14 @@ export const ContactForm = () => {
   return (
     <Container>
       <StyledForm 
-        name="contact-form"
+        name="contact-peak-digital"
         onSubmit={handleSubmit} 
         method="POST" 
         data-netlify="true" 
         data-netlify-honeypot="bot-field"
       >
         {/* Hidden field for Netlify */}
-        <input type="hidden" name="form-name" value="contact-form" />
+        <input type="hidden" name="form-name" value="contact-peak-digital" />
         <input type="hidden" name="bot-field" onChange={handleChange} /> {/* Honeypot field */}
 
         <Row>
