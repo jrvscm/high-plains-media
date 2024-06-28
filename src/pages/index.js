@@ -37,6 +37,14 @@ const Hero = styled.div`
     left: 0;
     right: 0;
   }
+
+  @media ${device.tablet} {
+    background-attachment: scroll;
+  }
+
+  @media ${device.mobile} {
+    background-attachment: scroll;
+  }
 `;
 
 const StyledContainer = styled(Container)`
