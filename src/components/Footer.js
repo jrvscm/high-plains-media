@@ -134,7 +134,7 @@ export const Footer = () => {
                     </Col>
                     <Col lg={3} md={6} className="py-3">
                         <H4>Socials</H4>
-                        <FooterP>This is some text about staying social and the links will be below this. Just some dumn words I have no idea what will actually go here.</FooterP>
+                        <FooterP>Follow us for special offers and updates on our latest projects. Click the links below to join our community!</FooterP>
                         <SocialLinksContainer>
                             <SocialLink href="#" className="twitter">
                             <FaTwitter size="20" />
