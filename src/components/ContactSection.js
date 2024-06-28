@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, forwardRef, useImperativeHandle, useRef } from 'react';
 import styled from 'styled-components';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -54,13 +54,15 @@ const Image = styled.img`
   will-change: transform;
 `;
 
-export const ContactSection = () => {
+const ContactSection = forwardRef((props, ref) => {
   const { setHash } = useHash(); // Consume setHash from context
 
-  const { ref: contactRef, inView: contactInView } = useInView({
+  const { ref: inViewRef, inView: contactInView } = useInView({
     threshold: 0.5,
     triggerOnce: true,
   });
+
+  const innerRef = useRef(null);
 
   useEffect(() => {
     if (contactInView) {
@@ -68,62 +70,72 @@ export const ContactSection = () => {
     }
   }, [contactInView, setHash]);
 
-  return (
-    <Section className="pb-5" id="contact" ref={contactRef}>
-      <Container>
-        <Row className="py-5">
-          <TitleWithPill
-            title={'Contact'}
-            headline={''}
-            subhead={'Shoot us a message about your project. We will respond within one business day!'}
-            spanText={'Contact Us'}
-          />
-        </Row>
-        <Row className="justify-content-center align-items-center">
-          <Col lg={6} md={6} sm={12}>
-            <ShadowDiv className="text-center py-3 my-3">
-              <IconWrapper className="my-3 mx-auto">
-                <MdOutlineLocationOn />
-              </IconWrapper>
-              <H3>Our Address</H3>
-              <P>Gillette WY, 82718</P>
-            </ShadowDiv>
-          </Col>
-          <Col lg={3} md={3} sm={12}>
-            <ShadowDiv className="text-center py-3 my-3">
-              <IconWrapper className="my-3 mx-auto">
-                <MdOutlineEmail />
-              </IconWrapper>
-              <H3>Email Us</H3>
-              <P>chrisjarvisdev@gmail.com</P>
-            </ShadowDiv>
-          </Col>
-          <Col lg={3} md={3} sm={12}>
-            <ShadowDiv className="text-center py-3 my-3">
-              <IconWrapper className="my-3 mx-auto">
-                <MdOutlinePhoneInTalk />
-              </IconWrapper>
-              <H3>Call Us</H3>
-              <P>+1 307 680 6321</P>
-            </ShadowDiv>
-          </Col>
-        </Row>
+  useImperativeHandle(ref, () => ({
+    scrollToSection: () => {
+      if (innerRef.current) {
+        innerRef.current.scrollIntoView({ behavior: 'smooth' });
+      }
+    },
+  }));
 
-        <Row>
-          <Col lg={6} sm={12} className="my-3">
-            <ShadowDiv>
-              <Image src="/images/office-workers-two.jpg" alt="man in office explaining" />
-            </ShadowDiv>
-          </Col>
-          <Col lg={6} sm={12} className="my-3">
-            <ShadowDiv className="py-4 px-2">
-              <ContactForm />
-            </ShadowDiv>
-          </Col>
-        </Row>
-      </Container>
+  return (
+    <Section className="pb-5" id="contact" ref={inViewRef}>
+      <div ref={innerRef}>
+        <Container>
+          <Row className="py-5">
+            <TitleWithPill
+              title={'Contact'}
+              headline={''}
+              subhead={'Shoot us a message about your project. We will respond within one business day!'}
+              spanText={'Contact Us'}
+            />
+          </Row>
+          <Row className="justify-content-center align-items-center">
+            <Col lg={6} md={6} sm={12}>
+              <ShadowDiv className="text-center py-3 my-3">
+                <IconWrapper className="my-3 mx-auto">
+                  <MdOutlineLocationOn />
+                </IconWrapper>
+                <H3>Our Address</H3>
+                <P>Gillette WY, 82718</P>
+              </ShadowDiv>
+            </Col>
+            <Col lg={3} md={3} sm={12}>
+              <ShadowDiv className="text-center py-3 my-3">
+                <IconWrapper className="my-3 mx-auto">
+                  <MdOutlineEmail />
+                </IconWrapper>
+                <H3>Email Us</H3>
+                <P>chrisjarvisdev@gmail.com</P>
+              </ShadowDiv>
+            </Col>
+            <Col lg={3} md={3} sm={12}>
+              <ShadowDiv className="text-center py-3 my-3">
+                <IconWrapper className="my-3 mx-auto">
+                  <MdOutlinePhoneInTalk />
+                </IconWrapper>
+                <H3>Call Us</H3>
+                <P>+1 307 680 6321</P>
+              </ShadowDiv>
+            </Col>
+          </Row>
+
+          <Row>
+            <Col lg={6} sm={12} className="my-3">
+              <ShadowDiv>
+                <Image src="/images/office-workers-two.jpg" alt="man in office explaining" />
+              </ShadowDiv>
+            </Col>
+            <Col lg={6} sm={12} className="my-3">
+              <ShadowDiv className="py-4 px-2">
+                <ContactForm />
+              </ShadowDiv>
+            </Col>
+          </Row>
+        </Container>
+      </div>
     </Section>
   );
-};
+});
 
 export default ContactSection;
