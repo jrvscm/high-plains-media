@@ -222,7 +222,7 @@ const Navigation = () => {
             <NavSection>
               <IconGroup>
                 <TfiEmail size={'14px'}/>
-                <a href="mailto:jarvis@peakdigital.com">jarvis@peakdigital.com</a>
+                <a href="mailto:chrisjarvisdev@gmail.com">chrisjarvisdev@gmail.com</a>
               </IconGroup>
               <IconGroup>
                 <IoPhonePortraitOutline size={'14px'}/>
@@ -249,7 +249,7 @@ const Navigation = () => {
       <LowerNav $isScrolled={isScrolled}>
         <Stackable $isOpen={$isOpen} className="d-flex align-items-center justify-content-between">
           <div style={{paddingLeft: '0px'}} className="d-flex align-items-center justify-content-between container-fluid">
-            <StyledNavbarBrand href="/">Peak Digital<span>.</span></StyledNavbarBrand>
+            <StyledNavbarBrand href="/">High Plains Media<span>.</span></StyledNavbarBrand>
             <Navbar.Toggle onClick={toggleMenu} aria-controls="nav" />
           </div>
           <div className="d-flex justify-content-end">

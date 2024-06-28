@@ -79,19 +79,19 @@ const reviews = [
     {
         name: "Jessica Thompson",
         title: "Marketing Director",
-        testimonial: "\"I had an exceptional experience working with Peak Digital! Their team was incredibly professional and responsive throughout the entire project. They delivered a stunning website that perfectly matches our brand's vision. The attention to detail and the seamless functionality of the site exceeded our expectations. We’ve already seen an increase in customer engagement and positive feedback from our clients. Highly recommend!\"",
+        testimonial: "\"I had an exceptional experience working with High Plains Media! Their team was incredibly professional and responsive throughout the entire project. They delivered a stunning website that perfectly matches our brand's vision. The attention to detail and the seamless functionality of the site exceeded our expectations. We’ve already seen an increase in customer engagement and positive feedback from our clients. Highly recommend!\"",
         imageUrl: null
     },
     {
         name: "Michael Rodriguez",
         title: "CEO",
-        testimonial: "\"Peak Digital truly transformed our online presence. From the initial consultation to the final launch, their expertise and creativity shone through. They provided valuable insights and suggestions that enhanced our website’s design and user experience. The project was completed on time and within budget, with excellent communication every step of the way. Our website looks fantastic and performs flawlessly. We couldn't be happier with the results!\"",
+        testimonial: "\"High Plains Media truly transformed our online presence. From the initial consultation to the final launch, their expertise and creativity shone through. They provided valuable insights and suggestions that enhanced our website’s design and user experience. The project was completed on time and within budget, with excellent communication every step of the way. Our website looks fantastic and performs flawlessly. We couldn't be happier with the results!\"",
         imageUrl: null
     },
     {
         name: "Sarah Mitchell",
         title: "Operations Manager",
-        testimonial: "\"Working with Peak Digital was a game-changer for our business. Their team is knowledgeable, efficient, and incredibly talented. They took the time to understand our goals and delivered a custom website that has significantly boosted our online visibility. The site is fast, user-friendly, and beautifully designed. Their ongoing support and maintenance have been top-notch as well. If you need a web development firm that delivers outstanding results, look no further than Peak Digital!\"",
+        testimonial: "\"Working with High Plains Media was a game-changer for our business. Their team is knowledgeable, efficient, and incredibly talented. They took the time to understand our goals and delivered a custom website that has significantly boosted our online visibility. The site is fast, user-friendly, and beautifully designed. Their ongoing support and maintenance have been top-notch as well. If you need a web development firm that delivers outstanding results, look no further than High Plains Media!\"",
         imageUrl: null
     }
 ];

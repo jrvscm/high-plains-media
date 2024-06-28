@@ -86,7 +86,7 @@ export const ContactSection = () => {
                 <MdOutlineLocationOn />
               </IconWrapper>
               <H3>Our Address</H3>
-              <P>2704 Ridgecrest Drive, Gillette WY, 82718</P>
+              <P>Gillette WY, 82718</P>
             </ShadowDiv>
           </Col>
           <Col lg={3} md={3} sm={12}>
@@ -95,7 +95,7 @@ export const ContactSection = () => {
                 <MdOutlineEmail />
               </IconWrapper>
               <H3>Email Us</H3>
-              <P>jarvis@peakdigital.com</P>
+              <P>chrisjarvisdev@gmail.com</P>
             </ShadowDiv>
           </Col>
           <Col lg={3} md={3} sm={12}>

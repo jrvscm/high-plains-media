@@ -158,7 +158,7 @@ export default function Home() {
 
       <Hero ref={heroRef}>
         <StyledContainer $isVisible={heroInView}>
-          <H1>Welcome to <Span>Peak Digital</Span></H1>
+          <H1>Welcome to <Span>High Plains Media</Span></H1>
           <H2>We are a team of talented engineers and designers building projects for the web</H2>
           <ButtonsWrapper>
             <Button variant="primary" $style={primaryButtonStyle} $hoverStyle={primaryHoverStyle} onClick={() => console.log('clickkkkked')}>Schedule a Call</Button>

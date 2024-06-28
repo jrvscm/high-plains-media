@@ -100,14 +100,13 @@ export const Footer = () => {
             <Container>
                 <Row>
                     <Col lg={3} md={6} className="py-3">
-                        <H3 className="mb-3">Peak Digital<Span>.</Span></H3>
+                        <H3 className="mb-3">High Plains Media<Span>.</Span></H3>
                         <FooterP>
-                            2704 Ridgecrest Drive<br />
                             Gillette, WY 82718<br/>
                             United States<br/><br/>
 
                             <strong>Phone:</strong> +1 307 680 6321<br/>
-                            <strong>Email:</strong> jarvis@peakdigital.com<br/>
+                            <strong>Email:</strong> chrisjarvisdev@gmail.com<br/>
                         </FooterP>
                     </Col>
                     <Col lg={3} md={6} className="py-3">
@@ -158,7 +157,7 @@ export const Footer = () => {
             </Container>
         </Section>
         <CopyWrapper className="justify-content-center align-items-center py-3">
-            <p className="text-center">&copy; { new Date().getFullYear() } Peak Digital</p>
+            <p className="text-center">&copy; { new Date().getFullYear() } High Plains Media</p>
         </CopyWrapper>
     </>
     )
