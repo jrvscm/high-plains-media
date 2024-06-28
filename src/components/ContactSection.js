@@ -138,4 +138,7 @@ const ContactSection = forwardRef((props, ref) => {
   );
 });
 
+// Add display name to the component
+ContactSection.displayName = 'ContactSection';
+
 export default ContactSection;
