@@ -137,14 +137,14 @@ export const Footer = () => {
                     <Col lg={3} md={6} className="py-3">
                         <H4>Our Services</H4>
                         <FooterList>
-                            <Li className="d-flex justify-content-start align-items-center py-1"><FooterIcon /><StyledLink href={slugify("Mobile Applications")}><FooterP>Mobile Applications</FooterP></StyledLink></Li>
-                            <Li className="d-flex justify-content-start align-items-center py-1"><FooterIcon /><StyledLink href={slugify("Website Development")}><FooterP>Website Development</FooterP></StyledLink></Li>
-                            <Li className="d-flex justify-content-start align-items-center py-1"><FooterIcon /><StyledLink href={slugify("Digital Marketing")}><FooterP>Digital Marketing</FooterP></StyledLink></Li>
-                            <Li className="d-flex justify-content-start align-items-center py-1"><FooterIcon /><StyledLink href={slugify("E-commerce")}><FooterP>E-commerce</FooterP></StyledLink></Li>
-                            <Li className="d-flex justify-content-start align-items-center py-1"><FooterIcon /><StyledLink href={slugify("Content Strategy")}><FooterP>Content Strategy</FooterP></StyledLink></Li>
-                            <Li className="d-flex justify-content-start align-items-center py-1"><FooterIcon /><StyledLink href={slugify("Funnel Creation")}><FooterP>Funnel Creation</FooterP></StyledLink></Li>
-                            <Li className="d-flex justify-content-start align-items-center py-1"><FooterIcon /><StyledLink href={slugify("SEO Optimization")}><FooterP>SEO Optimization</FooterP></StyledLink></Li>
-                            <Li className="d-flex justify-content-start align-items-center py-1"><FooterIcon /><StyledLink href={slugify("Graphic Design")}><FooterP>Graphic Design</FooterP></StyledLink></Li>
+                            <Li className="d-flex justify-content-start align-items-center py-1"><FooterIcon /><StyledLink href={`/posts/${slugify("Mobile Applications")}`}><FooterP>Mobile Applications</FooterP></StyledLink></Li>
+                            <Li className="d-flex justify-content-start align-items-center py-1"><FooterIcon /><StyledLink href={`/posts/${slugify("Website Development")}`}><FooterP>Website Development</FooterP></StyledLink></Li>
+                            <Li className="d-flex justify-content-start align-items-center py-1"><FooterIcon /><StyledLink href={`/posts/${slugify("Digital Marketing")}`}><FooterP>Digital Marketing</FooterP></StyledLink></Li>
+                            <Li className="d-flex justify-content-start align-items-center py-1"><FooterIcon /><StyledLink href={`/posts/${slugify("E-commerce")}`}><FooterP>E-commerce</FooterP></StyledLink></Li>
+                            <Li className="d-flex justify-content-start align-items-center py-1"><FooterIcon /><StyledLink href={`/posts/${slugify("Content Strategy")}`}><FooterP>Content Strategy</FooterP></StyledLink></Li>
+                            <Li className="d-flex justify-content-start align-items-center py-1"><FooterIcon /><StyledLink href={`/posts/${slugify("Funnel Creation")}`}><FooterP>Funnel Creation</FooterP></StyledLink></Li>
+                            <Li className="d-flex justify-content-start align-items-center py-1"><FooterIcon /><StyledLink href={`/posts/${slugify("SEO Optimization")}`}><FooterP>SEO Optimization</FooterP></StyledLink></Li>
+                            <Li className="d-flex justify-content-start align-items-center py-1"><FooterIcon /><StyledLink href={`/posts/${slugify("Graphic Design")}`}><FooterP>Graphic Design</FooterP></StyledLink></Li>
                         </FooterList>
                     </Col>
                     <Col lg={3} md={6} className="py-3">
