@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import Head from 'next/head';
+import { device } from '../../styles/breakpoints';
 import { getBlogPostBySlug, getBlogPosts } from '../../utils/contentful';
 import ReactMarkdown from 'react-markdown';
 import Container from 'react-bootstrap/Container';
@@ -48,6 +50,32 @@ const StyledContainer = styled(Container)`
     width: 100%;
     height: auto;
   }
+
+  @media ${device.tablet} {
+    width: 100%;
+
+    h1 {
+      ${({ theme }) => theme.fonts.font28Bold};
+      margin-bottom: 50px;
+    }
+
+    h2 {
+      ${({ theme }) => theme.fonts.font24Bold};
+    }
+
+    h3 {
+      ${({ theme }) => theme.fonts.font22Bold};
+    }
+
+    h4 {
+      ${({ theme }) => theme.fonts.font20Bold};
+    }
+
+    p {
+      ${({ theme }) => theme.fonts.fontBody18Regular};
+    }
+
+  }
 `;
 
 const H1 = styled.h1`
@@ -59,13 +87,24 @@ const H1 = styled.h1`
 
 const Post = ({ post }) => {
   return (
-    <Section>
-      {post?.fields?.hero?.fields?.file?.url && <PostHero $imageSrc={post.fields.hero.fields.file.url} />}
-      <StyledContainer>
-        {post?.fields?.title && <H1>{post?.fields?.title}</H1>}
-        {post?.fields?.content && <div><ReactMarkdown>{post.fields.content}</ReactMarkdown></div>}
-      </StyledContainer>
-    </Section>
+    <>
+      <Head>
+        <title>{post?.fields?.title || 'Default Blog Title'}</title>
+        <meta name="description" content={post?.fields?.description || 'Default description of the blog post'} />
+        <meta property="og:title" content={post?.fields?.title || 'Default Blog Title'} />
+        <meta property="og:description" content={post?.fields?.description || 'Default description of the blog post'} />
+        <meta property="og:image" content={post?.fields?.hero?.fields?.file?.url} />
+        <meta property="og:type" content="article" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <Section>
+        {post?.fields?.hero?.fields?.file?.url && <PostHero $imageSrc={post.fields.hero.fields.file.url} />}
+        <StyledContainer>
+          {post?.fields?.title && <H1>{post?.fields?.title}</H1>}
+          {post?.fields?.content && <div><ReactMarkdown>{post.fields.content}</ReactMarkdown></div>}
+        </StyledContainer>
+      </Section>
+    </>
   );
 };
 

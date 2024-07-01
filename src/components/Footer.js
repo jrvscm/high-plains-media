@@ -2,6 +2,8 @@ import styled from 'styled-components';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/Container';
+import Link from 'next/link';
+import { slugify } from '../utils/misc';
 import { MdOutlineChevronRight } from "react-icons/md";
 import { FaFacebook, FaTwitter, FaInstagram, FaSkype, FaLinkedin } from 'react-icons/fa';
 
@@ -93,6 +95,19 @@ const CopyWrapper = styled(Row)`
     }
 `;
 
+const StyledLink = styled(Link)`
+    text-decoration: none;
+    ${({ theme }) => theme.fonts.fontBody24Regular};
+    font-size: 14px;
+    color: ${({ theme }) => theme.colors.lightGray};
+    line-height: 24px;
+    transition: all .25s ease;
+
+    > p {
+        margin: 0;
+    }
+`;
+
 export const Footer = () => {
     return (
     <>
@@ -122,14 +137,14 @@ export const Footer = () => {
                     <Col lg={3} md={6} className="py-3">
                         <H4>Our Services</H4>
                         <FooterList>
-                            <Li className="d-flex justify-content-start align-items-center py-1"><FooterIcon /><FooterP>Mobile Applications</FooterP></Li>
-                            <Li className="d-flex justify-content-start align-items-center py-1"><FooterIcon /><FooterP>Website Development</FooterP></Li>
-                            <Li className="d-flex justify-content-start align-items-center py-1"><FooterIcon /><FooterP>Digital Marketing</FooterP></Li>
-                            <Li className="d-flex justify-content-start align-items-center py-1"><FooterIcon /><FooterP>E-commerce</FooterP></Li>
-                            <Li className="d-flex justify-content-start align-items-center py-1"><FooterIcon /><FooterP>Content Strategy</FooterP></Li>
-                            <Li className="d-flex justify-content-start align-items-center py-1"><FooterIcon /><FooterP>Funnel Creation</FooterP></Li>
-                            <Li className="d-flex justify-content-start align-items-center py-1"><FooterIcon /><FooterP>SEO Optimization</FooterP></Li>
-                            <Li className="d-flex justify-content-start align-items-center py-1"><FooterIcon /><FooterP>Graphic Design</FooterP></Li>
+                            <Li className="d-flex justify-content-start align-items-center py-1"><FooterIcon /><StyledLink href={slugify("Mobile Applications")}><FooterP>Mobile Applications</FooterP></StyledLink></Li>
+                            <Li className="d-flex justify-content-start align-items-center py-1"><FooterIcon /><StyledLink href={slugify("Website Development")}><FooterP>Website Development</FooterP></StyledLink></Li>
+                            <Li className="d-flex justify-content-start align-items-center py-1"><FooterIcon /><StyledLink href={slugify("Digital Marketing")}><FooterP>Digital Marketing</FooterP></StyledLink></Li>
+                            <Li className="d-flex justify-content-start align-items-center py-1"><FooterIcon /><StyledLink href={slugify("E-commerce")}><FooterP>E-commerce</FooterP></StyledLink></Li>
+                            <Li className="d-flex justify-content-start align-items-center py-1"><FooterIcon /><StyledLink href={slugify("Content Strategy")}><FooterP>Content Strategy</FooterP></StyledLink></Li>
+                            <Li className="d-flex justify-content-start align-items-center py-1"><FooterIcon /><StyledLink href={slugify("Funnel Creation")}><FooterP>Funnel Creation</FooterP></StyledLink></Li>
+                            <Li className="d-flex justify-content-start align-items-center py-1"><FooterIcon /><StyledLink href={slugify("SEO Optimization")}><FooterP>SEO Optimization</FooterP></StyledLink></Li>
+                            <Li className="d-flex justify-content-start align-items-center py-1"><FooterIcon /><StyledLink href={slugify("Graphic Design")}><FooterP>Graphic Design</FooterP></StyledLink></Li>
                         </FooterList>
                     </Col>
                     <Col lg={3} md={6} className="py-3">

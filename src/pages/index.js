@@ -112,8 +112,8 @@ export default function Home() {
   const router = useRouter();
   const { isMobile } = useResponsive();
   const cards = [
-    { title: 'Mobile Applications', Icon: MdOutlinePhoneIphone, text: "Custom mobile solutions for iOS and Android that enhance engagement." },
     { title: "Website Development", Icon: MdLaptop, text: "Responsive and engaging websites that elevate your online presence." },
+    { title: 'Mobile Applications', Icon: MdOutlinePhoneIphone, text: "Custom mobile solutions for iOS and Android that enhance engagement." },
     { title: "Digital Marketing", Icon: IoMdAnalytics, text: "Strategic digital marketing that boosts visibility and increases conversions." },
     { title: "E-commerce", Icon: MdOutlineShoppingCart, text: "Seamless e-commerce solutions tailored for growth so you can start selling today." },
     ...(!isMobile ? [
@@ -187,7 +187,7 @@ export default function Home() {
         <Container>
           <StyledRow>
             {(servicesInView || isMobile) && cards.map(({ title, Icon, text }, index) => (
-              <Card title={title} Icon={Icon} text={text} $delay={0.2 * index} $isVisible={servicesInView || isMobile} key={'service_' + index} overrideHref={'#services'} />
+              <Card title={title} Icon={Icon} text={text} $delay={0.2 * index} $isVisible={servicesInView || isMobile} key={'service_' + index} overrideHref={false} />
             ))}
           </StyledRow>
         </Container>

@@ -38,6 +38,31 @@ const fonts = {
         color: ${colors.black};
     `,
 
+    font28Bold: css`
+        font-family: Poppins, sans-seriff;
+        font-size: 30px;
+        font-weight: 600;
+        letter-spacing: 0.8px;
+        color: ${colors.black};
+    `,
+
+    font20Bold: css`
+        font-family: Poppins, sans-seriff;
+        font-size: 28px;
+        font-weight: 600;
+        letter-spacing: 0.8px;
+        color: ${colors.black};
+    `,
+
+    font20Bold: css`
+        font-family: Poppins, sans-seriff;
+        font-size: 22px;
+        font-weight: 600;
+        letter-spacing: 0.8px;
+        color: ${colors.black};
+    `,
+
+
     font24Bold: css`
         font-family: Poppins, sans-seriff;
         font-size: 24px;
@@ -67,6 +92,13 @@ const fonts = {
         font-size: 16px;
         font-weight: 600;
         color: ${colors.black};
+    `,
+
+    fontBody18Regular: css`
+        font-size: 18px;
+        font-weight: 400;
+        font-family: "Roboto", sans-serif;
+        color: ${colors.gray};
     `,
 
     fontBody24Regular: css`

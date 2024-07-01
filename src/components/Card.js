@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import styled, { css } from 'styled-components';
 import { device } from '../styles/breakpoints';
+import { slugify } from '../utils/misc';
 
 const CardContainer = styled.div`
   flex: 0 1 ${({ $overrideWidth }) => $overrideWidth ? $overrideWidth : '300px'}; // Base width of each card
@@ -116,16 +117,6 @@ const StyledLink = styled(Link)`
 //only pass image if you want the image variant
 const Card = ({ Icon, title, text, $delay, $isVisible, image = null, overrideWidth = null, overrideHeight = null, isBlur = null, overrideBackground = null, overrideHref = null, alt = '' }) => {
   const [isHovered, setIsHovered] = useState(false);
-
-  const slugify = (text) => {
-    return text
-        .toString()
-        .toLowerCase()
-        .trim()
-        .replace(/\s+/g, '-')           // Replace spaces with -
-        .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
-        .replace(/\-\-+/g, '-');        // Replace multiple - with single -
-  } 
 
   return (
     <CardContainer 
