@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://www.highplainsmedia.com
+
+# Sitemaps
+Sitemap: https://www.highplainsmedia.com/sitemap.xml
