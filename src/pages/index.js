@@ -166,10 +166,13 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>High Plains Media</title>
-        <meta name="description" content="High Plains Media digital agency" />
+        <meta charset="UTF-8" />
+        <title>High Plains Media | Leading Digital Marketing Agency</title>
+        <meta name="description" content="Elevate your business with High Plains Media, a leading digital agency specializing in tailored web development, SEO, and online marketing strategies." />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
+        <meta name="robots" content="index, follow" />
+        <link rel="canonical" href="https://www.highplainsmedia.com/" />
       </Head>
 
       <Hero ref={heroRef}>
