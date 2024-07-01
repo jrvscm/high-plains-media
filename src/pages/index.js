@@ -128,13 +128,23 @@ export default function Home() {
   const { ref: servicesRef, inView: servicesInView } = useInView({ threshold: 0.5, triggerOnce: true });
   const { ref: heroRef, inView: heroInView } = useInView({ threshold: 0.5, triggerOnce: true });
 
+  //nav refs
+  const { ref: heroRefNav, inView: heroInViewNav } = useInView({ threshold: 0.5 });
+  const { ref: servicesRefNav, inView: servicesInViewNav } = useInView({ threshold: 0.5 });
+  const { ref: workSectionRefNav, inView: workSectionInViewNav } = useInView({ threshold: 0.5 });
+  const { ref: contactSectionRefNav, inView: contactSectionInViewNav } = useInView({ threshold: 0.5 });
+
   useEffect(() => {
-    if (servicesInView) {
-      updateHash('services', setHash); // Pass setHash to update the context
-    } else if (heroInView) {
+    if (heroInViewNav) {
       updateHash('', setHash);
+    } else if (servicesInViewNav) {
+      updateHash('services', setHash); // Pass setHash to update the context
+    } else if(workSectionInViewNav) {
+      updateHash('work', setHash);
+    } else if(contactSectionInViewNav) {
+      updateHash('contact', setHash);
     }
-  }, [heroInView, servicesInView, setHash]);
+  }, [heroInViewNav, setHash, servicesInViewNav, contactSectionInViewNav, workSectionInViewNav]);
 
   useEffect(() => {
     const handleHashChange = () => {
@@ -174,7 +184,8 @@ export default function Home() {
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://www.highplainsmedia.com/" />
       </Head>
-
+      
+      <div ref={heroRefNav} id="hero-target"/>
       <Hero ref={heroRef}>
         <StyledContainer $isVisible={heroInView}>
           <H1>Welcome to <Span>High Plains Media</Span></H1>
@@ -186,6 +197,7 @@ export default function Home() {
         </StyledContainer>
       </Hero>
 
+      <div ref={servicesRefNav} id="services-target"/>
       <Services ref={servicesRef} id="services" style={{ minHeight: '695px' }}>
         <Container>
           <StyledRow>
@@ -203,6 +215,7 @@ export default function Home() {
         subhead={headerMsg}
       />
 
+      <div ref={workSectionRefNav} id="work-target"/>
       <WorkSection
         title={'work'}
         headline={"projects we've"}
@@ -212,6 +225,7 @@ export default function Home() {
 
       <ReviewsCarousel imageSrc={'/images/tetons.jpg'} />
 
+      <div ref={contactSectionRefNav} id="contact-target"/>
       <ContactSection ref={contactSectionRef} />
 
       <NewsletterSection />
