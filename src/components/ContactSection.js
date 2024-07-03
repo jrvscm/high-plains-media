@@ -63,6 +63,10 @@ const Image = styled.img`
   will-change: transform;
 `;
 
+const SkeletonWrapper = styled.div`
+  background: ${({ theme: { colors }}) => colors.gray};
+`;
+
 const ContactSection = forwardRef((props, ref) => {
   const { setHash } = useHash(); // Consume setHash from context
 
@@ -132,7 +136,7 @@ const ContactSection = forwardRef((props, ref) => {
           <Row>
             <Col lg={6} sm={12} className="my-3">
               <ShadowDiv>
-                <Image src="/images/office-workers-two.jpg" alt="man in office explaining" />
+                <SkeletonWrapper><Image src="/images/office-workers-two.jpg" alt="man in office explaining" /></SkeletonWrapper>
               </ShadowDiv>
             </Col>
             <Col lg={6} sm={12} className="my-3">

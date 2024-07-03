@@ -114,6 +114,11 @@ const StyledLink = styled(Link)`
   text-decoration: none;
 `;
 
+const ImageWrapper = styled.div`
+  min-height: 218px;
+  background: ${({ theme: { colors }}) => colors.gray};
+`;
+
 //only pass image if you want the image variant
 const Card = ({ Icon, title, text, $delay, $isVisible, image = null, overrideWidth = null, overrideHeight = null, isBlur = null, overrideBackground = null, overrideHref = null, alt = '' }) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -133,7 +138,7 @@ const Card = ({ Icon, title, text, $delay, $isVisible, image = null, overrideWid
       <StyledLink href={overrideHref ? overrideHref : `/posts/${slugify(title)}`}>
         {!isBlur && <Background $isHovered={isHovered} />}
         <Content $isHovered={isHovered}>
-          {image && <Image $isBlur={isBlur} src={image} alt={alt} />}
+          {image &&  <ImageWrapper><Image $isBlur={isBlur} src={`${image}?w=350`} alt={alt} /></ImageWrapper>}
           {Icon && <IconWrapper><Icon size={'48px'} /></IconWrapper>}
           {title && <Title $image={image}  $isHovered={isHovered}>{title}</Title>}
           {text && <Text $isBlur={isBlur} $image={image} $isHovered={isHovered} $overrideBackground={overrideBackground}>{text}</Text>}
