@@ -222,7 +222,7 @@ const Navigation = () => {
             <NavSection>
               <IconGroup>
                 <TfiEmail size={'14px'}/>
-                <a href="mailto:chrisjarvisdev@gmail.com">chrisjarvisdev@gmail.com</a>
+                <a href="mailto:team@highplainsmedia.com">team@highplainsmedia.com</a>
               </IconGroup>
               <IconGroup>
                 <IoPhonePortraitOutline size={'14px'}/>

@@ -39,6 +39,10 @@ const H3 = styled.h3`
 const P = styled.p`
   ${({ theme }) => theme.fonts.font16TextRegular};
   color: ${({ theme }) => theme.colors.lightGray};
+
+  a {
+    text-decoration: none;
+  }
 `;
 
 const ShadowDiv = styled.div`
@@ -106,7 +110,7 @@ const ContactSection = forwardRef((props, ref) => {
                   <MdOutlineEmail />
                 </IconWrapper>
                 <H3>Email Us</H3>
-                <P>chrisjarvisdev@gmail.com</P>
+                <P><a href="mailto:team@highplainsmedia.com">team@highplainsmedia.com</a></P>
               </ShadowDiv>
             </Col>
             <Col lg={3} md={3} sm={12}>

@@ -35,6 +35,14 @@ const FooterP = styled.p`
     color: ${({ theme }) => theme.colors.lightGray};
     line-height: 24px;
     transition: all .25s ease;
+
+    a {
+        text-decoration: underline;
+        color: ${({ theme }) => theme.colors.lightGray};
+        &:hover {
+            filter: brightness(.7);
+        }
+    }
 `;
 
 const FooterList = styled.ul`
@@ -121,7 +129,7 @@ export const Footer = () => {
                             United States<br/><br/>
 
                             <strong>Phone:</strong> +1 307 680 6321<br/>
-                            <strong>Email:</strong> chrisjarvisdev@gmail.com<br/>
+                            <strong>Email:</strong> <a href="mailto:team@highplainsmedia.com">team@highplainsmedia.com</a><br/>
                         </FooterP>
                     </Col>
                     <Col lg={3} md={6} className="py-3">
