@@ -41,7 +41,12 @@ const P = styled.p`
   color: ${({ theme }) => theme.colors.lightGray};
 
   a {
-    text-decoration: none;
+    text-decoration: underline;
+    color: ${({ theme }) => theme.colors.lightGray};
+
+    &:hover {
+      filter: brightness(.7);
+    }
   }
 `;
 
