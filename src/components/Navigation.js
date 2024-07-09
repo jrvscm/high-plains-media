@@ -13,7 +13,7 @@ import { FaInstagram, FaXTwitter, FaLinkedin } from "react-icons/fa6";
 import { useScrollPosition } from './hooks/ScrollPosition';
 import useResponsive from '../components/hooks/useResponsive';
 import { useHash } from '../components/contexts/HashContext';
-import mainLogo from '/public/high-plains-logo.png'
+import mainLogo from '/public/high-plains-logo.svg'
 
 const StyledContainer = styled(Container)`
   background: ${({ theme }) => theme.colors.blue};
