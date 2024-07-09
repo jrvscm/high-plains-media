@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import styled, { css } from 'styled-components';
 import Link from 'next/link';
+import Image from 'next/image';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -12,6 +13,7 @@ import { FaInstagram, FaXTwitter, FaLinkedin } from "react-icons/fa6";
 import { useScrollPosition } from './hooks/ScrollPosition';
 import useResponsive from '../components/hooks/useResponsive';
 import { useHash } from '../components/contexts/HashContext';
+import mainLogo from '/public/high-plains-logo.png'
 
 const StyledContainer = styled(Container)`
   background: ${({ theme }) => theme.colors.blue};
@@ -249,7 +251,7 @@ const Navigation = () => {
       <LowerNav $isScrolled={isScrolled}>
         <Stackable $isOpen={$isOpen} className="d-flex align-items-center justify-content-between">
           <div style={{paddingLeft: '0px'}} className="d-flex align-items-center justify-content-between container-fluid">
-            <StyledNavbarBrand href="/">High Plains Media<span>.</span></StyledNavbarBrand>
+            <StyledNavbarBrand href="/"><Image src={mainLogo} alt='Logo' width={200}/></StyledNavbarBrand>
             <Navbar.Toggle onClick={toggleMenu} aria-controls="nav" />
           </div>
           <div className="d-flex justify-content-end">
