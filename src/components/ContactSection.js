@@ -21,7 +21,7 @@ const IconWrapper = styled.div`
   font-size: 24px;
   padding: 8px;
   margin-right: ${({ theme }) => theme.spacing.md};
-  color: ${({ theme }) => theme.colors.blue};
+  color: ${({ theme }) => theme.colors.primary};
   border-radius: 32px;
   height: 64px;
   width: 64px;

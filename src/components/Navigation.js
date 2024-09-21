@@ -16,7 +16,7 @@ import { useHash } from '../components/contexts/HashContext';
 import mainLogo from '/public/high-plains-logo.svg'
 
 const StyledContainer = styled(Container)`
-  background: ${({ theme }) => theme.colors.blue};
+  background: ${({ theme }) => theme.colors.primary};
 `;
 
 const Stackable = styled(Container)`
@@ -113,14 +113,14 @@ const IconWrapper = styled.div`
 
 const Wrapper = styled.div`
   width: 100%;
-  background: ${({ theme }) => theme.colors.blue};
+  background: ${({ theme }) => theme.colors.primary};
 `;
 
 const StyledNavbarBrand = styled(Navbar.Brand)`
   ${({theme}) => theme.fonts.font30Bold};
 
   span {
-    color: ${({theme}) => theme.colors.blue};
+    color: ${({theme}) => theme.colors.primary};
   }
 `;
 
@@ -150,7 +150,7 @@ const Li = styled.li`
   a {
     text-decoration: none;
     font-size: 15px;
-    color: ${({ theme, $active }) => ($active ? theme.colors.blue : theme.colors.black)};
+    color: ${({ theme, $active }) => ($active ? theme.colors.primary : theme.colors.black)};
     position: relative;
 
     &:after {
@@ -160,12 +160,12 @@ const Li = styled.li`
       left: 0;
       width: ${({ $active }) => ($active ? '100%' : '0')};
       height: 2px;
-      background-color: ${({ theme }) => theme.colors.blue};
+      background-color: ${({ theme }) => theme.colors.primary};
       transition: width 0.3s ease;
     }
 
     &:hover {
-      color: ${({ theme }) => theme.colors.blue};
+      color: ${({ theme }) => theme.colors.primary};
 
       &:after {
         width: 100%;

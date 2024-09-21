@@ -11,14 +11,14 @@ const Pill = styled.h2`
     padding: ${({ theme }) => `${theme.spacing.sm} ${theme.spacing.md}`};
     margin: 0;
     background: ${({ theme }) => theme.colors.accentBlue};
-    color: ${({theme}) => theme.colors.blue};
+    color: ${({theme}) => theme.colors.primary};
     display: inline-block;
     text-transform: uppercase;
     border-radius: 50px;
 `;
 
 const Span = styled.span`
-    color: ${({ theme }) => theme.colors.blue};
+    color: ${({ theme }) => theme.colors.primary};
 `;
 
 const TitleCol = styled(Col)`

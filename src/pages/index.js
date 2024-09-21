@@ -21,7 +21,7 @@ import { updateHash } from '../utils/routerUtil';
 
 const Hero = styled.div`
   height: 75vh;
-  background: url('/images/hero-bg.jpeg') top left;
+  background: url('/images/tetons-plains.jpg') top left;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -30,7 +30,7 @@ const Hero = styled.div`
 
   &:before {
     content: "";
-    background: rgba(255, 255, 255, 0.6);
+    background: rgb(0,0,0, 0.1);
     position: absolute;
     bottom: 0;
     top: 0;
@@ -55,16 +55,28 @@ const StyledContainer = styled(Container)`
   justify-content: center;
   position: relative;
   flex-direction: column;
+  
 
   ${({ $isVisible, theme }) => $isVisible && theme.tokens.fadeInUpAnimation}
 `;
 
+const TextWrapper = styled.div`
+  justify-self: flex-start;
+  padding: 20px; /* Add padding to give the text room to breathe */
+  /* Blurred background */
+  background: rgba(255, 255, 255, 0.3); /* Semi-transparent white */
+  backdrop-filter: blur(20px); /* The blur effect */
+  border-radius: 10px; /* Optional for a cleaner look */
+  z-index: 2; /* Ensure it's above the background */
+`;
+
 const Span = styled.span`
-  color: ${({ theme }) => theme.colors.blue};
+  color: ${({ theme }) => theme.colors.primary};
 `;
 
 const H1 = styled.h1`
   ${({ theme }) => theme.fonts.font48ExtraBold};
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
 `;
 
 const H2 = styled.h1`
@@ -74,7 +86,7 @@ const H2 = styled.h1`
 const ButtonsWrapper = styled.div`
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
 
   @media ${device.tablet} {
     flex-direction: column;
@@ -188,12 +200,14 @@ export default function Home() {
       <div ref={heroRefNav} id="hero-target"/>
       <Hero ref={heroRef}>
         <StyledContainer $isVisible={heroInView}>
-          <H1>Welcome to <Span>High Plains Media</Span></H1>
-          <H2>We are a team of talented engineers and designers building projects for the web</H2>
-          <ButtonsWrapper>
-            <Button variant="primary" $style={primaryButtonStyle} $hoverStyle={primaryHoverStyle} onClick={scrollToContact}>Schedule a Call</Button>
-            <Button variant="secondary" $style={secondaryButtonStyle} $hoverStyle={secondaryHoverStyle} onClick={scrollToContact}>Send an Email</Button>
-          </ButtonsWrapper>
+          <TextWrapper>
+            <H1>Welcome to <Span>High Plains Media</Span></H1>
+            <H2>We are a team of talented engineers and designers building projects for the web</H2>
+            <ButtonsWrapper>
+              <Button variant="primary" $style={primaryButtonStyle} $hoverStyle={primaryHoverStyle} onClick={scrollToContact}>Schedule a Call</Button>
+              <Button variant="secondary" $style={secondaryButtonStyle} $hoverStyle={secondaryHoverStyle} onClick={scrollToContact}>Send an Email</Button>
+            </ButtonsWrapper>
+          </TextWrapper>
         </StyledContainer>
       </Hero>
 
@@ -223,7 +237,7 @@ export default function Home() {
         subhead={'Our experienced team leverages cutting-edge technology and in-depth knowledge to deliver exceptional digital solutions tailored to your needs.'}
       />
 
-      <ReviewsCarousel imageSrc={'/images/tetons.jpg'} />
+      {/* <ReviewsCarousel imageSrc={'/images/tetons.jpg'} /> */}
 
       <div ref={contactSectionRefNav} id="contact-target"/>
       <ContactSection ref={contactSectionRef} />

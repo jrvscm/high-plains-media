@@ -15,8 +15,8 @@ const StyledForm = styled(Form)`
   }
 
   .btn-primary {
-    background-color: ${({ theme }) => theme.colors.blue};
-    border-color: ${({ theme }) => theme.colors.blue};
+    background-color: ${({ theme }) => theme.colors.primary};
+    border-color: ${({ theme }) => theme.colors.primary};
 
     &:hover {
       filter: brightness(90%);
