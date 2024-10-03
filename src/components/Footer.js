@@ -8,7 +8,7 @@ import { MdOutlineChevronRight } from "react-icons/md";
 import { FaFacebook, FaTwitter, FaInstagram, FaSkype, FaLinkedin } from 'react-icons/fa';
 
 const Section = styled.section`
-    background: ${({ theme }) => theme.colors.white};
+    background: ${({ theme }) => theme.colors.sectionBackground};
 `;
 
 const H3 = styled.h3`
@@ -93,7 +93,7 @@ const SocialLink = styled.a`
 `;
 
 const CopyWrapper = styled(Row)`
-    background: ${({ theme }) => theme.colors.sectionBackground};
+    background: ${({ theme }) => theme.colors.white};
     width: 100vw;
     margin: 0;
     p {

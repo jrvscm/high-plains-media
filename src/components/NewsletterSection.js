@@ -4,7 +4,7 @@ import TitleWithPill from '../components/TitleWithPill';
 import { device } from '../styles/breakpoints';
 
 const Section = styled.section`
-  background: ${({ theme }) => theme.colors.sectionBackground};
+  background: ${({ theme }) => theme.colors.white};
   height: 300px;
   display: flex;
   align-items: center;

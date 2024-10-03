@@ -1,10 +1,12 @@
 export const colors = {
     primary: '#a47245',
     accentBlue: '#e7f1fd',
+    // accentBlue: '#dbbd8c',
     black: '#222',
     white: '#fff',
     gray: '#555555',
     lightGray: '#777777',
     textGray: '#444444',
-    sectionBackground: '#f6f9fe'
+    sectionBackground: '#f6f9fe',
+    darkBlue: '#000D41'
 }

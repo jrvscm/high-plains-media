@@ -110,7 +110,7 @@ const Image = styled.img`
   filter: ${({ $isBlur }) => $isBlur ? 'blur(10px)' : 'none'};
 `;
 
-const StyledLink = styled(Link)`
+const StyledLink = styled.span`
   text-decoration: none;
 `;
 

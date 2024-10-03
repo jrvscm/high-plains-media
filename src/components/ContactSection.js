@@ -12,7 +12,7 @@ import { updateHash } from '../utils/routerUtil';
 import { useHash } from '../components/contexts/HashContext';
 
 const Section = styled.section`
-  background: ${({ theme }) => theme.colors.white};
+  background: ${({ theme }) => theme.colors.sectionBackground};
   will-change: transform;
 `;
 

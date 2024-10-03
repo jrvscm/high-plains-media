@@ -18,6 +18,7 @@ import ContactSection from '../components/ContactSection';
 import { useRouter } from 'next/router';
 import { useHash } from '../components/contexts/HashContext';
 import { updateHash } from '../utils/routerUtil';
+import useSplashScreen from '../components/hooks/useSplashScreen';
 
 const Hero = styled.div`
   height: 75vh;
@@ -25,9 +26,9 @@ const Hero = styled.div`
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  background-attachment: fixed;
+  background-attachment: scroll;
   position: relative;
-
+  transform: translateZ(0);
   &:before {
     content: "";
     background: rgb(0,0,0, 0.1);
@@ -38,26 +39,28 @@ const Hero = styled.div`
     right: 0;
   }
 
-  @media ${device.tablet} {
+  ${'' /* @media ${device.tablet} {
     background-attachment: scroll;
   }
 
   @media ${device.mobile} {
     background-attachment: scroll;
-  }
+  } */}
 `;
 
 const StyledContainer = styled(Container)`
-  opacity: 0;
   height: 100%;
   display: flex;
   align-items: flex-start;
   justify-content: center;
   position: relative;
   flex-direction: column;
-  
 
-  ${({ $isVisible, theme }) => $isVisible && theme.tokens.fadeInUpAnimation}
+  /* Initially visible without opacity fade, and transition the blur */
+  ${({ $isVisible, theme }) => $isVisible && `
+    opacity: 1;
+    transition: backdrop-filter 0.3s ease-in-out; 
+  `}
 `;
 
 const TextWrapper = styled.div`
@@ -68,6 +71,8 @@ const TextWrapper = styled.div`
   backdrop-filter: blur(20px); /* The blur effect */
   border-radius: 10px; /* Optional for a cleaner look */
   z-index: 2; /* Ensure it's above the background */
+  will-change: transform, backdrop-filter;
+  backface-visibility: hidden;
 `;
 
 const Span = styled.span`
@@ -103,7 +108,7 @@ const ButtonsWrapper = styled.div`
 
 const Services = styled.section`
   padding: ${({ theme }) => theme.spacing.xxxlg};
-  background: ${({ theme }) => theme.colors.white};
+  background: ${({ theme }) => theme.colors.sectionBackground};
 
   @media ${device.tablet} {
     padding: ${({ theme }) => `${theme.spacing.xlg} ${theme.spacing.sm}`};
@@ -120,6 +125,7 @@ const StyledRow = styled(Row)`
 `;
 
 export default function Home() {
+  const { isSplashVisible, SplashComponent } = useSplashScreen('/images/highplains-logo-v2.svg', 1500);
   const { hash, setHash } = useHash(); // Consume hash state from context
   const router = useRouter();
   const { isMobile } = useResponsive();
@@ -196,7 +202,7 @@ export default function Home() {
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://www.highplainsmedia.com/" />
       </Head>
-      
+      {SplashComponent}
       <div ref={heroRefNav} id="hero-target"/>
       <Hero ref={heroRef}>
         <StyledContainer $isVisible={heroInView}>
