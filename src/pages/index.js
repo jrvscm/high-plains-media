@@ -125,7 +125,7 @@ const StyledRow = styled(Row)`
 `;
 
 export default function Home() {
-  const { isSplashVisible, SplashComponent } = useSplashScreen('/images/highplains-logo-v2.svg', 1500);
+  const { isSplashVisible, SplashComponent } = useSplashScreen('/images/highplains-logo-v2.svg', 1000);
   const { hash, setHash } = useHash(); // Consume hash state from context
   const router = useRouter();
   const { isMobile } = useResponsive();
