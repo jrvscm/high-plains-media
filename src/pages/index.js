@@ -127,13 +127,70 @@ const StyledRow = styled(Row)`
 `;
 
 const Wrapper = styled.div`
-  min-height: 110vh;
-  background: ${({theme}) => theme.colors.backgroundGradient};
+  position: relative;
+  padding-bottom: 100px;
+  background: ${({theme}) => theme.colors.backgroundGradient}; /* The gradient */
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('/images/highplains-logo-v2.svg') center center / contain no-repeat;
+    opacity: 0.03; /* Adjust opacity here */
+  }
 
   @media ${device.tablet} {
     background: ${({theme}) => theme.colors.mobileBackgroundGradient};
+    
+    &::before {
+      background: url('images/highplains-logo-v2.svg') center center / contain no-repeat;
+    }
   }
 `;
+
+const GridWrapper = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);  /* Two equal columns */
+  grid-template-rows: repeat(2, 1fr);  /* Two equal rows */
+  gap: 20px;  /* Gap between grid items */
+  padding: 40px; /* Padding around the grid */
+  
+  position: relative;  /* Position the grid on top of the normal content */
+
+  width: 100%;
+  height: 100%;
+  z-index: 10;  /* Ensure it stays above other content */
+
+  @media ${device.tablet} {
+    grid-template-columns: 1fr;  /* One column on smaller screens */
+    grid-template-rows: auto;  /* Auto rows on smaller screens */
+    padding: 20px;
+  }
+`;
+
+const GridItem = styled.div`
+  height: 400px;
+  background-color: ${({ theme }) => theme.colors.lightGray};
+  border-radius: 15px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Shadow effect */
+  overflow: hidden;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* Add hover effect if needed */
+  &:hover {
+    transform: scale(1.02);
+    transition: transform 0.3s ease;
+    background-color: rgba(255, 255, 255, 0.2); /* Slightly increase opacity on hover */
+  }
+`;
+
+
 
 export default function Home() {
   const { isSplashVisible, SplashComponent } = useSplashScreen('/images/highplains-logo-v2.svg');
@@ -216,7 +273,23 @@ export default function Home() {
       {SplashComponent}
       <Wrapper>
         <HeaderPill title={'Services'} />
+        <GridWrapper className={'container'}>
+          <GridItem>
+            {/* Add content, e.g., images, text, etc. */}
+            {/* <img src="/path/to/image1.svg" alt="Web Development" /> */}
+          </GridItem>
+          <GridItem>
+            {/* <img src="/path/to/image2.svg" alt="Digital Marketing" /> */}
+          </GridItem>
+          <GridItem>
+            {/* <img src="/path/to/image3.svg" alt="E-commerce" /> */}
+          </GridItem>
+          <GridItem>
+            {/* <img src="/path/to/image4.svg" alt="Automation" /> */}
+          </GridItem>
+        </GridWrapper>
       </Wrapper>
+
       {/* <div ref={heroRefNav} id="hero-target"/>
       <Hero ref={heroRef}>
         <StyledContainer $isVisible={heroInView}>

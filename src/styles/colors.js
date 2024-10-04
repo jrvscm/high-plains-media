@@ -5,7 +5,7 @@ export const colors = {
     black: '#222',
     white: '#fff',
     gray: '#555555',
-    lightGray: '#777777',
+    lightGray: '#9CA3AF',
     textGray: '#444444',
     sectionBackground: '#f6f9fe',
 
@@ -14,5 +14,7 @@ export const colors = {
     primaryLight: '#584C9D',
     primaryDark: '#1e1b36',
     backgroundGradient: 'radial-gradient(circle 500px at center, #584C9D 0%, #1f1b37 100%)',
-    mobileBackgroundGradient: 'radial-gradient(circle 200px at center, #584C9D 0%, #1f1b37 100%)'
+    mobileBackgroundGradient: 'radial-gradient(circle 200px at center, #584C9D 0%, #1f1b37 100%)',
+    backgroundGradient: 'radial-gradient(circle 500px at center, #584C9D 0%, #3F2A77 40%, #1F1B37 100%)',
+    
 }

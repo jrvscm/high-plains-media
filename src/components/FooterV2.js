@@ -3,93 +3,66 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/Container';
 import Link from 'next/link';
-import { slugify } from '../utils/misc';
-import { MdOutlineChevronRight } from "react-icons/md";
-import { FaFacebook, FaTwitter, FaInstagram, FaSkype, FaLinkedin } from 'react-icons/fa';
+
+import { device } from '../styles/breakpoints';
+
+const StyledContainer = styled(Container)`
+    border-Bottom: 2px solid ${({ theme }) => theme.colors.lightGray};
+`;
 
 const Section = styled.section`
     background: ${({ theme }) => theme.colors.primaryDark};
-`;
-
-const H3 = styled.h3`
-    ${({ theme }) => theme.fonts.fontBody24Regular};
-    color: ${({ theme }) => theme.colors.black};
-    font-weight: 700;
+    padding-bottom: 0px;
 `;
 
 const H4 = styled.h4`
-    ${({ theme }) => theme.fonts.fontBody24Regular};
-    font-size: 18px; //gross
-    color: ${({ theme }) => theme.colors.black};
-    font-weight: 700;
-`;
-
-
-const Span = styled.span`
-    color: ${({ theme }) => theme.colors.primary};
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
+    font-family: 'Orbitron', sans-serif;
+    font-size: 18px; 
+    color: ${({ theme }) => theme.colors.white};
+    letter-spacing: 2px;
+    font-weight: 600;
 `;
 
 const FooterP = styled.p`
-    ${({ theme }) => theme.fonts.fontBody24Regular};
-    font-size: 14px;
+    font-family: 'Raleway', sans-serif;
+    font-size: 16px;
     color: ${({ theme }) => theme.colors.lightGray};
     line-height: 24px;
-    transition: all .25s ease;
 
+    li > a,
     a {
+        transition: all .25s ease;
         text-decoration: underline;
         color: ${({ theme }) => theme.colors.lightGray};
         &:hover {
-            filter: brightness(.7);
+            filter: brightness(80%);
         }
     }
 `;
 
 const FooterList = styled.ul`
     padding: 0;
+
+    & li > a > p {
+        transition: all .25s ease;
+        &:hover {
+            cursor: pointer;
+            filter: brightness(80%);
+        }
+    }
 `;
 
 const Li = styled.li`
     & > p {
         margin: 0;
     }
-
-    &:hover {
-        & > p {
+    & > p {
+        &:hover {
             cursor: pointer;
-            color: ${({ theme }) => theme.colors.primary};
+            filter: brightness(80%);
         }
     }
-`;
-
-const FooterIcon = styled(MdOutlineChevronRight)`
-    color: ${({ theme }) => theme.colors.primary};
-`;
-
-const SocialLinksContainer = styled.div`
-  display: flex;
-  justify-content: flex-start;
-  margin-top: 15px;
-
-  & a {
-      margin: 0px 8px 0px 0px;
-  }
-`;
-
-const SocialLink = styled.a`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;  // Ensuring it's a perfect square
-  height: 40px;
-  background-color: ${({ theme }) => theme.colors.primary};
-  color: white;
-  margin: 0;
-  border-radius: 5px;  // Slight rounding of corners
-
-  &:hover {
-    opacity: 0.8;
-  }
 `;
 
 const CopyWrapper = styled(Row)`
@@ -97,7 +70,9 @@ const CopyWrapper = styled(Row)`
     width: 100vw;
     margin: 0;
     p {
-        ${({ theme }) => theme.fonts.font13TextRegular};
+        font-family: 'Raleway', sans-serif;
+        font-size: 12px;
+        color: ${({ theme }) => theme.colors.lightGray};
         margin: 0;
         padding: 0;
     }
@@ -116,70 +91,58 @@ const StyledLink = styled(Link)`
     }
 `;
 
+const Logo = styled.img`
+  width: 200px;
+  height: 200px;
+  @media ${device.tablet}{
+    width: 125px;
+    height: 125px;
+  }
+  ${'' /* filter: drop-shadow(0 0 30px rgb(164, 54, 227));  /* Apply drop shadow effect */ }
+`;
+
+
 export const Footer = () => {
     return (
     <>
-        <Section className="py-5">
-            <Container>
+        <Section className="pt-3 pb-0">
+            <StyledContainer>
                 <Row>
+                    <Col lg={3} md={6} className="pt-3">
+                        <Logo src={'/images/highplains-logo-v2.svg'} />
+                    </Col>
                     <Col lg={3} md={6} className="py-3">
-                        <H3 className="mb-3">High Plains Media<Span>.</Span></H3>
+                        <H4>COMPANY</H4>
+                        <FooterList>
+                            <Li className="d-flex justify-content-start align-items-center py-1"><FooterP>Home</FooterP></Li>
+                            <Li className="d-flex justify-content-start align-items-center py-1"><FooterP>About</FooterP></Li>
+                            <Li className="d-flex justify-content-start align-items-center py-1"><FooterP>Services</FooterP></Li>
+                            <Li className="d-flex justify-content-start align-items-center py-1"><FooterP>Terms of Service</FooterP></Li>
+                            <Li className="d-flex justify-content-start align-items-center py-1"><FooterP>Privacy Policy</FooterP></Li>
+                        </FooterList>
+                    </Col>
+                    <Col lg={3} md={6} className="py-3">
+                        <H4>FOLLOW US</H4>
+                        <FooterList>
+                            <Li className="d-flex justify-content-start align-items-center py-1"><StyledLink href={``}><FooterP>Github</FooterP></StyledLink></Li>
+                            <Li className="d-flex justify-content-start align-items-center py-1"><StyledLink href={``}><FooterP>Instagram</FooterP></StyledLink></Li>
+                            <Li className="d-flex justify-content-start align-items-center py-1"><StyledLink href={``}><FooterP>LinkedIn</FooterP></StyledLink></Li>
+                        </FooterList>
+                    </Col>
+                    <Col lg={3} md={6} className="py-3">
+                        <H4>CONTACT US</H4>
                         <FooterP>
-                            Gillette, WY 82718<br/>
+                            Gillette, WY USA<br/>
                             United States<br/><br/>
 
                             <strong>Phone:</strong> +1 307 680 6321<br/>
                             <strong>Email:</strong> <a href="mailto:team@highplainsmedia.com">team@highplainsmedia.com</a><br/>
                         </FooterP>
                     </Col>
-                    <Col lg={3} md={6} className="py-3">
-                        <H4>Useful Links</H4>
-                        <FooterList>
-                            <Li className="d-flex justify-content-start align-items-center py-1"><FooterIcon /><FooterP>Home</FooterP></Li>
-                            <Li className="d-flex justify-content-start align-items-center py-1"><FooterIcon /><FooterP>About Us</FooterP></Li>
-                            <Li className="d-flex justify-content-start align-items-center py-1"><FooterIcon /><FooterP>Services</FooterP></Li>
-                            <Li className="d-flex justify-content-start align-items-center py-1"><FooterIcon /><FooterP>Terms of Service</FooterP></Li>
-                            <Li className="d-flex justify-content-start align-items-center py-1"><FooterIcon /><FooterP>Privacy Policy</FooterP></Li>
-                        </FooterList>
-                    </Col>
-                    <Col lg={3} md={6} className="py-3">
-                        <H4>Our Services</H4>
-                        <FooterList>
-                            <Li className="d-flex justify-content-start align-items-center py-1"><FooterIcon /><StyledLink href={`/posts/${slugify("Mobile Applications")}`}><FooterP>Mobile Applications</FooterP></StyledLink></Li>
-                            <Li className="d-flex justify-content-start align-items-center py-1"><FooterIcon /><StyledLink href={`/posts/${slugify("Website Development")}`}><FooterP>Website Development</FooterP></StyledLink></Li>
-                            <Li className="d-flex justify-content-start align-items-center py-1"><FooterIcon /><StyledLink href={`/posts/${slugify("Digital Marketing")}`}><FooterP>Digital Marketing</FooterP></StyledLink></Li>
-                            <Li className="d-flex justify-content-start align-items-center py-1"><FooterIcon /><StyledLink href={`/posts/${slugify("E-commerce")}`}><FooterP>E-commerce</FooterP></StyledLink></Li>
-                            <Li className="d-flex justify-content-start align-items-center py-1"><FooterIcon /><StyledLink href={`/posts/${slugify("Content Strategy")}`}><FooterP>Content Strategy</FooterP></StyledLink></Li>
-                            <Li className="d-flex justify-content-start align-items-center py-1"><FooterIcon /><StyledLink href={`/posts/${slugify("Funnel Creation")}`}><FooterP>Funnel Creation</FooterP></StyledLink></Li>
-                            <Li className="d-flex justify-content-start align-items-center py-1"><FooterIcon /><StyledLink href={`/posts/${slugify("SEO Optimization")}`}><FooterP>SEO Optimization</FooterP></StyledLink></Li>
-                            <Li className="d-flex justify-content-start align-items-center py-1"><FooterIcon /><StyledLink href={`/posts/${slugify("Graphic Design")}`}><FooterP>Graphic Design</FooterP></StyledLink></Li>
-                        </FooterList>
-                    </Col>
-                    <Col lg={3} md={6} className="py-3">
-                        <H4>Socials</H4>
-                        <FooterP>Follow us for special offers and updates on our latest projects. Click the links below to join our community!</FooterP>
-                        <SocialLinksContainer>
-                            <SocialLink href="#" className="twitter">
-                            <FaTwitter size="20" />
-                            </SocialLink>
-                            <SocialLink href="#" className="facebook">
-                            <FaFacebook size="20" />
-                            </SocialLink>
-                            <SocialLink href="#" className="instagram">
-                            <FaInstagram size="20" />
-                            </SocialLink>
-                            <SocialLink href="#" className="skype">
-                            <FaSkype size="20" />
-                            </SocialLink>
-                            <SocialLink href="#" className="linkedin">
-                            <FaLinkedin size="20" />
-                            </SocialLink>
-                        </SocialLinksContainer>
-                    </Col>
                 </Row>
-            </Container>
+            </StyledContainer>
         </Section>
-        <CopyWrapper className="justify-content-center align-items-center py-3">
+        <CopyWrapper className="justify-content-center align-items-center py-4">
             <p className="text-center">&copy; { new Date().getFullYear() } High Plains Media</p>
         </CopyWrapper>
     </>
