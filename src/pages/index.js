@@ -20,6 +20,8 @@ import { useHash } from '../components/contexts/HashContext';
 import { updateHash } from '../utils/routerUtil';
 import useSplashScreen from '../components/hooks/useSplashScreen';
 
+import HeaderPill from '../components/HeaderPill';
+
 const Hero = styled.div`
   height: 75vh;
   background: url('/images/tetons-plains.jpg') top left;
@@ -124,8 +126,17 @@ const StyledRow = styled(Row)`
   width: 100%;
 `;
 
+const Wrapper = styled.div`
+  min-height: 110vh;
+  background: ${({theme}) => theme.colors.backgroundGradient};
+
+  @media ${device.tablet} {
+    background: ${({theme}) => theme.colors.mobileBackgroundGradient};
+  }
+`;
+
 export default function Home() {
-  const { isSplashVisible, SplashComponent } = useSplashScreen('/images/highplains-logo-v2.svg', 1000);
+  const { isSplashVisible, SplashComponent } = useSplashScreen('/images/highplains-logo-v2.svg');
   const { hash, setHash } = useHash(); // Consume hash state from context
   const router = useRouter();
   const { isMobile } = useResponsive();
@@ -203,7 +214,10 @@ export default function Home() {
         <link rel="canonical" href="https://www.highplainsmedia.com/" />
       </Head>
       {SplashComponent}
-      <div ref={heroRefNav} id="hero-target"/>
+      <Wrapper>
+        <HeaderPill title={'Services'} />
+      </Wrapper>
+      {/* <div ref={heroRefNav} id="hero-target"/>
       <Hero ref={heroRef}>
         <StyledContainer $isVisible={heroInView}>
           <TextWrapper>
@@ -245,10 +259,10 @@ export default function Home() {
 
       {/* <ReviewsCarousel imageSrc={'/images/tetons.jpg'} /> */}
 
-      <div ref={contactSectionRefNav} id="contact-target"/>
-      <ContactSection ref={contactSectionRef} />
+      {/* <div ref={contactSectionRefNav} id="contact-target"/> */}
+      {/* <ContactSection ref={contactSectionRef} /> */}
 
-      <NewsletterSection />
+      {/* <NewsletterSection /> */} 
     </>
   );
 }

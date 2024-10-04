@@ -1,20 +1,19 @@
 import Navigation from './Navigation';
-import Footer from './Footer';
+import FooterV2 from './FooterV2';
 import { useLoading } from './contexts/LoadingContext';
 import styled from 'styled-components';
 import Loader from '../components/Loader';
 
 const Wrapper = styled.div`
-    padding-top: 125px;
 `;
 
 export const Layout = ({ children }) => {
     const { isLoading } = useLoading();
     return (
         <Wrapper>
-            <Navigation />
+            {/* <Navigation /> */}
             {children}
-            <Footer />
+            <FooterV2 />
             {isLoading && <Loader />}
         </Wrapper>
     )

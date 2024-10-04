@@ -34,7 +34,7 @@ const SplashScreen = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background: ${({ theme }) => theme.colors.darkBlue};
+  background: ${({ theme }) => theme.colors.secondaryDark};
   z-index: 9999;
   display: flex;
   align-items: center;
