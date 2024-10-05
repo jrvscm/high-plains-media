@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Head from "next/head";
 import styled from 'styled-components';
 import { useInView } from 'react-intersection-observer';
@@ -21,6 +21,8 @@ import { updateHash } from '../utils/routerUtil';
 import useSplashScreen from '../components/hooks/useSplashScreen';
 
 import HeaderPill from '../components/HeaderPill';
+import useCustomCursor from '../components/hooks/useCursorTracker';
+import CustomCursor from '../components/CustomCursor';
 
 const Hero = styled.div`
   height: 75vh;
@@ -131,31 +133,34 @@ const Wrapper = styled.div`
   padding-bottom: 100px;
   background: ${({theme}) => theme.colors.backgroundGradient}; /* The gradient */
 
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: url('/images/highplains-logo-v2.svg') center center / contain no-repeat;
-    opacity: 0.03; /* Adjust opacity here */
-  }
-
   @media ${device.tablet} {
     background: ${({theme}) => theme.colors.mobileBackgroundGradient};
-    
-    &::before {
-      background: url('images/highplains-logo-v2.svg') center center / contain no-repeat;
-    }
   }
+`;
+
+const GridTileOverlay  = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: ${({ theme }) => `${theme.colors.secondaryDark}F2`};  /* Semi-transparent black background */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 24px;
+  opacity: 0;  /* Initially invisible */
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  z-index: 2;  /* Above everything else */
 `;
 
 const GridWrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);  /* Two equal columns */
   grid-template-rows: repeat(2, 1fr);  /* Two equal rows */
-  gap: 20px;  /* Gap between grid items */
+  gap: 35px;  /* Gap between grid items */
   padding: 40px; /* Padding around the grid */
   
   position: relative;  /* Position the grid on top of the normal content */
@@ -172,8 +177,8 @@ const GridWrapper = styled.div`
 `;
 
 const GridItem = styled.div`
+  position: relative;
   height: 400px;
-  background-color: ${({ theme }) => theme.colors.lightGray};
   border-radius: 15px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Shadow effect */
   overflow: hidden;
@@ -181,15 +186,83 @@ const GridItem = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-
+  background: #FFB6C1;
+  overflow: hidden;
   /* Add hover effect if needed */
   &:hover {
     transform: scale(1.02);
-    transition: transform 0.3s ease;
-    background-color: rgba(255, 255, 255, 0.2); /* Slightly increase opacity on hover */
+    transition: transform 0.3s ease-in-out;
+    cursor: pointer;
+
+    > ${GridTileOverlay} {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+
+  &::before {
+    content: ' ';
+    position: absolute;
+    height: 300px;
+    width: 300px;
+    top: -100px;
+    right: -100px;
+    border-top-right-radius: 150px;
+    border-top-left-radius: 150px;
+    border-bottom-right-radius: 150px;
+    border-bottom-left-radius: 150px;
+    background: #9370DB;
+    z-index: 0;
+  }
+
+  & > img {
+    width: 100%;
+    height: auto;
+    z-index: 1;
+  }
+
+  &:nth-of-type(2) {
+    background: #98FF98;
+
+    &::before {
+      background: #D2B48C;
+    }
+  }
+
+  &:nth-of-type(3) {
+    background: #87CEEB;
+    &::before {
+      background: #008080;
+    }
+  }
+
+  &:nth-of-type(4) {
+    background: #FF6F61;
+    &::before {
+      background: #FFC107;
+    }
+  }
+
+  & h3 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 32px;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
   }
 `;
 
+const Cursor = styled.div`
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  border: 2px solid white;
+  border-radius: 50%;
+  pointer-events: none;
+  mix-blend-mode: difference;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+  transform: ${({ hovered }) => (hovered ? 'scale(1.2)' : 'scale(1)')};
+  background-color: ${({ hovered }) => (hovered ? 'rgba(255, 255, 255, 0.1)' : 'transparent')};
+`;
 
 
 export default function Home() {
@@ -258,6 +331,8 @@ export default function Home() {
   const headerMsg = !isMobile
     ? 'Enhance your online reach and increase conversions through our AI-powered, project build-out. Our approach leverages the latest in AI technology to ensure every aspect of your project is optimized for success.'
     : 'Enhance your online reach and increase conversions through our AI-powered, project build-out.'
+  
+  const [hovered, setHovered] = useState(false);
 
   return (
     <>
@@ -271,20 +346,40 @@ export default function Home() {
         <link rel="canonical" href="https://www.highplainsmedia.com/" />
       </Head>
       {SplashComponent}
+      <CustomCursor hovered={hovered}/>
       <Wrapper>
-        <HeaderPill title={'Services'} />
+        <HeaderPill title={'work'} />
         <GridWrapper className={'container'}>
-          <GridItem>
-            {/* Add content, e.g., images, text, etc. */}
+          <GridItem 
+            onMouseEnter={() => setHovered(true)}
+            onMouseLeave={() => setHovered(false)}
+          >
+            <img src={'/images/sunshinePaintAndBody.png'} />
+            <GridTileOverlay><h3>DETAILS</h3></GridTileOverlay>
             {/* <img src="/path/to/image1.svg" alt="Web Development" /> */}
           </GridItem>
-          <GridItem>
+          <GridItem
+            onMouseEnter={() => setHovered(true)}
+            onMouseLeave={() => setHovered(false)}
+          >
+            <img src={'/images/sunshinePaintAndBody.png'} />
+            <GridTileOverlay><h3>DETAILS</h3></GridTileOverlay>
             {/* <img src="/path/to/image2.svg" alt="Digital Marketing" /> */}
           </GridItem>
-          <GridItem>
+          <GridItem
+            onMouseEnter={() => setHovered(true)}
+            onMouseLeave={() => setHovered(false)}
+          >
+            <img src={'/images/sunshinePaintAndBody.png'} />
+            <GridTileOverlay><h3>DETAILS</h3></GridTileOverlay>
             {/* <img src="/path/to/image3.svg" alt="E-commerce" /> */}
           </GridItem>
-          <GridItem>
+          <GridItem
+            onMouseEnter={() => setHovered(true)}
+            onMouseLeave={() => setHovered(false)}
+          >
+            <img src={'/images/sunshinePaintAndBody.png'} />
+            <GridTileOverlay><h3>DETAILS</h3></GridTileOverlay>
             {/* <img src="/path/to/image4.svg" alt="Automation" /> */}
           </GridItem>
         </GridWrapper>
