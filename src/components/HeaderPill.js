@@ -81,6 +81,10 @@ const StyledLink = styled(Link)`
     height: 2px; /* Thickness of the underline */
     background-color: ${({ theme }) => theme.colors.white};
     transition: width 0.3s ease;
+
+    ${({ $active }) => $active && `
+        width: 100%;
+    `}
   }
 
   &:hover {
@@ -90,6 +94,8 @@ const StyledLink = styled(Link)`
       width: 100%; /* Animate underline width to full */
     }
   }
+
+
 `;
 
 const HeaderPill = ({title}) => (
@@ -98,10 +104,10 @@ const HeaderPill = ({title}) => (
             <PillText>{title}</PillText>
         </PillContainer>
         <LinkWrapper>
-            <StyledLink href={''}>ABOUT</StyledLink>
-            <StyledLink href={''}>SERVICES</StyledLink>
-            <StyledLink href={''}>WORK</StyledLink>
-            <StyledLink href={''}>CONTACT</StyledLink>
+            <StyledLink $active={'about' === title} href={''}>ABOUT</StyledLink>
+            <StyledLink $active={'services' === title} href={''}>SERVICES</StyledLink>
+            <StyledLink $active={'work' === title} href={''}>WORK</StyledLink>
+            <StyledLink $active={'contact' === title} href={'/contact'}>CONTACT</StyledLink>
         </LinkWrapper>
     </Wrapper>
 );

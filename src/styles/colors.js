@@ -10,6 +10,7 @@ export const colors = {
     sectionBackground: '#f6f9fe',
 
     //new theme
+    borderColor: '#dee2e6',
     secondaryDark: '#000D41',
     primaryLight: '#584C9D',
     primaryDark: '#1e1b36',
