@@ -10,7 +10,11 @@ const StyledForm = styled(Form)`
     margin-bottom: 32px;
     label {
       padding-left: 20px;
-      color: ${({ theme }) => theme.colors.lightGray};
+      color: ${({ theme }) => theme.colors.lightGray} !important;
+      
+      &::after {  
+        background: transparent !important;
+      }
     }
 
     textarea,
@@ -21,6 +25,8 @@ const StyledForm = styled(Form)`
       border-bottom-right-radius: 100px;
       border-top-left-radius: 100px;
       border-bottom-left-radius: 100px;
+      color: ${({ theme }) => theme.colors.white} !important;
+      padding-left: 20px;
     }
 
     textarea {
@@ -57,6 +63,7 @@ export const ContactForm = ({ setHovered }) => {
       'form-name': 'contact-peak-digital', // Required for Netlify to recognize the form
       'name': '',
       'email': '',
+      'phone': '',
       'subject': '',
       'message': ''
   });
@@ -77,6 +84,7 @@ export const ContactForm = ({ setHovered }) => {
           'bot-field': '', // Honeypot field
           'form-name': 'contact-peak-digital', 
           'name': '',
+          'phone': '',
           'email': '',
           'subject': '',
           'message': ''
@@ -129,8 +137,8 @@ export const ContactForm = ({ setHovered }) => {
         <Row>
           <Col md={6}>
             <Form.Floating>
-              <Form.Control onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} type="text" id="phone" name="phone" placeholder="Phone (optional)" onChange={handleChange} value={formData.subject}/>
-              <label htmlFor="subject">Phone (optional)</label>
+              <Form.Control onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} type="text" id="phone" name="phone" placeholder="Phone (optional)" onChange={handleChange} value={formData.phone}/>
+              <label htmlFor="phone">Phone (optional)</label>
             </Form.Floating>
           </Col>
           <Col md={6}>
