@@ -98,8 +98,8 @@ export default function Home() {
                 technological experiences for their clients and help them stay ahead of the 
                 digital curve.</P>
                 </Col>
-                <Col lg={6} className="pt-3 text-center" onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
-                    <ThreeDAnimation />
+                <Col lg={6} className="pt-3 text-center">
+                    <ThreeDAnimation setHovered={setHovered}/>
                 </Col>
             </Row>
         </StyledContainer>

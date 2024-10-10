@@ -3,7 +3,7 @@ import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { gsap } from 'gsap';
 
-const ThreeDUfo = () => {
+const ThreeDUfo = ({setHovered}) => {
   const mountRef = useRef(null);
   const ufoRef = useRef(null);
   const [isAnimating, setIsAnimating] = useState(false);
@@ -181,6 +181,7 @@ const ThreeDUfo = () => {
 
   return (
     <div
+        onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}
       ref={mountRef}
       style={{
         width: '100%',
