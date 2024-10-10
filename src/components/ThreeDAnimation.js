@@ -7,11 +7,25 @@ const ThreeDUfo = () => {
   const mountRef = useRef(null);
   const ufoRef = useRef(null);
   const [isAnimating, setIsAnimating] = useState(false);
+  const isDragging = useRef(false);
+  const previousMousePosition = useRef({ x: 0, y: 0 });
 
   const handleMouseMove = (event) => {
-    if (ufoRef.current && !isAnimating) { // Only react to mouse if not animating
-      const mouseX = (event.clientX / window.innerWidth - 0.5) * 0.6;
-      const mouseY = (event.clientY / window.innerHeight - 0.5) * 0.6;
+    if (ufoRef.current && !isAnimating && isDragging.current) {
+      const deltaX = event.clientX - previousMousePosition.current.x;
+      const deltaY = event.clientY - previousMousePosition.current.y;
+
+      // Update the UFO rotation based on mouse movement
+      ufoRef.current.rotation.y += deltaX * 0.01;
+      ufoRef.current.rotation.x += deltaY * 0.01;
+
+      previousMousePosition.current = {
+        x: event.clientX,
+        y: event.clientY
+      };
+    } else if (ufoRef.current && !isAnimating && !isDragging.current) { 
+      const mouseX = (event.clientX / window.innerWidth - 0.5) * 0.8;
+      const mouseY = (event.clientY / window.innerHeight - 0.5) * 0.8;
 
       gsap.to(ufoRef.current.position, {
         x: mouseX,
@@ -22,30 +36,42 @@ const ThreeDUfo = () => {
     }
   };
 
+  const handleMouseDown = (event) => {
+    isDragging.current = true;
+    previousMousePosition.current = {
+      x: event.clientX,
+      y: event.clientY
+    };
+  };
+
+  const handleMouseUp = () => {
+    isDragging.current = false;
+  };
+
   const flyIn = () => {
     if (ufoRef.current) {
-      setIsAnimating(true); // Start animation
+      setIsAnimating(true);
       gsap.to(ufoRef.current.position, { 
         x: 0, 
         y: 5, 
         z: 0, 
         duration: 2, 
         ease: 'power2.out',
-        onComplete: () => setIsAnimating(false) // End animation
+        onComplete: () => setIsAnimating(false)
       });
     }
   };
 
   const flyOut = () => {
     if (ufoRef.current) {
-      setIsAnimating(true); // Start animation
+      setIsAnimating(true);
       gsap.to(ufoRef.current.position, {
         x: window.innerWidth / 1.5,
         y: window.innerHeight / 2,
         z: -20,
         duration: 2,
         ease: 'power2.in',
-        onComplete: () => setIsAnimating(false) // End animation
+        onComplete: () => setIsAnimating(false)
       });
     }
   };
@@ -91,11 +117,11 @@ const ThreeDUfo = () => {
         ufo.scale.set(2, 2, 2);
         scene.add(ufo);
 
-        // Delay the initial flyIn by 1200ms
         setTimeout(flyIn, 1200);
-
         window.addEventListener('mousemove', handleMouseMove);
         window.addEventListener('scroll', handleScroll);
+        window.addEventListener('mousedown', handleMouseDown);
+        window.addEventListener('mouseup', handleMouseUp);
 
         const animate = () => {
           requestAnimationFrame(animate);
@@ -144,6 +170,8 @@ const ThreeDUfo = () => {
       window.removeEventListener('resize', handleResize);
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mousedown', handleMouseDown);
+      window.removeEventListener('mouseup', handleMouseUp);
       renderer.dispose();
       if (mountRef.current) {
         mountRef.current.removeChild(renderer.domElement);
