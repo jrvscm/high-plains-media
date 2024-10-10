@@ -139,20 +139,6 @@ const GridItem = styled.div`
   }
 `;
 
-const Cursor = styled.div`
-  position: absolute;
-  width: 50px;
-  height: 50px;
-  border: 2px solid white;
-  border-radius: 50%;
-  pointer-events: none;
-  mix-blend-mode: difference;
-  transition: transform 0.2s ease, background-color 0.2s ease;
-  transform: ${({ hovered }) => (hovered ? 'scale(1.2)' : 'scale(1)')};
-  background-color: ${({ hovered }) => (hovered ? 'rgba(255, 255, 255, 0.1)' : 'transparent')};
-`;
-
-
 export default function Home() {
   const { isSplashVisible, SplashComponent } = useSplashScreen('/images/highplains-logo-v2.svg');
   const [hovered, setHovered] = useState(false);

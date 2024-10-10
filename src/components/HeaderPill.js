@@ -104,9 +104,9 @@ const HeaderPill = ({title}) => (
             <PillText>{title}</PillText>
         </PillContainer>
         <LinkWrapper>
-            <StyledLink $active={'about' === title} href={''}>ABOUT</StyledLink>
-            <StyledLink $active={'services' === title} href={''}>SERVICES</StyledLink>
-            <StyledLink $active={'work' === title} href={''}>WORK</StyledLink>
+            <StyledLink $active={'about' === title} href={'/about'}>ABOUT</StyledLink>
+            <StyledLink $active={'services' === title} href={'/services'}>SERVICES</StyledLink>
+            <StyledLink $active={'work' === title} href={'/'}>WORK</StyledLink>
             <StyledLink $active={'contact' === title} href={'/contact'}>CONTACT</StyledLink>
         </LinkWrapper>
     </Wrapper>
