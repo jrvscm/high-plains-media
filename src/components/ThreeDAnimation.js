@@ -73,7 +73,7 @@ const ThreeDUfo = ({ setHovered, isMobile }) => {
 
   const handleScroll = () => {
     const scrollTop = window.scrollY;
-    const scrollThreshold = isMobile ? window.innerHeight * 0.1 : 10;
+    const scrollThreshold = isMobile ? window.innerHeight * 0.1 : 50;
 
     if (scrollTop > scrollThreshold) {
       flyOut();

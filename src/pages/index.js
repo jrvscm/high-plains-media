@@ -48,7 +48,7 @@ const GridWrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);  /* Two equal columns */
   grid-template-rows: repeat(2, 1fr);  /* Two equal rows */
-  gap: 35px;  /* Gap between grid items */
+  gap: ${({ $isMobile }) => $isMobile ? '16px' : '35px'};  /* Gap between grid items */
   padding: 40px; /* Padding around the grid */
   
   position: relative;  /* Position the grid on top of the normal content */
@@ -60,7 +60,7 @@ const GridWrapper = styled.div`
   @media ${device.tablet} {
     grid-template-columns: 1fr;  /* One column on smaller screens */
     grid-template-rows: auto;  /* Auto rows on smaller screens */
-    padding: 20px;
+    padding: 50px 0px;
   }
 `;
 
@@ -70,7 +70,6 @@ const GridItem = styled.div`
   border-radius: 15px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Shadow effect */
   overflow: hidden;
-  padding: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -157,8 +156,9 @@ export default function Home() {
       {SplashComponent}
       {!isMobile && <CustomCursor hovered={hovered}/>}
       <Wrapper>
+        <Container>
         <HeaderPill title={'work'} />
-        <GridWrapper className={'container'}>
+        <GridWrapper $isMobile={isMobile} className={'container'}>
           <GridItem 
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
@@ -188,6 +188,7 @@ export default function Home() {
             <GridTileOverlay><h3>DETAILS</h3></GridTileOverlay>
           </GridItem>
         </GridWrapper>
+        </Container>
       </Wrapper>
     </>
   );
