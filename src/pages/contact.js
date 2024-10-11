@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Head from "next/head";
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { device } from '../styles/breakpoints';import { Container, Form, Button, Row, Col } from 'react-bootstrap';
 import { MdOutlineLocationOn, MdOutlinePhoneInTalk, MdOutlineEmail } from "react-icons/md";
 
@@ -166,7 +166,11 @@ const IconWrapper = styled.div`
 `;
 
 const StyledRow = styled(Row)`
-    margin: 16px auto;
+    margin: 100px auto 16px auto;
+
+    ${({ $isMobile }) => $isMobile && css`
+      margin: 25px auto;
+    `}
 `;
 
 export default function Home() {
@@ -187,41 +191,42 @@ export default function Home() {
       {SplashComponent}
       {!isMobile && <CustomCursor hovered={hovered}/>}
       <Wrapper>
-        <HeaderPill title={'contact'} />
-   
-        <StyledRow className="justify-content-center  align-items-center">
-            <Col lg={3} md={3} sm={12}>
-              <InfoWrapper className="text-center py-3 mt-3">
-                <IconWrapper className="my-3 mx-auto">
-                  <MdOutlineLocationOn />
-                </IconWrapper>
-                <h3>ADDRESS</h3>
-                <p>Gillette WY, 82718</p>
-              </InfoWrapper>
-            </Col>
-            <Col lg={3} md={3} sm={12}>
-              <InfoWrapper className="text-center py-3 mt-3">
-                    <IconWrapper className="my-3 mx-auto">
-                  <MdOutlineEmail />
-                </IconWrapper>
-                <h3>EMAIL</h3>
-                <p><a onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} href="mailto:team@highplainsmedia.com">team@highplainsmedia.com</a></p>
-              </InfoWrapper>
-            </Col>
-            <Col lg={3} md={3} sm={12}>
-              <InfoWrapper className="text-center py-3 mt-3">
-                <IconWrapper className="my-3 mx-auto">
-                  <MdOutlinePhoneInTalk />
-                </IconWrapper>
-                <h3>CALL</h3>
-                <p>+1 307 680 6321</p>
-              </InfoWrapper>
-            </Col>
-        </StyledRow>
-        <FormWrapper className={'container'}>
-            <H3>LET&apos;S GET IN TOUCH</H3>
-            <ContactForm setHovered={setHovered} />
-        </FormWrapper>
+        <Container>
+          <HeaderPill title={'contact'} />
+          <StyledRow $isMobile={isMobile} className="justify-content-center  align-items-center">
+              <Col lg={4} md={12} sm={12} className={isMobile && 'px-0'}>
+                <InfoWrapper className="text-center py-3 mt-3">
+                  <IconWrapper className="my-3 mx-auto">
+                    <MdOutlineLocationOn />
+                  </IconWrapper>
+                  <h3>ADDRESS</h3>
+                  <p>Gillette WY, 82718</p>
+                </InfoWrapper>
+              </Col>
+              <Col lg={4} md={12} sm={12} className={isMobile && 'px-0'}>
+                <InfoWrapper className="text-center py-3 mt-3">
+                      <IconWrapper className="my-3 mx-auto">
+                    <MdOutlineEmail />
+                  </IconWrapper>
+                  <h3>EMAIL</h3>
+                  <p><a onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} href="mailto:team@highplainsmedia.com">team@highplainsmedia.com</a></p>
+                </InfoWrapper>
+              </Col>
+              <Col lg={4} md={12} sm={12} className={isMobile && 'px-0'}>
+                <InfoWrapper className="text-center py-3 mt-3">
+                  <IconWrapper className="my-3 mx-auto">
+                    <MdOutlinePhoneInTalk />
+                  </IconWrapper>
+                  <h3>CALL</h3>
+                  <p>+1 307 680 6321</p>
+                </InfoWrapper>
+              </Col>
+          </StyledRow>
+          <FormWrapper>
+              <H3>LET&apos;S GET IN TOUCH</H3>
+              <ContactForm setHovered={setHovered} />
+          </FormWrapper>
+        </Container>
       </Wrapper>
     </>
   );

@@ -40,6 +40,7 @@ const StyledForm = styled(Form)`
   .btn-primary {
     min-width: 25vw;
     background-color: ${({ theme }) => theme.colors.white};
+    border-width: 2px;
     border-color: ${({ theme }) => theme.colors.white};
     color: ${({ theme }) => theme.colors.black};
     font-family: 'Orbitron', sans-serif;
@@ -49,6 +50,8 @@ const StyledForm = styled(Form)`
     transition: all .3s ease;
     &:hover {
       filter: brightness(90%);
+      background: transparent;
+      color: ${({ theme }) => theme.colors.white};
     }
   }
 `;
@@ -108,7 +111,7 @@ export const ContactForm = ({ setHovered }) => {
   };
 
   return (
-  
+      <Container>
       <StyledForm 
         $isMobile={isMobile}
         name="contact-peak-digital"
@@ -152,16 +155,16 @@ export const ContactForm = ({ setHovered }) => {
           </Col>
         </Row>
 
-        <Form.Floating>
+        <Form.Floating md={6}>
           <Form.Control onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} as="textarea" id="message" name="message" placeholder="Message" style={{ height: '400px' }} onChange={handleChange} value={formData.message} required />
           <label htmlFor="message">Message</label>
         </Form.Floating>
         
-        <BtnWrapper className="text-center" $isMobile={isMobile}>
+        <BtnWrapper className="text-center" $isMobile={isMobile} md={6}>
           <Button onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} type="submit" className="mt-2 btn-primary" style={{width: isMobile ? '100%' : ''}}>submit</Button>
         </BtnWrapper>
       </StyledForm>
-
+      </Container>
   );
 };
 

@@ -1,7 +1,8 @@
 import React from 'react';
-import { styled } from 'styled-components';
+import { styled, css } from 'styled-components';
 import { device } from '../styles/breakpoints';
 import Link from 'next/link';
+import useResponsive from '../components/hooks/useResponsive';
 
 const Wrapper = styled.div`
     padding-top: 100px;
@@ -28,9 +29,9 @@ const PillContainer = styled.div`
     width: 35vw;
     z-index:1;
     
-    @media ${device.tablet} {
-        width: 90%;
-    }
+    ${({ $isMobile }) => $isMobile && css`
+        width: 100%;
+    `}
 `;
 
 const PillText = styled.h1`
@@ -98,9 +99,11 @@ const StyledLink = styled(Link)`
 
 `;
 
-const HeaderPill = ({title}) => (
+const HeaderPill = ({title}) => {
+    const { isMobile } = useResponsive();
+    return (
     <Wrapper>
-        <PillContainer>
+        <PillContainer $isMobile={isMobile}>
             <PillText>{title}</PillText>
         </PillContainer>
         <LinkWrapper>
@@ -110,6 +113,6 @@ const HeaderPill = ({title}) => (
             <StyledLink $active={'contact' === title} href={'/contact'}>CONTACT</StyledLink>
         </LinkWrapper>
     </Wrapper>
-);
+)};
 
 export default HeaderPill;
