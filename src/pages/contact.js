@@ -8,6 +8,7 @@ import useSplashScreen from '../components/hooks/useSplashScreen';
 import HeaderPill from '../components/HeaderPill';
 import CustomCursor from '../components/CustomCursor';
 import ContactForm from '../components/ContactForm';
+import useResponsive from '../components/hooks/useResponsive';
 
 const Wrapper = styled.div`
   position: relative;
@@ -165,13 +166,13 @@ const IconWrapper = styled.div`
 `;
 
 const StyledRow = styled(Row)`
-    margin: 100px auto;
+    margin: 16px auto;
 `;
 
 export default function Home() {
   const { SplashComponent } = useSplashScreen('/images/highplains-logo-v2.svg');
   const [hovered, setHovered] = useState(false);
-
+  const { isMobile } = useResponsive();
   return (
     <>
       <Head>
@@ -184,13 +185,13 @@ export default function Home() {
         <link rel="canonical" href="https://www.highplainsmedia.com/" />
       </Head>
       {SplashComponent}
-      <CustomCursor hovered={hovered}/>
+      {!isMobile && <CustomCursor hovered={hovered}/>}
       <Wrapper>
         <HeaderPill title={'contact'} />
    
-        <StyledRow className="justify-content-center align-items-center">
+        <StyledRow className="justify-content-center  align-items-center">
             <Col lg={3} md={3} sm={12}>
-              <InfoWrapper className="text-center py-3 my-3">
+              <InfoWrapper className="text-center py-3 mt-3">
                 <IconWrapper className="my-3 mx-auto">
                   <MdOutlineLocationOn />
                 </IconWrapper>
@@ -199,7 +200,7 @@ export default function Home() {
               </InfoWrapper>
             </Col>
             <Col lg={3} md={3} sm={12}>
-              <InfoWrapper className="text-center py-3 my-3">
+              <InfoWrapper className="text-center py-3 mt-3">
                     <IconWrapper className="my-3 mx-auto">
                   <MdOutlineEmail />
                 </IconWrapper>
@@ -208,7 +209,7 @@ export default function Home() {
               </InfoWrapper>
             </Col>
             <Col lg={3} md={3} sm={12}>
-              <InfoWrapper className="text-center py-3 my-3">
+              <InfoWrapper className="text-center py-3 mt-3">
                 <IconWrapper className="my-3 mx-auto">
                   <MdOutlinePhoneInTalk />
                 </IconWrapper>

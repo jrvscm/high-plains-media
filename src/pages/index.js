@@ -142,7 +142,7 @@ const GridItem = styled.div`
 export default function Home() {
   const { isSplashVisible, SplashComponent } = useSplashScreen('/images/highplains-logo-v2.svg');
   const [hovered, setHovered] = useState(false);
-
+  const { isMobile } = useResponsive();
   return (
     <>
       <Head>
@@ -155,7 +155,7 @@ export default function Home() {
         <link rel="canonical" href="https://www.highplainsmedia.com/" />
       </Head>
       {SplashComponent}
-      <CustomCursor hovered={hovered}/>
+      {!isMobile && <CustomCursor hovered={hovered}/>}
       <Wrapper>
         <HeaderPill title={'work'} />
         <GridWrapper className={'container'}>

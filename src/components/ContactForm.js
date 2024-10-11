@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { Container, Form, Button, Row, Col } from 'react-bootstrap';
 import styled from 'styled-components';
-
+import useResponsive from '../components/hooks/useResponsive';
 import { useLoading } from '../components/contexts/LoadingContext';
 
 const StyledForm = styled(Form)`
   margin: 0 auto;
   .form-floating {
-    margin-bottom: 32px;
+    margin-bottom: ${({ $isMobile }) => $isMobile ? '16px' : '32px'};
     label {
       padding-left: 20px;
       color: ${({ theme }) => theme.colors.lightGray} !important;
@@ -54,7 +54,8 @@ const StyledForm = styled(Form)`
 `;
 
 const BtnWrapper = styled.div`
-  margin-top: 28px;
+  margin-top: ${({ $isMobile }) => $isMobile ? '16px' : '28px'};
+
 `;
 
 export const ContactForm = ({ setHovered }) => {
@@ -67,6 +68,7 @@ export const ContactForm = ({ setHovered }) => {
       'subject': '',
       'message': ''
   });
+  const { isMobile } = useResponsive();
   const { startLoading, stopLoading } = useLoading();
   // Form submit handler
   const handleSubmit = async (event) => {
@@ -106,8 +108,9 @@ export const ContactForm = ({ setHovered }) => {
   };
 
   return (
-    <Container>
+  
       <StyledForm 
+        $isMobile={isMobile}
         name="contact-peak-digital"
         onSubmit={handleSubmit} 
         method="POST" 
@@ -154,11 +157,11 @@ export const ContactForm = ({ setHovered }) => {
           <label htmlFor="message">Message</label>
         </Form.Floating>
         
-        <BtnWrapper className="text-center">
-          <Button onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} type="submit" className="mt-2 btn-primary">submit</Button>
+        <BtnWrapper className="text-center" $isMobile={isMobile}>
+          <Button onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} type="submit" className="mt-2 btn-primary" style={{width: isMobile ? '100%' : ''}}>submit</Button>
         </BtnWrapper>
       </StyledForm>
-    </Container>
+
   );
 };
 

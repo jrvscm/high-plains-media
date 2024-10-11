@@ -2,9 +2,8 @@ import React, { useRef, useEffect, useState } from 'react';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { gsap } from 'gsap';
-import useResponsive from '../components/hooks/useResponsive';
 
-const ThreeDUfo = ({ setHovered }) => {
+const ThreeDUfo = ({ setHovered, isMobile }) => {
   const mountRef = useRef(null);
   const ufoRef = useRef(null);
   const [isAnimating, setIsAnimating] = useState(false);
@@ -42,7 +41,7 @@ const ThreeDUfo = ({ setHovered }) => {
   const flyIn = () => {
     if (ufoRef.current) {
       setIsAnimating(true);
-      gsap.killTweensOf(ufoRef.current.position); // Stop any ongoing position animations
+      gsap.killTweensOf(ufoRef.current.position);
       gsap.to(ufoRef.current.position, { 
         x: 0, 
         y: 5, 
@@ -51,7 +50,7 @@ const ThreeDUfo = ({ setHovered }) => {
         ease: 'power2.out',
         onComplete: () => {
           setIsAnimating(false);
-          float(); // Start floating effect after flying in
+          float();
         }
       });
     }
@@ -60,10 +59,10 @@ const ThreeDUfo = ({ setHovered }) => {
   const flyOut = () => {
     if (ufoRef.current) {
       setIsAnimating(true);
-      gsap.killTweensOf(ufoRef.current.position); // Stop any ongoing position animations
+      gsap.killTweensOf(ufoRef.current.position);
       gsap.to(ufoRef.current.position, {
-        x: window.innerWidth / 1.1,  // Adjust for a smooth off-screen exit
-        y: window.innerHeight / 1.8, // Adjust for a smooth off-screen exit
+        x: isMobile ? window.innerWidth / 1.05 : window.innerWidth / 1.1,
+        y: isMobile ? window.innerHeight / 2.5 : window.innerHeight / 1.8,
         z: -20,
         duration: 2,
         ease: 'power2.in',
@@ -74,10 +73,9 @@ const ThreeDUfo = ({ setHovered }) => {
 
   const handleScroll = () => {
     const scrollTop = window.scrollY;
-    const windowHeight = window.innerHeight;
-    const pageHeight = document.documentElement.scrollHeight;
+    const scrollThreshold = isMobile ? window.innerHeight * 0.1 : 10;
 
-    if (scrollTop + windowHeight >= pageHeight - 10) {
+    if (scrollTop > scrollThreshold) {
       flyOut();
     } else if (scrollTop < 10) {
       flyIn();
@@ -91,7 +89,7 @@ const ThreeDUfo = ({ setHovered }) => {
         duration: 1.5,
         ease: 'sine.inOut',
         yoyo: true,
-        repeat: -1 // Repeat indefinitely for continuous float
+        repeat: -1
       });
     }
   };
@@ -121,12 +119,12 @@ const ThreeDUfo = ({ setHovered }) => {
           }
         });
 
-        ufo.position.set(window.innerWidth / 1.5, window.innerHeight / 2, -10);
-        ufo.scale.set(2, 2, 2);
+        ufo.position.set(isMobile ? window.innerWidth / 2 : window.innerWidth / 1.5, window.innerHeight / 2, -10);
+        ufo.scale.set(isMobile ? 1 : 2, isMobile ? 1 : 2, isMobile ? 1 : 2);
         scene.add(ufo);
 
         setTimeout(flyIn, 1200);
-        window.addEventListener('mousemove', handleDragMove); // Add listener for dragging
+        window.addEventListener('mousemove', handleDragMove);
         window.addEventListener('scroll', handleScroll);
         window.addEventListener('mousedown', handleMouseDown);
         window.addEventListener('mouseup', handleMouseUp);
@@ -154,7 +152,7 @@ const ThreeDUfo = ({ setHovered }) => {
     directionalLight.shadow.mapSize.height = 2048;
     scene.add(directionalLight);
 
-    const circleGeometry = new THREE.CircleGeometry(4, 32);
+    const circleGeometry = new THREE.CircleGeometry(isMobile ? 6 : 4, 32); // Increase shadow size for mobile
     const circleMaterial = new THREE.ShadowMaterial({ opacity: 0.4 });
     const circle = new THREE.Mesh(circleGeometry, circleMaterial);
     circle.rotation.x = -Math.PI / 2;
@@ -184,15 +182,16 @@ const ThreeDUfo = ({ setHovered }) => {
         mountRef.current.removeChild(renderer.domElement);
       }
     };
-  }, []);
+  }, [isMobile]);
 
   return (
     <div
       onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}
       ref={mountRef}
       style={{
+        'margin-top': isMobile ? '-50px' : 0,
         width: '100%',
-        height: '400px', 
+        height: isMobile ? '600px' : '400px', 
       }}
     />
   );

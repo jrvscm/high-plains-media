@@ -41,7 +41,7 @@ const StyledContainer = styled(Container)`
     color: ${({ theme }) => theme.colors.white};
 
     & .row {
-        padding-top: 100px;
+        padding-top: ${({ $isMobile }) => $isMobile ? '0px' : '100px'};
     }
 `;
 
@@ -63,43 +63,35 @@ export default function Home() {
       {SplashComponent}
       {!isMobile && <CustomCursor hovered={hovered}/>}
       <Wrapper>
-        <StyledContainer>
+        <StyledContainer $isMobile={isMobile}>
             <HeaderPill title={'about'} />
             <Row className="align-items-center justify-content-around">
                 {!isMobile && 
                 <>
                   <Col lg={6}  className="pt-3">
                     <H2>Who we are</H2>
-                    <P>Our relentless pursuit of being the best digital transformation company 
-                        enables us to become industry experts in the digital world by actively adding 
-                        value to our partners' projects. We constantly learn, ideate, incubate, 
-                        iterate and scale. At Stixor, we consider clients our partners, and your 
-                        success is our success. This approach enables us to deliver effective digital 
-                        solutions that empower businesses and allow them to scale. We create unparalleled 
-                        technological experiences for their clients and help them stay ahead of the 
-                        digital curve.
+                    <P>
+                    We are "out of this world" developers and designers, creating engaging digital experiences across the web. With two decades of experience working for Fortune 500 companies in Silicon Valley, High Plains Media has cultivated a relentless pursuit of excellence in digital transformation. Today, we bring our expertise to small businesses, empowering them to scale and succeed in the digital world.
+                    <br /><br />
+                    Our commitment to being industry leaders drives us to continually learn, ideate, incubate, iterate, and scale. At High Plains Media, we view clients as partners. Your success is our success, and we strive to build digital solutions that elevate your brand and keep you ahead of the digital curve. We craft unparalleled technological experiences for your customers, ensuring your business is not just part of the digital landscape but a driving force within it.
                     </P>
                   </Col>
-                  <Col lg={6} className="pt-3 text-center">
+                  <Col lg={6} className="pt-3 text-center px-0">
                       <ThreeDAnimation setHovered={setHovered} isMobile={isMobile}/>
                   </Col>
                 </>}
 
                 {isMobile && 
                 <>
-                  <AffixedCol lg={6} className="pt-3 text-center">
+                  <Col lg={6} className="pt-3 text-center px-0">
                     <ThreeDAnimation setHovered={setHovered} isMobile={isMobile}/>
-                  </AffixedCol>
-                  <Col lg={6}  className="pt-3">
+                  </Col>
+                  <Col lg={6}  className="pt-3" style={{'margin-top': '-100px'}}>
                     <H2>Who we are</H2>
-                    <P>Our relentless pursuit of being the best digital transformation company 
-                      enables us to become industry experts in the digital world by actively adding 
-                      value to our partners' projects. We constantly learn, ideate, incubate, 
-                      iterate and scale. At Stixor, we consider clients our partners, and your 
-                      success is our success. This approach enables us to deliver effective digital 
-                      solutions that empower businesses and allow them to scale. We create unparalleled 
-                      technological experiences for their clients and help them stay ahead of the 
-                      digital curve.
+                    <P>
+                    We are &quot;out of this world&quot; developers and designers creating engaging digital experiences across the web. With two decades of experience working for Fortune 500 companies in Silicon Valley, High Plains Media has cultivated a relentless pursuit of excellence in digital transformation. Today, we bring our expertise to small businesses, empowering them to scale and succeed in the digital world.
+                    <br /><br />
+                    Our commitment to being industry leaders drives us to continually learn, ideate, incubate, iterate, and scale. At High Plains Media, we view clients as partners. Your success is our success, and we strive to build digital solutions that elevate your brand and keep you ahead of the digital curve. We craft unparalleled technological experiences for your customers, ensuring your business is not just part of the digital landscape but a driving force within it.
                     </P>
                   </Col>
                 </>}
