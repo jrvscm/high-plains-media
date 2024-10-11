@@ -2,39 +2,14 @@ import React, { useRef, useEffect, useState } from 'react';
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { gsap } from 'gsap';
+import useResponsive from '../components/hooks/useResponsive';
 
-const ThreeDUfo = ({setHovered}) => {
+const ThreeDUfo = ({ setHovered }) => {
   const mountRef = useRef(null);
   const ufoRef = useRef(null);
   const [isAnimating, setIsAnimating] = useState(false);
   const isDragging = useRef(false);
   const previousMousePosition = useRef({ x: 0, y: 0 });
-
-  const handleMouseMove = (event) => {
-    if (ufoRef.current && !isAnimating && isDragging.current) {
-      const deltaX = event.clientX - previousMousePosition.current.x;
-      const deltaY = event.clientY - previousMousePosition.current.y;
-
-      // Update the UFO rotation based on mouse movement
-      ufoRef.current.rotation.y += deltaX * 0.01;
-      ufoRef.current.rotation.x += deltaY * 0.01;
-
-      previousMousePosition.current = {
-        x: event.clientX,
-        y: event.clientY
-      };
-    } else if (ufoRef.current && !isAnimating && !isDragging.current) { 
-      const mouseX = (event.clientX / window.innerWidth - 0.5) * 0.8;
-      const mouseY = (event.clientY / window.innerHeight - 0.5) * 0.8;
-
-      gsap.to(ufoRef.current.position, {
-        x: mouseX,
-        y: mouseY + 5, 
-        duration: 0.2,
-        ease: 'power1.out'
-      });
-    }
-  };
 
   const handleMouseDown = (event) => {
     isDragging.current = true;
@@ -48,16 +23,36 @@ const ThreeDUfo = ({setHovered}) => {
     isDragging.current = false;
   };
 
+  const handleDragMove = (event) => {
+    if (ufoRef.current && isDragging.current) {
+      const deltaX = event.clientX - previousMousePosition.current.x;
+      const deltaY = event.clientY - previousMousePosition.current.y;
+
+      // Update the UFO rotation based on dragging movement
+      ufoRef.current.rotation.y += deltaX * 0.01;
+      ufoRef.current.rotation.x += deltaY * 0.01;
+
+      previousMousePosition.current = {
+        x: event.clientX,
+        y: event.clientY
+      };
+    }
+  };
+
   const flyIn = () => {
     if (ufoRef.current) {
       setIsAnimating(true);
+      gsap.killTweensOf(ufoRef.current.position); // Stop any ongoing position animations
       gsap.to(ufoRef.current.position, { 
         x: 0, 
         y: 5, 
         z: 0, 
         duration: 2, 
         ease: 'power2.out',
-        onComplete: () => setIsAnimating(false)
+        onComplete: () => {
+          setIsAnimating(false);
+          float(); // Start floating effect after flying in
+        }
       });
     }
   };
@@ -65,9 +60,10 @@ const ThreeDUfo = ({setHovered}) => {
   const flyOut = () => {
     if (ufoRef.current) {
       setIsAnimating(true);
+      gsap.killTweensOf(ufoRef.current.position); // Stop any ongoing position animations
       gsap.to(ufoRef.current.position, {
-        x: window.innerWidth / 1.5,
-        y: window.innerHeight / 2,
+        x: window.innerWidth / 1.1,  // Adjust for a smooth off-screen exit
+        y: window.innerHeight / 1.8, // Adjust for a smooth off-screen exit
         z: -20,
         duration: 2,
         ease: 'power2.in',
@@ -85,6 +81,18 @@ const ThreeDUfo = ({setHovered}) => {
       flyOut();
     } else if (scrollTop < 10) {
       flyIn();
+    }
+  };
+
+  const float = () => {
+    if (ufoRef.current) {
+      gsap.to(ufoRef.current.position, {
+        y: '+=0.5',
+        duration: 1.5,
+        ease: 'sine.inOut',
+        yoyo: true,
+        repeat: -1 // Repeat indefinitely for continuous float
+      });
     }
   };
 
@@ -118,7 +126,7 @@ const ThreeDUfo = ({setHovered}) => {
         scene.add(ufo);
 
         setTimeout(flyIn, 1200);
-        window.addEventListener('mousemove', handleMouseMove);
+        window.addEventListener('mousemove', handleDragMove); // Add listener for dragging
         window.addEventListener('scroll', handleScroll);
         window.addEventListener('mousedown', handleMouseDown);
         window.addEventListener('mouseup', handleMouseUp);
@@ -153,7 +161,6 @@ const ThreeDUfo = ({setHovered}) => {
     circle.position.set(0, -2, 0);
     circle.receiveShadow = true;
     scene.add(circle);
-
     camera.position.set(0, 4, 12);
 
     const handleResize = () => {
@@ -169,7 +176,7 @@ const ThreeDUfo = ({setHovered}) => {
     return () => {
       window.removeEventListener('resize', handleResize);
       window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mousemove', handleDragMove);
       window.removeEventListener('mousedown', handleMouseDown);
       window.removeEventListener('mouseup', handleMouseUp);
       renderer.dispose();
@@ -181,7 +188,7 @@ const ThreeDUfo = ({setHovered}) => {
 
   return (
     <div
-        onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}
+      onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}
       ref={mountRef}
       style={{
         width: '100%',

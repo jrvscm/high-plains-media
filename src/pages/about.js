@@ -9,6 +9,7 @@ import useSplashScreen from '../components/hooks/useSplashScreen';
 import HeaderPill from '../components/HeaderPill';
 import CustomCursor from '../components/CustomCursor';
 import ThreeDAnimation from '../components/ThreeDAnimation';
+import useResponsive from '../components/hooks/useResponsive';
 
 const Wrapper = styled.div`
   position: relative;
@@ -44,32 +45,10 @@ const StyledContainer = styled(Container)`
     }
 `;
 
-const Logo = styled.img`
-  width: 300px;
-  height: 300px;
-  filter: drop-shadow(0 0 15px rgb(164, 54, 227));  /* Initial shadow */
-  animation: flicker 1.5s infinite alternate;
-
-  ${'' /* @keyframes flicker {
-    0%, 18%, 22%, 25%, 53%, 57%, 100% {
-      filter: drop-shadow(0 0 15px rgb(164, 54, 227));
-    }
-    20%, 24%, 55% {
-      filter: drop-shadow(0 0 30px rgb(164, 54, 227));
-    }
-    23% {
-      filter: drop-shadow(0 0 60px rgb(164, 54, 227));
-    }
-    58% {
-      filter: drop-shadow(0 0 40px rgb(164, 54, 227));
-    }
-  } */}
-`;
-
 export default function Home() {
   const { isSplashVisible, SplashComponent } = useSplashScreen('/images/highplains-logo-v2.svg');
   const [hovered, setHovered] = useState(false);
-
+  const { isMobile } = useResponsive();
   return (
     <>
       <Head>
@@ -82,25 +61,48 @@ export default function Home() {
         <link rel="canonical" href="https://www.highplainsmedia.com/" />
       </Head>
       {SplashComponent}
-      <CustomCursor hovered={hovered}/>
+      {!isMobile && <CustomCursor hovered={hovered}/>}
       <Wrapper>
         <StyledContainer>
             <HeaderPill title={'about'} />
             <Row className="align-items-center justify-content-around">
-                <Col lg={6}  className="pt-3">
+                {!isMobile && 
+                <>
+                  <Col lg={6}  className="pt-3">
                     <H2>Who we are</H2>
                     <P>Our relentless pursuit of being the best digital transformation company 
-                enables us to become industry experts in the digital world by actively adding 
-                value to our partners' projects. We constantly learn, ideate, incubate, 
-                iterate and scale. At Stixor, we consider clients our partners, and your 
-                success is our success. This approach enables us to deliver effective digital 
-                solutions that empower businesses and allow them to scale. We create unparalleled 
-                technological experiences for their clients and help them stay ahead of the 
-                digital curve.</P>
-                </Col>
-                <Col lg={6} className="pt-3 text-center">
-                    <ThreeDAnimation setHovered={setHovered}/>
-                </Col>
+                        enables us to become industry experts in the digital world by actively adding 
+                        value to our partners' projects. We constantly learn, ideate, incubate, 
+                        iterate and scale. At Stixor, we consider clients our partners, and your 
+                        success is our success. This approach enables us to deliver effective digital 
+                        solutions that empower businesses and allow them to scale. We create unparalleled 
+                        technological experiences for their clients and help them stay ahead of the 
+                        digital curve.
+                    </P>
+                  </Col>
+                  <Col lg={6} className="pt-3 text-center">
+                      <ThreeDAnimation setHovered={setHovered} isMobile={isMobile}/>
+                  </Col>
+                </>}
+
+                {isMobile && 
+                <>
+                  <AffixedCol lg={6} className="pt-3 text-center">
+                    <ThreeDAnimation setHovered={setHovered} isMobile={isMobile}/>
+                  </AffixedCol>
+                  <Col lg={6}  className="pt-3">
+                    <H2>Who we are</H2>
+                    <P>Our relentless pursuit of being the best digital transformation company 
+                      enables us to become industry experts in the digital world by actively adding 
+                      value to our partners' projects. We constantly learn, ideate, incubate, 
+                      iterate and scale. At Stixor, we consider clients our partners, and your 
+                      success is our success. This approach enables us to deliver effective digital 
+                      solutions that empower businesses and allow them to scale. We create unparalleled 
+                      technological experiences for their clients and help them stay ahead of the 
+                      digital curve.
+                    </P>
+                  </Col>
+                </>}
             </Row>
         </StyledContainer>
       </Wrapper>
