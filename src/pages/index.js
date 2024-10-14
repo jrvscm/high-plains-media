@@ -1,16 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 import Head from "next/head";
 import styled from 'styled-components';
-import { useInView } from 'react-intersection-observer';
 import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import { MdOutlinePhoneIphone, MdLaptop, MdOutlineShoppingCart, MdOutlineBrush, MdOutlineContentCopy, MdOutlineTrendingUp, MdFilterList } from "react-icons/md";
-import { IoMdAnalytics } from 'react-icons/io';
 import { device } from '../styles/breakpoints';
 import useResponsive from '../components/hooks/useResponsive';
-import { useRouter } from 'next/router';
-import { useHash } from '../components/contexts/HashContext';
-import { updateHash } from '../utils/routerUtil';
 import useSplashScreen from '../components/hooks/useSplashScreen';
 
 import HeaderPill from '../components/HeaderPill';
@@ -164,14 +157,14 @@ export default function Home() {
             onMouseLeave={() => setHovered(false)}
           >
             <img src={'/images/sunshinePaintAndBody.png'} />
-            <GridTileOverlay><h3>DETAILS</h3></GridTileOverlay>
+            <GridTileOverlay><h3>julieschf.com</h3></GridTileOverlay>
           </GridItem>
           <GridItem
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
           >
             <img src={'/images/suite-sleeps-mac.png'} />
-            <GridTileOverlay><h3>DETAILS</h3></GridTileOverlay>
+            <GridTileOverlay><h3>suitesleeps.com</h3></GridTileOverlay>
           </GridItem>
           <GridItem
             onMouseEnter={() => setHovered(true)}
