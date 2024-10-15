@@ -110,10 +110,15 @@ const GridItem = styled.div`
   }
 
   &:nth-of-type(3) {
-    background: #87CEEB;
     &::before {
-      background: #008080;
+      display:none;
     }
+    background: url('/images/web-development-tile.svg') center center;
+    background-size: cover;
+
+    ${'' /* &::before {
+      background: #008080;
+    } */}
   }
 
   &:nth-of-type(4) {
@@ -170,7 +175,7 @@ export default function Home() {
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
           >
-            <img src={'/images/suite-sleeps-mac.png'} />
+            {/* <img src={'/images/web-development-tile.svg'} /> */}
             <GridTileOverlay><h3>DETAILS</h3></GridTileOverlay>
           </GridItem>
           <GridItem
