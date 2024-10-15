@@ -28,7 +28,7 @@ const Hero = styled(Container)`
     border-radius: 25px;
     width: 80%;
     aspect-ratio: 5 / 3; /* Aspect ratio 4:3 for the Hero component */
-    margin-top: 100px;
+    margin-top: 80px;
     position: relative;
     --tw-shadow: -31px 31px 41px rgba(0, 0, 0, .39);
   --tw-shadow-colored: -31px 31px 41px var(--tw-shadow-color);
@@ -73,7 +73,7 @@ const Technologies = styled(Container)`
     text-transform: uppercase; 
     width: 70vw;
     z-index:1;
-    margin: 100px auto 60px auto;
+    margin: 100px auto 80px auto;
     border: 5px solid turquoise;
 
     color: ${({ theme }) => theme.colors.white};
@@ -150,7 +150,7 @@ const AboutTheProjectWrapper = styled(Container)`
   font-family: 'Raleway', sans-serif;
   font-size: 18px;
   color: ${({ theme }) => theme.colors.white};
-  margin-top: 60px;
+  margin-top: 80px;
 
   > div {
     border: 1px solid turquoise;
@@ -228,7 +228,7 @@ const Project = () => {
         <title>High Plains Media | Leading Digital Agency</title>
         <meta name="description" content="Elevate your business with High Plains Media, a leading digital agency specializing in tailored web development, SEO, and online marketing strategies." />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/high-plains-favicon.png" />
+        <link rel="icon" href="/highplains-logo-v2.svg" />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://www.highplainsmedia.com/" />
       </Head>

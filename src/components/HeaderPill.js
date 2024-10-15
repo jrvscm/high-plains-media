@@ -5,7 +5,7 @@ import Link from 'next/link';
 import useResponsive from '../components/hooks/useResponsive';
 
 const Wrapper = styled.div`
-    padding-top: 100px;
+    padding-top: 80px;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -109,7 +109,7 @@ const HeaderPill = ({title}) => {
         </PillContainer>
         <LinkWrapper>
             <StyledLink $active={'about' === title} href={'/about'}>ABOUT</StyledLink>
-            <StyledLink $active={'services' === title} href={'/services'}>SERVICES</StyledLink>
+            {/* <StyledLink $active={'services' === title} href={'/services'}>SERVICES</StyledLink> */}
             <StyledLink $active={'work' === title} href={'/'}>WORK</StyledLink>
             <StyledLink $active={'contact' === title} href={'/contact'}>CONTACT</StyledLink>
         </LinkWrapper>
