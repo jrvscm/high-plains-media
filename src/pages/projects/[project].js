@@ -253,7 +253,7 @@ const Project = () => {
         <DescriptionWrapper>
           <Description>
             Julie&apos;s Caring Heart Foundation is a non profit in Gillette, Wyoming USA. They fundraise for charitable causes. 
-            Julie&apos;s Caring Heart Foundation's annual golf tournament needed a website that could handle player signups, sponsor signups, and let players and sponsors alike make payments.
+            Julie&apos;s Caring Heart Foundation&apos;s annual golf tournament needed a website that could handle player signups, sponsor signups, and let players and sponsors alike make payments.
           </Description>
         </DescriptionWrapper>
         <AboutTheProjectWrapper>
@@ -263,7 +263,7 @@ const Project = () => {
           </AboutTheProjectHeader>
           <AboutTheProjectP>
             Julie&apos;s Caring Heart Foundation is a non profit in Gillette, Wyoming USA.
-            They fundraise for charitable causes. Julie&apos;s Caring Heart Foundation's
+            They fundraise for charitable causes. Julie&apos;s Caring Heart Foundation&apos;s
             annual golf tournament needed a website that could handle player signups, sponsor
             signups, and let players and sponsors alike make payments.<br /><br/>
 
