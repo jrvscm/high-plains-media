@@ -71,7 +71,7 @@ export default function Home() {
                   <Col lg={6}  className="pt-3">
                     <H2>Who we are</H2>
                     <P>
-                    We are "out of this world" developers and designers, creating engaging digital experiences across the web. With two decades of experience working for Fortune 500 companies in Silicon Valley, High Plains Media has cultivated a relentless pursuit of excellence in digital transformation. Today, we bring our expertise to small businesses, empowering them to scale and succeed in the digital world.
+                    We are &quot;out of this world&quote; developers and designers, creating engaging digital experiences across the web. With two decades of experience working for Fortune 500 companies in Silicon Valley, High Plains Media has cultivated a relentless pursuit of excellence in digital transformation. Today, we bring our expertise to small businesses, empowering them to scale and succeed in the digital world.
                     <br /><br />
                     Our commitment to being industry leaders drives us to continually learn, ideate, incubate, iterate, and scale. At High Plains Media, we view clients as partners. Your success is our success, and we strive to build digital solutions that elevate your brand and keep you ahead of the digital curve. We craft unparalleled technological experiences for your customers, ensuring your business is not just part of the digital landscape but a driving force within it.
                     </P>
