@@ -228,7 +228,7 @@ const Project = () => {
         <title>High Plains Media | Leading Digital Agency</title>
         <meta name="description" content="Elevate your business with High Plains Media, a leading digital agency specializing in tailored web development, SEO, and online marketing strategies." />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/highplains-logo-v2.svg" />
+        <link rel="icon" href="/images/highplains-logo-v2.svg" />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://www.highplainsmedia.com/" />
       </Head>

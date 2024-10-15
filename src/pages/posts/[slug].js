@@ -95,7 +95,7 @@ const Post = ({ post }) => {
         <meta property="og:description" content={post?.fields?.description || 'Default description of the blog post'} />
         <meta property="og:image" content={post?.fields?.hero?.fields?.file?.url} />
         <meta property="og:type" content="article" />
-        <link rel="icon" href="/highplains-logo-v2.svg" />
+        <link rel="icon" href="/images/highplains-logo-v2.svg" />
 
       </Head>
       <Section>
