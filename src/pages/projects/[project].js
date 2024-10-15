@@ -217,6 +217,10 @@ const Project = () => {
   const { SplashComponent } = useSplashScreen('/images/highplains-logo-v2.svg');
   const [hovered, setHovered] = useState(false);
   const { isMobile } = useResponsive();
+  
+  const handleClick = () => {
+    router.push('/contact')
+  }
   return (
     <>
       <Head>
@@ -269,7 +273,7 @@ const Project = () => {
             4. Sponsor/Player Signup Notifications to Admin<br />
           </AboutTheProjectP>
           <BtnWrapper $isMobile={isMobile} md={6}>
-            <Button onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} className="mt-2 btn-primary" style={{width: isMobile ? '100%' : ''}}>contact</Button>
+            <Button onClick={() => handleClick()} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} className="mt-2 btn-primary" style={{width: isMobile ? '100%' : ''}}>contact</Button>
           </BtnWrapper>
           </div>
         </AboutTheProjectWrapper>

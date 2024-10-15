@@ -126,13 +126,13 @@ export const ContactForm = ({ setHovered }) => {
         <input type="hidden" name="bot-field" onChange={handleChange} /> {/* Honeypot field */}
 
         <Row>
-          <Col md={6}>
+          <Col md={6} className={isMobile ? 'px-0' : ''}>
             <Form.Floating>
               <Form.Control onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} type="text" id="name" name="name" placeholder="Your Name" onChange={handleChange} value={formData.name} required />
               <label htmlFor="name">Your Name</label>
             </Form.Floating>
           </Col>
-          <Col md={6}>
+          <Col md={6} className={isMobile ? 'px-0' : ''}>
             <Form.Floating>
               <Form.Control onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} type="email" id="email" name="email" placeholder="Your Email" onChange={handleChange} value={formData.email} required />
               <label htmlFor="email">Your Email</label>
@@ -141,13 +141,13 @@ export const ContactForm = ({ setHovered }) => {
         </Row>
 
         <Row>
-          <Col md={6}>
+          <Col md={6}className={isMobile ? 'px-0' : ''}>
             <Form.Floating>
               <Form.Control onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} type="text" id="phone" name="phone" placeholder="Phone (optional)" onChange={handleChange} value={formData.phone}/>
               <label htmlFor="phone">Phone (optional)</label>
             </Form.Floating>
           </Col>
-          <Col md={6}>
+          <Col md={6} className={isMobile ? 'px-0' : ''}>
             <Form.Floating>
               <Form.Control onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} type="text" id="subject" name="subject" placeholder="Subject" onChange={handleChange} value={formData.subject} required />
               <label htmlFor="subject">Subject</label>
@@ -155,14 +155,18 @@ export const ContactForm = ({ setHovered }) => {
           </Col>
         </Row>
 
-        <Form.Floating md={6}>
-          <Form.Control onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} as="textarea" id="message" name="message" placeholder="Message" style={{ height: '400px' }} onChange={handleChange} value={formData.message} required />
-          <label htmlFor="message">Message</label>
-        </Form.Floating>
-        
-        <BtnWrapper className="text-center" $isMobile={isMobile} md={6}>
-          <Button onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} type="submit" className="mt-2 btn-primary" style={{width: isMobile ? '100%' : ''}}>submit</Button>
-        </BtnWrapper>
+        <Row>
+          <Col md={12} className={isMobile ? 'px-0' : ''}>
+            <Form.Floating>
+              <Form.Control onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} as="textarea" id="message" name="message" placeholder="Message" style={{ height: '400px' }} onChange={handleChange} value={formData.message} required />
+              <label htmlFor="message">Message</label>
+            </Form.Floating>
+          
+            <BtnWrapper className="text-center" $isMobile={isMobile}>
+              <Button onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} type="submit" className="mt-2 btn-primary" style={{width: isMobile ? '100%' : ''}}>submit</Button>
+            </BtnWrapper>
+          </Col>
+        </Row>
       </StyledForm>
       </Container>
   );
