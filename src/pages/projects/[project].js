@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import Head from "next/head";
 import styled from 'styled-components';
 import Container from 'react-bootstrap/Container';
+import Button from 'react-bootstrap/Button';
 import { device } from '../../styles/breakpoints';
 import useResponsive from '../../components/hooks/useResponsive';
 import useSplashScreen from '../../components/hooks/useSplashScreen';
@@ -23,13 +24,21 @@ const Wrapper = styled.div`
 const Hero = styled(Container)`
     background: url('/images/julieschf-homepage.png') top center no-repeat;
     background-size: cover;
-    ${'' /* border: 5px solid ${({ theme }) => theme.colors.black}; */}
     border: 5px solid turquoise;
     border-radius: 25px;
     width: 80%;
     aspect-ratio: 5 / 3; /* Aspect ratio 4:3 for the Hero component */
     margin-top: 100px;
     position: relative;
+    --tw-shadow: -31px 31px 41px rgba(0, 0, 0, .39);
+  --tw-shadow-colored: -31px 31px 41px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+
+    @media ${device.tablet} {
+      border: 2px solid turquoise;
+      border-radius: 8px;
+      margin-top: 60px;
+    }
 `;
 
 const Phone = styled.div`
@@ -38,36 +47,46 @@ const Phone = styled.div`
   aspect-ratio: 8 / 16; /* Aspect ratio 9:16 for the Phone component */
   width: 20%;
   z-index: 1;
-  ${'' /* border: 5px solid ${({ theme }) => theme.colors.black}; */}
   border: 5px solid turquoise;
   border-radius: 25px;
   position: absolute;
   bottom: -10%;
   right: -8%;
-  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.3); /* Add shadow here */
+  --tw-shadow: -31px 31px 41px rgba(0, 0, 0, .39);
+  --tw-shadow-colored: -31px 31px 41px var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+
+  @media ${device.tablet} {
+    border: 2px solid turquoise;
+    border-radius: 8px;
+  }
 `;
 
-const Technologies = styled.div`
+const Technologies = styled(Container)`
     background: ${({ theme }) => theme.colors.primaryLight};
-    height: 100px;
-    border-radius: 50px;
+    height: 120px;
+    border-radius: 60px;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
     box-shadow: inset 0px 4px 10px rgba(0, 0, 0, 0.6); /* Inset shadow for depth effect */
     text-transform: uppercase; 
-    ${'' /* width: 35vw; */}
-    width: 50vw;
+    width: 70vw;
     z-index:1;
-    margin: 140px auto 60px auto;
+    margin: 100px auto 60px auto;
     border: 5px solid turquoise;
 
     color: ${({ theme }) => theme.colors.white};
     font-family: 'Orbitron', sans-serif;
-    font-size: 32px;
-    ${({ $isMobile }) => $isMobile && css`
-        width: 100%;
-    `}
+    font-size: 36px;
+
+    @media ${device.tablet} {
+      border: 2px solid turquoise;
+      height: auto;
+      padding: 5px 12px;
+      margin: 30px auto;
+      width: fit-content;
+    }
 `;
 
 const H3 = styled.h3`
@@ -76,6 +95,10 @@ const H3 = styled.h3`
   padding: 0;
   letter-spacing: 2px;
   text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
+
+  @media ${device.tablet} {
+    display: none;
+  }
 `;
 
 const IconWrapper = styled.div`
@@ -88,20 +111,33 @@ const IconWrapper = styled.div`
 
   img {
     height: 100%;
-    width: auto;
+    width: 7vw;
+
+    @media ${device.tablet} {
+      height: 10vw;
+      width: auto;
+    }
   }
 
   /* Add a vertical divider between each image */
   img:not(:first-child) {
     border-left: 2px solid ${({ theme }) => theme.colors.white}; /* Divider color */
     padding-left: 20px; /* Space after divider */
+
+    @media ${device.tablet} {
+      border-width: 1px;
+    }
   }
 `;
 
 const DescriptionWrapper = styled(Container)`
   font-family: 'Raleway', sans-serif;
-  font-size: 18px;
+  font-size: 24px;
   color: ${({ theme }) => theme.colors.white};
+
+  @media ${device.tablet} {
+    font-size: 16px;
+  }
 `;
 
 const Description = styled.p`
@@ -109,6 +145,71 @@ const Description = styled.p`
   padding: 0;
   text-align: center;
 `;
+
+const AboutTheProjectWrapper = styled(Container)`
+  font-family: 'Raleway', sans-serif;
+  font-size: 18px;
+  color: ${({ theme }) => theme.colors.white};
+  margin-top: 60px;
+
+  > div {
+    border: 1px solid turquoise;
+    border-radius: 25px;
+    padding: 0px 16px;
+  }
+`;
+
+const AboutTheProjectHeader = styled.h4`
+  font-family: 'Orbitron', sans-serif;
+  font-size: 32px;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
+  margin: 20px 16px;
+
+  @media ${device.tablet}{
+    margin: 16px 0px;
+  }
+`;
+
+const AboutTheProjectP = styled.p`
+  margin: 20px 16px;
+  display: block;
+  width: 50%;
+
+  @media ${device.tablet}{
+    width: 100%;
+    margin: 20px 0px;
+  }
+`;
+
+
+const BtnWrapper = styled.div`
+  margin-top: ${({ $isMobile }) => $isMobile ? '16px' : '28px'};
+  padding-left: 16px;
+  padding-bottom: 32px;
+
+  @media ${device.tablet}{
+    padding-left: 0px;
+    padding-bottom: 16px;
+  }
+
+.btn-primary {
+  min-width: 25vw;
+  background-color: ${({ theme }) => theme.colors.white};
+  border-width: 2px;
+  border-color: ${({ theme }) => theme.colors.white};
+  color: ${({ theme }) => theme.colors.black};
+  font-family: 'Orbitron', sans-serif;
+  font-size: 18px;
+  text-transform: uppercase;
+  border-radius: 50px;
+  transition: all .3s ease;
+  &:hover {
+    background: transparent;
+    color: ${({ theme }) => theme.colors.white};
+  }
+}`;  
+
 
 const Project = () => {
   const router = useRouter();
@@ -131,7 +232,7 @@ const Project = () => {
       {!isMobile && <CustomCursor hovered={hovered}/>}
       <Wrapper>
         <Container>
-            <HeaderPill title={'work'} />
+            <HeaderPill title={'projects'} />
         </Container>
         <Hero>
           <Phone />
@@ -146,9 +247,32 @@ const Project = () => {
           </IconWrapper>
         </Technologies>
         <DescriptionWrapper>
-          <Description>Julie&apos;s Caring Heart Foundation is a non profit in Gillette, Wyoming USA. They fund raise for charitable causes. 
-          Julie&apos;s Caring Heart Foundation's annual golf tournament needed a website that could handle player signups, sponsor signups, and let users make and manage payments.</Description>
+          <Description>
+            Julie&apos;s Caring Heart Foundation is a non profit in Gillette, Wyoming USA. They fundraise for charitable causes. 
+            Julie&apos;s Caring Heart Foundation's annual golf tournament needed a website that could handle player signups, sponsor signups, and let players and sponsors alike make payments.
+          </Description>
         </DescriptionWrapper>
+        <AboutTheProjectWrapper>
+          <div>
+          <AboutTheProjectHeader>
+            ABOUT THE PROJECT
+          </AboutTheProjectHeader>
+          <AboutTheProjectP>
+            Julie&apos;s Caring Heart Foundation is a non profit in Gillette, Wyoming USA.
+            They fundraise for charitable causes. Julie&apos;s Caring Heart Foundation's
+            annual golf tournament needed a website that could handle player signups, sponsor
+            signups, and let players and sponsors alike make payments.<br /><br/>
+
+            1. Custom Website Design & Development<br />
+            2. Payment Processing via Stripe<br />
+            3. Registration System & Data Capture <br />
+            4. Sponsor/Player Signup Notifications to Admin<br />
+          </AboutTheProjectP>
+          <BtnWrapper $isMobile={isMobile} md={6}>
+            <Button onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} className="mt-2 btn-primary" style={{width: isMobile ? '100%' : ''}}>contact</Button>
+          </BtnWrapper>
+          </div>
+        </AboutTheProjectWrapper>
       </Wrapper>
     </>
   );

@@ -21,6 +21,7 @@ const PillContainer = styled.div`
     background: ${({ theme }) => theme.colors.primaryLight};
     padding: 15px 30px;
     border-radius: 50px;
+    border: 1px solid ${({ theme }) => theme.colors.white};
     display: flex;
     justify-content: center;
     align-items: center;
