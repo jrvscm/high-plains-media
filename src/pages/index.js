@@ -164,13 +164,15 @@ export default function Home() {
               <GridTileOverlay><h3>julieschf.com</h3></GridTileOverlay>
             </GridItem>
           </Link>
-          <GridItem
-            onMouseEnter={() => setHovered(true)}
-            onMouseLeave={() => setHovered(false)}
-          >
-            <img src={'/images/suite-sleeps-mac.png'} />
-            <GridTileOverlay><h3>suitesleeps.com</h3></GridTileOverlay>
-          </GridItem>
+          <Link href={'/projects/suitesleeps'}>
+            <GridItem
+              onMouseEnter={() => setHovered(true)}
+              onMouseLeave={() => setHovered(false)}
+            >
+              <img src={'/images/suite-sleeps-mac.png'} />
+              <GridTileOverlay><h3>suitesleeps.com</h3></GridTileOverlay>
+            </GridItem>
+          </Link>
           <GridItem
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
