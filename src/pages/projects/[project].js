@@ -219,8 +219,6 @@ const BtnWrapper = styled.div`
 
 const Project = ({ project }) => {
   const router = useRouter();
-  const { query } = router;
-  const { project: projectTitle } = query;
   const { SplashComponent } = useSplashScreen('/images/highplains-logo-v2.svg');
   const [hovered, setHovered] = useState(false);
   const { isMobile } = useResponsive();
