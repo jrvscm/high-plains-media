@@ -11,6 +11,8 @@ import useSplashScreen from '../../components/hooks/useSplashScreen';
 import HeaderPill from '../../components/HeaderPill';
 import CustomCursor from '../../components/CustomCursor';
 
+import { getPortfolioProjects, getProjectByTitle } from '../../utils/contentful';
+
 const Wrapper = styled.div`
   position: relative;
   padding-bottom: 100px;
@@ -22,7 +24,7 @@ const Wrapper = styled.div`
 `;
 
 const Hero = styled(Container)`
-    background: url('/images/julieschf-homepage.png') top center no-repeat;
+    background: ${({ $image }) =>  $image && `url(${$image}) top center no-repeat`};
     background-size: cover;
     border: 5px solid turquoise;
     border-radius: 25px;
@@ -42,7 +44,7 @@ const Hero = styled(Container)`
 `;
 
 const Phone = styled.div`
-  background: url('/images/julieschf_reg_page.png') bottom center no-repeat;
+  background: ${({ $image }) =>  $image && `url(${$image}) bottom center no-repeat`};
   background-size: cover;
   aspect-ratio: 8 / 16; /* Aspect ratio 9:16 for the Phone component */
   width: 20%;
@@ -153,9 +155,13 @@ const AboutTheProjectWrapper = styled(Container)`
   margin-top: 80px;
 
   > div {
-    border: 1px solid turquoise;
+    border: 5px solid turquoise;
     border-radius: 25px;
     padding: 0px 16px;
+
+    @media ${device.tablet} {
+      border-width: 2px;
+    }
   }
 `;
 
@@ -211,9 +217,8 @@ const BtnWrapper = styled.div`
 }`;  
 
 
-const Project = () => {
+const Project = ({ project }) => {
   const router = useRouter();
-  const { project } = router.query;
   const { SplashComponent } = useSplashScreen('/images/highplains-logo-v2.svg');
   const [hovered, setHovered] = useState(false);
   const { isMobile } = useResponsive();
@@ -225,35 +230,35 @@ const Project = () => {
     <>
       <Head>
         <meta charset="UTF-8" />
-        <title>High Plains Media | Leading Digital Agency</title>
-        <meta name="description" content="Elevate your business with High Plains Media, a leading digital agency specializing in tailored web development, SEO, and online marketing strategies." />
+        <title>Julie's Caring Heart Foundation Tournament | High Plains Media Project</title>
+        <meta name="description" content="Discover how High Plains Media created a custom website for Julie's Caring Heart Foundation to streamline player and sponsor signups, handle payments, and provide real-time registration data for their annual golf tournament." />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/images/highplains-logo-v2.svg" />
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://www.highplainsmedia.com/" />
+        <link rel="canonical" href="https://www.highplainsmedia.com/projects/julieschf" />
       </Head>
       {SplashComponent}
       {!isMobile && <CustomCursor hovered={hovered}/>}
       <Wrapper>
         <Container>
-            <HeaderPill title={'projects'} />
+            {project?.fields?.title && <HeaderPill hideLinks title={project?.fields?.title} />}
         </Container>
-        <Hero>
-          <Phone />
-        </Hero>
+        {project?.fields?.desktopImage?.fields?.file?.url && 
+        <Hero $image={project?.fields?.desktopImage?.fields?.file?.url}>
+          {project?.fields?.mobileImage?.fields?.file?.url && 
+          <Phone $image={project?.fields?.mobileImage?.fields?.file?.url} />}
+        </Hero>}
         <Technologies>
           <H3>BUILT WITH</H3>
           <IconWrapper>
-            <img src="/images/tech-stack-nextjs.svg" />
-            <img src="/images/tech-stack-react.svg" />
-            <img src="/images/tech-stack-netlify.svg" />
-            <img src="/images/tech-stack-figma.svg" />
+            {project?.fields?.tech.map((tech, index) => 
+              <img key={`tech-svg-${index}`} src={`/images/tech-stack-${tech === 'next' ? 'nextjs' : tech}.svg`} alt={`${tech}-logo`} />)
+            }
           </IconWrapper>
         </Technologies>
         <DescriptionWrapper>
           <Description>
-            Julie&apos;s Caring Heart Foundation is a non profit in Gillette, Wyoming USA. They fundraise for charitable causes. 
-            Julie&apos;s Caring Heart Foundation&apos;s annual golf tournament needed a website that could handle player signups, sponsor signups, and let players and sponsors alike make payments.
+            {project?.fields?.description}
           </Description>
         </DescriptionWrapper>
         <AboutTheProjectWrapper>
@@ -262,15 +267,10 @@ const Project = () => {
             ABOUT THE PROJECT
           </AboutTheProjectHeader>
           <AboutTheProjectP>
-            Julie&apos;s Caring Heart Foundation is a non profit in Gillette, Wyoming USA.
-            They fundraise for charitable causes. Julie&apos;s Caring Heart Foundation&apos;s
-            annual golf tournament needed a website that could handle player signups, sponsor
-            signups, and let players and sponsors alike make payments.<br /><br/>
-
-            1. Custom Website Design & Development<br />
-            2. Payment Processing via Stripe<br />
-            3. Registration System & Data Capture <br />
-            4. Sponsor/Player Signup Notifications to Admin<br />
+            {project?.fields?.outline}<br /><br />
+            {project?.fields?.projectHighlights?.map((highlight, index) => 
+              <><span key={`project_${index}`}>{index + 1}. {highlight}</span><br /></>
+            )}
           </AboutTheProjectP>
           <BtnWrapper $isMobile={isMobile} md={6}>
             <Button onClick={() => handleClick()} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} className="mt-2 btn-primary" style={{width: isMobile ? '100%' : ''}}>contact</Button>
@@ -280,6 +280,21 @@ const Project = () => {
       </Wrapper>
     </>
   );
+}
+
+export async function getStaticPaths() {
+  const projects = await getPortfolioProjects();
+  const paths = projects.map(project => ({ params: { project: project.fields.title } }));
+
+  return { paths, fallback: 'blocking' };
+}
+
+export async function getStaticProps({ params }) {
+  const project = await getProjectByTitle(params.title);
+  if (!project) {
+    return { notFound: true };
+  }
+  return { props: { project } };
 }
 
 export default Project;

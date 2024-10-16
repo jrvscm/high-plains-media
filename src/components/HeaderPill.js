@@ -100,19 +100,19 @@ const StyledLink = styled(Link)`
 
 `;
 
-const HeaderPill = ({title}) => {
+const HeaderPill = ({title, hideLinks = false}) => {
     const { isMobile } = useResponsive();
     return (
     <Wrapper>
         <PillContainer $isMobile={isMobile}>
             <PillText>{title}</PillText>
         </PillContainer>
-        <LinkWrapper>
+        {!hideLinks && <LinkWrapper>
             <StyledLink $active={'about' === title} href={'/about'}>ABOUT</StyledLink>
             {/* <StyledLink $active={'services' === title} href={'/services'}>SERVICES</StyledLink> */}
             <StyledLink $active={'work' === title} href={'/'}>WORK</StyledLink>
             <StyledLink $active={'contact' === title} href={'/contact'}>CONTACT</StyledLink>
-        </LinkWrapper>
+        </LinkWrapper>}
     </Wrapper>
 )};
 

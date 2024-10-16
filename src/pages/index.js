@@ -1,10 +1,11 @@
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import Head from "next/head";
 import styled from 'styled-components';
 import Container from 'react-bootstrap/Container';
 import { device } from '../styles/breakpoints';
 import useResponsive from '../components/hooks/useResponsive';
 import useSplashScreen from '../components/hooks/useSplashScreen';
+import Link from 'next/link';
 
 import HeaderPill from '../components/HeaderPill';
 import CustomCursor from '../components/CustomCursor';
@@ -115,10 +116,7 @@ const GridItem = styled.div`
     }
     background: url('/images/web-development-tile.svg') center center;
     background-size: cover;
-
-    ${'' /* &::before {
-      background: #008080;
-    } */}
+    border: 2px solid ${({ theme }) => theme.colors.white};
   }
 
   &:nth-of-type(4) {
@@ -157,13 +155,15 @@ export default function Home() {
         <Container>
         <HeaderPill title={'work'} />
         <GridWrapper $isMobile={isMobile} className={'container'}>
-          <GridItem 
-            onMouseEnter={() => setHovered(true)}
-            onMouseLeave={() => setHovered(false)}
-          >
-            <img src={'/images/sunshinePaintAndBody.png'} />
-            <GridTileOverlay><h3>julieschf.com</h3></GridTileOverlay>
-          </GridItem>
+          <Link href={'/projects/julieschf'}>
+            <GridItem 
+              onMouseEnter={() => setHovered(true)}
+              onMouseLeave={() => setHovered(false)}
+            >
+              <img src={'/images/sunshinePaintAndBody.png'} />
+              <GridTileOverlay><h3>julieschf.com</h3></GridTileOverlay>
+            </GridItem>
+          </Link>
           <GridItem
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
