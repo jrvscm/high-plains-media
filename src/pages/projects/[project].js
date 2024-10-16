@@ -230,7 +230,7 @@ const Project = ({ project }) => {
     <>
       <Head>
         <meta charset="UTF-8" />
-        <title>Julie's Caring Heart Foundation Tournament | High Plains Media Project</title>
+        <title>Julie&apos;s Caring Heart Foundation Tournament | High Plains Media Project</title>
         <meta name="description" content="Discover how High Plains Media created a custom website for Julie's Caring Heart Foundation to streamline player and sponsor signups, handle payments, and provide real-time registration data for their annual golf tournament." />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/images/highplains-logo-v2.svg" />
