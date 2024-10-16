@@ -219,6 +219,8 @@ const BtnWrapper = styled.div`
 
 const Project = ({ project }) => {
   const router = useRouter();
+  const { query } = router;
+  const { project: projectTitle } = query;
   const { SplashComponent } = useSplashScreen('/images/highplains-logo-v2.svg');
   const [hovered, setHovered] = useState(false);
   const { isMobile } = useResponsive();
@@ -226,6 +228,7 @@ const Project = ({ project }) => {
   const handleClick = () => {
     router.push('/contact')
   }
+
   return (
     <>
       <Head>
@@ -251,7 +254,7 @@ const Project = ({ project }) => {
         <Technologies>
           <H3>BUILT WITH</H3>
           <IconWrapper>
-            {project?.fields?.tech.map((tech, index) => 
+            {project?.fields?.tech?.map((tech, index) => 
               <img key={`tech-svg-${index}`} src={`/images/tech-stack-${tech === 'next' ? 'nextjs' : tech}.svg`} alt={`${tech}-logo`} />)
             }
           </IconWrapper>
@@ -290,7 +293,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const project = await getProjectByTitle(params.title);
+  const project = await getProjectByTitle(params.project);
   if (!project) {
     return { notFound: true };
   }
