@@ -141,6 +141,22 @@ const StyledLink = styled(Link)`
       background: #B3DDF2; /* Light sky blue */
     }
   }
+
+  &:nth-child(5) ${GridItem} {
+    background: #4D47A1; /* Coral */
+    &::before {
+      background: #C8B8E3; /* Light sky blue */
+    }
+  }
+
+  &:nth-child(6) ${GridItem} {
+    background: url('/images/ecommerce.png') center center, linear-gradient(135deg, rgba(0,0,0,1), rgba(0,0,0,1));
+    background-size: cover;
+
+    &::before {
+      display: none;
+    }
+  }
 `;
 
 export default function Home() {
@@ -207,6 +223,29 @@ export default function Home() {
                 <img src={'/images/suite-sleeps-mac.png'} />
                 <GridTileOverlay>
                   <h3>suitesleeps.com</h3>
+                </GridTileOverlay>
+              </GridItem>
+            </StyledLink>
+
+            <StyledLink href={'/projects/suitesleeps'}>
+              <GridItem
+                onMouseEnter={() => setHovered(true)}
+                onMouseLeave={() => setHovered(false)}
+              >
+                <img src={'/images/tvs.png'} />
+                <GridTileOverlay>
+                  <h3>highplainsmedia.com</h3>
+                </GridTileOverlay>
+              </GridItem>
+            </StyledLink>
+
+            <StyledLink href={''}>
+              <GridItem
+                onMouseEnter={() => setHovered(true)}
+                onMouseLeave={() => setHovered(false)}
+              >
+                <GridTileOverlay>
+                  <h3>e-commerce</h3>
                 </GridTileOverlay>
               </GridItem>
             </StyledLink>
