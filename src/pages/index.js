@@ -27,15 +27,24 @@ const GridTileOverlay = styled.div`
   right: 0;
   bottom: 0;
   background: ${({ theme }) => `${theme.colors.secondaryDark}F2`}; /* Semi-transparent background */
-  display: ${({ $isMobile }) => ($isMobile ? 'none' : 'flex')}; /* Hide overlay on mobile */
+  display: flex;
   align-items: center;
   justify-content: center;
   color: white;
   font-size: 24px;
-  opacity: ${({ $isMobile }) => ($isMobile ? 0 : 0)};  /* Fully hidden on mobile */
-  visibility: ${({ $isMobile }) => ($isMobile ? 'hidden' : 'hidden')}; /* Fully hidden on mobile */
+  opacity: ${({ $isHovered }) => ($isHovered ? 1 : 0)}; /* Show on hover */
+  visibility: ${({ $isHovered }) => ($isHovered ? 'visible' : 'hidden')}; /* Ensure visibility */
   transition: opacity 0.3s ease, visibility 0.3s ease;
   z-index: 2; /* Ensure it stays above the gradient and image */
+  
+  > h3 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 32px;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
+    color: white;
+    z-index: 3;
+  }
 `;
 
 const GridWrapper = styled.div`
@@ -73,7 +82,6 @@ const GridItem = styled.div`
   }
 
   &:hover {
-    ${'' /* Only scale on hover for non-mobile */}
     > ${GridTileOverlay} {
       opacity: 1;
       visibility: visible;
@@ -87,35 +95,21 @@ const GridItem = styled.div`
     z-index: 1;
   }
 
-  & h3 {
+  & h3.mobile {
     font-family: 'Orbitron', sans-serif;
-    font-size: 32px;
-    letter-spacing: 2px;
-    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
-    color: ${({ $isMobile, theme }) => ($isMobile ? theme.colors.white : 'transparent')}; /* Visible on mobile */
+    font-size: 24px;
+    color: #fff;
+    text-shadow: 0 0 5px rgba(0, 255, 255, 0.7), 0 0 10px rgba(0, 255, 255, 0.5);
+    padding: 10px;
+    border-radius: 0px;
+    background: rgba(0, 0, 0, 0.5);
     position: absolute;
-    z-index: 10;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    bottom: 15px;
-    width: 100%;
+    bottom: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0;
     text-align: center;
-
-    @media ${device.tablet}{
-      font-family: 'Orbitron', sans-serif;
-      font-size: 24px;
-      color: #fff;
-      text-shadow: 0 0 5px rgba(0, 255, 255, 0.7), 0 0 10px rgba(0, 255, 255, 0.5);
-      padding: 10px;
-      border-radius: 8px;
-      background: rgba(0, 0, 0, 0.5);
-      position: absolute;
-      bottom: 0px;
-      left: 50%;
-      transform: translateX(-50%);
-      margin: 0;
-    }
+    width: 100%;
   }
 `;
 
@@ -129,7 +123,6 @@ const StyledLink = styled(Link)`
 
   &:nth-child(2) ${GridItem} {
     background: url('/images/mobile-apps-min2.png') center center, linear-gradient(135deg, rgba(0,0,0,1), rgba(0,0,0,1));
-      /* Gradient with image background */
     background-size: cover;
     z-index: 0;
     &::before {
@@ -173,7 +166,7 @@ const StyledLink = styled(Link)`
 
 export default function Home() {
   const { isSplashVisible, SplashComponent } = useSplashScreen('/images/highplains-logo-v2.svg');
-  const [hovered, setHovered] = useState(false);
+  const [hoveredIndex, setHoveredIndex] = useState(null);
   const { isMobile } = useResponsive();
 
   return (
@@ -188,89 +181,101 @@ export default function Home() {
         <link rel="canonical" href="https://www.highplainsmedia.com/" />
       </Head>
       {SplashComponent}
-      {!isMobile && <CustomCursor hovered={hovered} />}
+      {!isMobile && <CustomCursor hovered={hoveredIndex !== null} />}
       <Wrapper>
         <Container>
           <HeaderPill title={'work'} />
           <GridWrapper $isMobile={isMobile} className={'container'}>
             <StyledLink href={'/projects/julieschf'}>
               <GridItem
-                onMouseEnter={() => !isMobile && setHovered(true)}  // Prevent hover on mobile
-                onMouseLeave={() => !isMobile && setHovered(false)} // Prevent hover on mobile
+                onMouseEnter={() => !isMobile && setHoveredIndex(0)}  // Set hover index for first tile
+                onMouseLeave={() => !isMobile && setHoveredIndex(null)} // Reset hover index
                 $isMobile={isMobile}
               >
                 <img src={'/images/sunshinePaintAndBody.png'} />
-                <h3 $isMobile={isMobile}>julieschf.com</h3>
-                <GridTileOverlay $isMobile={isMobile}>
-                  <h3>julieschf.com</h3>
-                </GridTileOverlay>
+                {isMobile && <h3 className={'mobile'}>julieschf.com</h3>}
+                {!isMobile && hoveredIndex === 0 && ( // Only render the overlay if hovered and not mobile
+                  <GridTileOverlay $isHovered={hoveredIndex === 0}>
+                    <h3>julieschf.com</h3>
+                  </GridTileOverlay>
+                )}
               </GridItem>
             </StyledLink>
 
             <StyledLink href={''}>
               <GridItem
-                onMouseEnter={() => !isMobile && setHovered(true)}
-                onMouseLeave={() => !isMobile && setHovered(false)}
+                onMouseEnter={() => !isMobile && setHoveredIndex(1)}  // Set hover index for second tile
+                onMouseLeave={() => !isMobile && setHoveredIndex(null)} // Reset hover index
                 $isMobile={isMobile}
               >
-                <h3 $isMobile={isMobile}>Mobile Applications</h3>
-                <GridTileOverlay $isMobile={isMobile}>
-                  <h3>Mobile Applications</h3>
-                </GridTileOverlay>
+                {isMobile && <h3 className={'mobile'}>Mobile Applications</h3>}
+                {!isMobile && hoveredIndex === 1 && (
+                  <GridTileOverlay $isHovered={hoveredIndex === 1}>
+                    <h3>Mobile Applications</h3>
+                  </GridTileOverlay>
+                )}
               </GridItem>
             </StyledLink>
 
             <StyledLink href={''}>
               <GridItem
-                onMouseEnter={() => !isMobile && setHovered(true)}
-                onMouseLeave={() => !isMobile && setHovered(false)}
+                onMouseEnter={() => !isMobile && setHoveredIndex(2)}  // Set hover index for third tile
+                onMouseLeave={() => !isMobile && setHoveredIndex(null)} // Reset hover index
                 $isMobile={isMobile}
               >
-                <h3 $isMobile={isMobile}>Web Development</h3>
-                <GridTileOverlay $isMobile={isMobile}>
-                  <h3>Web Development</h3>
-                </GridTileOverlay>
+                {isMobile && <h3 className={'mobile'}>Web Development</h3>}
+                {!isMobile && hoveredIndex === 2 && (
+                  <GridTileOverlay $isHovered={hoveredIndex === 2}>
+                    <h3>Web Development</h3>
+                  </GridTileOverlay>
+                )}
               </GridItem>
             </StyledLink>
 
             <StyledLink href={'/projects/suitesleeps'}>
               <GridItem
-                onMouseEnter={() => !isMobile && setHovered(true)}
-                onMouseLeave={() => !isMobile && setHovered(false)}
+                onMouseEnter={() => !isMobile && setHoveredIndex(3)}  // Set hover index for fourth tile
+                onMouseLeave={() => !isMobile && setHoveredIndex(null)} // Reset hover index
                 $isMobile={isMobile}
               >
                 <img src={'/images/suite-sleeps-mac.png'} />
-                <h3 $isMobile={isMobile}>suitesleeps.com</h3>
-                <GridTileOverlay $isMobile={isMobile}>
-                  <h3>suitesleeps.com</h3>
-                </GridTileOverlay>
+                {isMobile && <h3 className={'mobile'}>suitesleeps.com</h3>}
+                {!isMobile && hoveredIndex === 3 && (
+                  <GridTileOverlay $isHovered={hoveredIndex === 3}>
+                    <h3>suitesleeps.com</h3>
+                  </GridTileOverlay>
+                )}
               </GridItem>
             </StyledLink>
 
             <StyledLink href={'/projects/suitesleeps'}>
               <GridItem
-                onMouseEnter={() => !isMobile && setHovered(true)}
-                onMouseLeave={() => !isMobile && setHovered(false)}
+                onMouseEnter={() => !isMobile && setHoveredIndex(4)}  // Set hover index for fifth tile
+                onMouseLeave={() => !isMobile && setHoveredIndex(null)} // Reset hover index
                 $isMobile={isMobile}
               >
                 <img src={'/images/tvs.png'} />
-                <h3 $isMobile={isMobile}>highplainsmedia.com</h3>
-                <GridTileOverlay $isMobile={isMobile}>
-                  <h3>highplainsmedia.com</h3>
-                </GridTileOverlay>
+                {isMobile && <h3 className={'mobile'}>highplainsmedia.com</h3>}
+                {!isMobile && hoveredIndex === 4 && (
+                  <GridTileOverlay $isHovered={hoveredIndex === 4}>
+                    <h3>highplainsmedia.com</h3>
+                  </GridTileOverlay>
+                )}
               </GridItem>
             </StyledLink>
 
             <StyledLink href={''}>
               <GridItem
-                onMouseEnter={() => !isMobile && setHovered(true)}
-                onMouseLeave={() => !isMobile && setHovered(false)}
+                onMouseEnter={() => !isMobile && setHoveredIndex(5)}  // Set hover index for sixth tile
+                onMouseLeave={() => !isMobile && setHoveredIndex(null)} // Reset hover index
                 $isMobile={isMobile}
               >
-                <h3 $isMobile={isMobile}>e-commerce</h3>
-                <GridTileOverlay $isMobile={isMobile}>
-                  <h3>e-commerce</h3>
-                </GridTileOverlay>
+                {isMobile && <h3 className={'mobile'}>e-commerce</h3>}
+                {!isMobile && hoveredIndex === 5 && (
+                  <GridTileOverlay $isHovered={hoveredIndex === 5}>
+                    <h3>e-commerce</h3>
+                  </GridTileOverlay>
+                )}
               </GridItem>
             </StyledLink>
           </GridWrapper>
