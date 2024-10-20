@@ -10,7 +10,7 @@ import useSplashScreen from '../../components/hooks/useSplashScreen';
 
 import HeaderPill from '../../components/HeaderPill';
 import CustomCursor from '../../components/CustomCursor';
-
+import { BackButton } from '../../components/HeaderPill';
 import { getPortfolioProjects, getProjectByTitle } from '../../utils/contentful';
 
 const Wrapper = styled.div`
@@ -153,7 +153,7 @@ const AboutTheProjectWrapper = styled(Container)`
   font-size: 18px;
   color: ${({ theme }) => theme.colors.white};
   margin-top: 80px;
-
+  position: relative;
   > div {
     border: 5px solid turquoise;
     border-radius: 25px;
@@ -214,19 +214,19 @@ const BtnWrapper = styled.div`
     background: transparent;
     color: ${({ theme }) => theme.colors.white};
   }
-}`;  
+}`; 
 
 
 const Project = ({ project }) => {
   const router = useRouter();
+  const { asPath } = router;
   const { SplashComponent } = useSplashScreen('/images/highplains-logo-v2.svg');
   const [hovered, setHovered] = useState(false);
   const { isMobile } = useResponsive();
-  
-  const handleClick = () => {
-    router.push('/contact')
+  const handleBack = () => {
+    router.back();
   }
-
+  
   return (
     <>
       <Head>
@@ -242,7 +242,7 @@ const Project = ({ project }) => {
       {!isMobile && <CustomCursor hovered={hovered}/>}
       <Wrapper>
         <Container>
-            {project?.fields?.title && <HeaderPill hideLinks title={project?.fields?.title} />}
+            {project?.fields?.title && <HeaderPill title={project?.fields?.title} />}
         </Container>
         {project?.fields?.desktopImage?.fields?.file?.url && 
         <Hero $image={project?.fields?.desktopImage?.fields?.file?.url}>
@@ -263,6 +263,13 @@ const Project = ({ project }) => {
           </Description>
         </DescriptionWrapper>
         <AboutTheProjectWrapper>
+          {isMobile && 
+            <BackButton onClick={handleBack}>
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                  <path d="M19 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H19v-2z"/>
+                  </svg>
+            </BackButton>
+          }
           <div>
           <AboutTheProjectHeader>
             ABOUT THE PROJECT

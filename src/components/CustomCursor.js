@@ -33,12 +33,13 @@ const Cursor = styled.div`
   pointer-events: none;
   z-index: 1000;
   transition: 
-    transform 0.3s ease, 
-    background-color 0.3s ease, 
-    border 0.3s ease,
-    width 0.3s ease, 
-    height 0.3s ease, 
-    border-radius 0.3s ease; /* Smooth morph transition */
+    transform 0.2s ease-out, 
+    background-color 0.2s ease-out, 
+    border 0.2s ease-out, 
+    width 0.2s ease-out, 
+    height 0.2s ease-out, 
+    border-radius 0.2s ease-out; /* Smooth morph transition */
+  will-change: transform, width, height, border-radius; /* Optimize for performance */
 
   /* Default state (solid purple circle) */
   background-color: ${({ hovered }) => (hovered ? 'transparent' : '#800080')}; /* Purple when not hovering */

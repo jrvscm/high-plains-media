@@ -12,7 +12,6 @@ export const Layout = ({ children }) => {
     return (
         <Wrapper>
             <HamburgerMenu />
-            {/* <Navigation /> */} 
             {children}
             <FooterV2 />
             {isLoading && <Loader />}

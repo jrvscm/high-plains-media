@@ -1,7 +1,7 @@
 import React from 'react';
 import { styled, css } from 'styled-components';
 import { device } from '../styles/breakpoints';
-import Link from 'next/link';
+import { useRouter } from 'next/router'
 import useResponsive from '../components/hooks/useResponsive';
 
 const Wrapper = styled.div`
@@ -29,6 +29,7 @@ const PillContainer = styled.div`
     text-transform: uppercase; 
     width: 35vw;
     z-index:1;
+    position: relative;
     
     ${({ $isMobile }) => $isMobile && css`
         width: 100%;
@@ -49,70 +50,59 @@ const PillText = styled.h1`
     }
 `;
 
-const LinkWrapper = styled.div`
-    margin-top: 50px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-evenly;
-    width: 35vw;
-    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
-    z-index: 1;
-
-    @media ${device.tablet} {
-        width: 90%;
-        margin-top: 25px;
-    }
-`;
-
-const StyledLink = styled(Link)`
-  font-size: 16px;
-  font-family: 'Raleway', sans-serif;
-  text-decoration: none;
-  color: ${({ theme }) => theme.colors.white};
-  letter-spacing: 1.1px;
-  position: relative;
-  
-  /* Add an underline effect */
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: -5px; /* Adjusts the position of the underline */
-    left: 0;
-    width: 0;
-    height: 2px; /* Thickness of the underline */
-    background-color: ${({ theme }) => theme.colors.white};
-    transition: width 0.3s ease;
-
-    ${({ $active }) => $active && `
-        width: 100%;
-    `}
-  }
+export const BackButton = styled.button`
+  position: absolute;
+  top: 0;
+  left: -50%;
+  background-color: ${({ theme }) => theme.colors.primaryLight};
+  border: none;
+  padding: 10px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  z-index: 10;
 
   &:hover {
-    filter:brightness(80%);
-
-    &::after {
-      width: 100%; /* Animate underline width to full */
-    }
+    background-color: ${({ theme }) => theme.colors.primaryDark};
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
   }
 
+  svg {
+    width: auto;
+    height: 62px;
+    fill: white;
+  }
 
+  @media ${device.tablet}{
+    left: unset;
+    top: 8px;
+    right: 8px;
+    box-shadow: none;
+    background-color: transparent;
+  }
 `;
 
-const HeaderPill = ({title, hideLinks = false}) => {
+const HeaderPill = ({ title }) => {
     const { isMobile } = useResponsive();
+    const router = useRouter();
+    const handleBack = () => {
+        router.back();
+    }
+    const { asPath } = router;
     return (
     <Wrapper>
         <PillContainer $isMobile={isMobile}>
+            {asPath.includes(['projects']) &&  !isMobile && <BackButton onClick={handleBack}>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M19 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H19v-2z"/>
+                </svg>
+            </BackButton>}
             <PillText>{title}</PillText>
         </PillContainer>
-        {!hideLinks && <LinkWrapper>
-            <StyledLink $active={'about' === title} href={'/about'}>ABOUT</StyledLink>
-            {/* <StyledLink $active={'services' === title} href={'/services'}>SERVICES</StyledLink> */}
-            <StyledLink $active={'work' === title} href={'/'}>WORK</StyledLink>
-            <StyledLink $active={'contact' === title} href={'/contact'}>CONTACT</StyledLink>
-        </LinkWrapper>}
     </Wrapper>
 )};
 

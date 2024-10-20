@@ -5,7 +5,7 @@ export const useCustomCursor = () => {
   const [scrollPos, setScrollPos] = useState({ x: 0, y: 0 });
   const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
   
-  const speed = 0.9; // Adjust for smoother or tighter tracking
+  const speed = .9; // Adjust for smoother or tighter tracking
 
   // Capture mouse movement and track clientX and clientY
   useEffect(() => {
