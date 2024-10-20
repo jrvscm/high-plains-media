@@ -27,13 +27,13 @@ const GridTileOverlay = styled.div`
   right: 0;
   bottom: 0;
   background: ${({ theme }) => `${theme.colors.secondaryDark}F2`}; /* Semi-transparent background */
-  display: flex;
+  display: ${({ $isMobile }) => ($isMobile ? 'none' : 'flex')}; /* Hide overlay on mobile */
   align-items: center;
   justify-content: center;
   color: white;
   font-size: 24px;
-  opacity: 0;
-  visibility: hidden;
+  opacity: ${({ $isMobile }) => ($isMobile ? 0 : 0)};  /* Fully hidden on mobile */
+  visibility: ${({ $isMobile }) => ($isMobile ? 'hidden' : 'hidden')}; /* Fully hidden on mobile */
   transition: opacity 0.3s ease, visibility 0.3s ease;
   z-index: 2; /* Ensure it stays above the gradient and image */
 `;
@@ -73,7 +73,7 @@ const GridItem = styled.div`
   }
 
   &:hover {
-    ${'' /* transform: scale(1.02); */}
+    ${'' /* Only scale on hover for non-mobile */}
     > ${GridTileOverlay} {
       opacity: 1;
       visibility: visible;
@@ -81,22 +81,10 @@ const GridItem = styled.div`
   }
 
   & img {
-    position: relative; /* Ensure image is placed on top of the background */
+    position: relative;
     width: 100%;
     height: auto;
     z-index: 1;
-  }
-
-  /* Add circular backgrounds using ::before */
-  &::before {
-    content: ' ';
-    position: absolute;
-    height: 300px;
-    width: 300px;
-    top: -100px;
-    right: -100px;
-    border-radius: 150px;
-    z-index: 0; /* Ensure the circle is behind the content */
   }
 
   & h3 {
@@ -104,6 +92,30 @@ const GridItem = styled.div`
     font-size: 32px;
     letter-spacing: 2px;
     text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
+    color: ${({ $isMobile, theme }) => ($isMobile ? theme.colors.white : 'transparent')}; /* Visible on mobile */
+    position: absolute;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    bottom: 15px;
+    width: 100%;
+    text-align: center;
+
+    @media ${device.tablet}{
+      font-family: 'Orbitron', sans-serif;
+      font-size: 24px;
+      color: #fff;
+      text-shadow: 0 0 5px rgba(0, 255, 255, 0.7), 0 0 10px rgba(0, 255, 255, 0.5);
+      padding: 10px;
+      border-radius: 8px;
+      background: rgba(0, 0, 0, 0.5);
+      position: absolute;
+      bottom: 0px;
+      left: 50%;
+      transform: translateX(-50%);
+      margin: 0;
+    }
   }
 `;
 
@@ -183,11 +195,13 @@ export default function Home() {
           <GridWrapper $isMobile={isMobile} className={'container'}>
             <StyledLink href={'/projects/julieschf'}>
               <GridItem
-                onMouseEnter={() => setHovered(true)}
-                onMouseLeave={() => setHovered(false)}
+                onMouseEnter={() => !isMobile && setHovered(true)}  // Prevent hover on mobile
+                onMouseLeave={() => !isMobile && setHovered(false)} // Prevent hover on mobile
+                $isMobile={isMobile}
               >
                 <img src={'/images/sunshinePaintAndBody.png'} />
-                <GridTileOverlay>
+                <h3 $isMobile={isMobile}>julieschf.com</h3>
+                <GridTileOverlay $isMobile={isMobile}>
                   <h3>julieschf.com</h3>
                 </GridTileOverlay>
               </GridItem>
@@ -195,10 +209,12 @@ export default function Home() {
 
             <StyledLink href={''}>
               <GridItem
-                onMouseEnter={() => setHovered(true)}
-                onMouseLeave={() => setHovered(false)}
+                onMouseEnter={() => !isMobile && setHovered(true)}
+                onMouseLeave={() => !isMobile && setHovered(false)}
+                $isMobile={isMobile}
               >
-                <GridTileOverlay>
+                <h3 $isMobile={isMobile}>Mobile Applications</h3>
+                <GridTileOverlay $isMobile={isMobile}>
                   <h3>Mobile Applications</h3>
                 </GridTileOverlay>
               </GridItem>
@@ -206,10 +222,12 @@ export default function Home() {
 
             <StyledLink href={''}>
               <GridItem
-                onMouseEnter={() => setHovered(true)}
-                onMouseLeave={() => setHovered(false)}
+                onMouseEnter={() => !isMobile && setHovered(true)}
+                onMouseLeave={() => !isMobile && setHovered(false)}
+                $isMobile={isMobile}
               >
-                <GridTileOverlay>
+                <h3 $isMobile={isMobile}>Web Development</h3>
+                <GridTileOverlay $isMobile={isMobile}>
                   <h3>Web Development</h3>
                 </GridTileOverlay>
               </GridItem>
@@ -217,11 +235,13 @@ export default function Home() {
 
             <StyledLink href={'/projects/suitesleeps'}>
               <GridItem
-                onMouseEnter={() => setHovered(true)}
-                onMouseLeave={() => setHovered(false)}
+                onMouseEnter={() => !isMobile && setHovered(true)}
+                onMouseLeave={() => !isMobile && setHovered(false)}
+                $isMobile={isMobile}
               >
                 <img src={'/images/suite-sleeps-mac.png'} />
-                <GridTileOverlay>
+                <h3 $isMobile={isMobile}>suitesleeps.com</h3>
+                <GridTileOverlay $isMobile={isMobile}>
                   <h3>suitesleeps.com</h3>
                 </GridTileOverlay>
               </GridItem>
@@ -229,11 +249,13 @@ export default function Home() {
 
             <StyledLink href={'/projects/suitesleeps'}>
               <GridItem
-                onMouseEnter={() => setHovered(true)}
-                onMouseLeave={() => setHovered(false)}
+                onMouseEnter={() => !isMobile && setHovered(true)}
+                onMouseLeave={() => !isMobile && setHovered(false)}
+                $isMobile={isMobile}
               >
                 <img src={'/images/tvs.png'} />
-                <GridTileOverlay>
+                <h3 $isMobile={isMobile}>highplainsmedia.com</h3>
+                <GridTileOverlay $isMobile={isMobile}>
                   <h3>highplainsmedia.com</h3>
                 </GridTileOverlay>
               </GridItem>
@@ -241,10 +263,12 @@ export default function Home() {
 
             <StyledLink href={''}>
               <GridItem
-                onMouseEnter={() => setHovered(true)}
-                onMouseLeave={() => setHovered(false)}
+                onMouseEnter={() => !isMobile && setHovered(true)}
+                onMouseLeave={() => !isMobile && setHovered(false)}
+                $isMobile={isMobile}
               >
-                <GridTileOverlay>
+                <h3 $isMobile={isMobile}>e-commerce</h3>
+                <GridTileOverlay $isMobile={isMobile}>
                   <h3>e-commerce</h3>
                 </GridTileOverlay>
               </GridItem>
