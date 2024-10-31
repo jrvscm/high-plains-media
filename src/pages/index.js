@@ -26,17 +26,17 @@ const GridTileOverlay = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
-  background: ${({ theme }) => `${theme.colors.secondaryDark}F2`}; /* Semi-transparent background */
+  background: ${({ theme }) => `${theme.colors.secondaryDark}F2`};
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
   font-size: 24px;
-  opacity: ${({ $isHovered }) => ($isHovered ? 1 : 0)}; /* Show on hover */
-  visibility: ${({ $isHovered }) => ($isHovered ? 'visible' : 'hidden')}; /* Ensure visibility */
-  transition: opacity 0.3s ease, visibility 0.3s ease;
-  z-index: 2; /* Ensure it stays above the gradient and image */
-  
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  z-index: 2;
+  will-change: opacity, transform;
+
   > h3 {
     font-family: 'Orbitron', sans-serif;
     font-size: 32px;
@@ -186,31 +186,32 @@ export default function Home() {
         <Container>
           <HeaderPill title={'work'} />
           <GridWrapper $isMobile={isMobile} className={'container'}>
-            <StyledLink href={'/projects/julieschf'}>
-              <GridItem
-                onMouseEnter={() => !isMobile && setHoveredIndex(0)}  // Set hover index for first tile
-                onMouseLeave={() => !isMobile && setHoveredIndex(null)} // Reset hover index
-                $isMobile={isMobile}
-              >
-                <img src={'/images/sunshinePaintAndBody.png'} />
-                {isMobile && <h3 className={'mobile'}>julieschf.com</h3>}
-                {!isMobile && hoveredIndex === 0 && ( // Only render the overlay if hovered and not mobile
-                  <GridTileOverlay $isHovered={hoveredIndex === 0}>
-                    <h3>julieschf.com</h3>
-                  </GridTileOverlay>
-                )}
-              </GridItem>
-            </StyledLink>
+          <StyledLink href={'/projects/julieschf'}>
+            <GridItem
+              onMouseEnter={() => !isMobile && setHoveredIndex(0)}
+              onMouseLeave={() => !isMobile && setHoveredIndex(null)}
+              $isMobile={isMobile}
+            >
+              <img src={'/images/sunshinePaintAndBody.png'} />
+              {isMobile ? (
+                <h3 className="mobile">julieschf.com</h3> 
+              ) : (
+                <GridTileOverlay>
+                  <h3>julieschf.com</h3>
+                </GridTileOverlay>
+              )}
+            </GridItem>
+          </StyledLink>
 
             <StyledLink href={''}>
               <GridItem
-                onMouseEnter={() => !isMobile && setHoveredIndex(1)}  // Set hover index for second tile
-                onMouseLeave={() => !isMobile && setHoveredIndex(null)} // Reset hover index
+                onMouseEnter={() => !isMobile && setHoveredIndex(1)}  
+                onMouseLeave={() => !isMobile && setHoveredIndex(null)}
                 $isMobile={isMobile}
               >
-                {isMobile && <h3 className={'mobile'}>Mobile Applications</h3>}
-                {!isMobile && hoveredIndex === 1 && (
-                  <GridTileOverlay $isHovered={hoveredIndex === 1}>
+                {isMobile ? (<h3 className={'mobile'}>Mobile Applications</h3>)
+                : (
+                  <GridTileOverlay>
                     <h3>Mobile Applications</h3>
                   </GridTileOverlay>
                 )}
@@ -223,9 +224,9 @@ export default function Home() {
                 onMouseLeave={() => !isMobile && setHoveredIndex(null)} // Reset hover index
                 $isMobile={isMobile}
               >
-                {isMobile && <h3 className={'mobile'}>Web Development</h3>}
-                {!isMobile && hoveredIndex === 2 && (
-                  <GridTileOverlay $isHovered={hoveredIndex === 2}>
+                {isMobile ? (<h3 className={'mobile'}>Web Development</h3>)
+                : (
+                  <GridTileOverlay>
                     <h3>Web Development</h3>
                   </GridTileOverlay>
                 )}
@@ -239,9 +240,9 @@ export default function Home() {
                 $isMobile={isMobile}
               >
                 <img src={'/images/suite-sleeps-mac.png'} />
-                {isMobile && <h3 className={'mobile'}>suitesleeps.com</h3>}
-                {!isMobile && hoveredIndex === 3 && (
-                  <GridTileOverlay $isHovered={hoveredIndex === 3}>
+                {isMobile ? (<h3 className={'mobile'}>suitesleeps.com</h3>)
+                : (
+                  <GridTileOverlay>
                     <h3>suitesleeps.com</h3>
                   </GridTileOverlay>
                 )}
@@ -255,9 +256,9 @@ export default function Home() {
                 $isMobile={isMobile}
               >
                 <img src={'/images/tvs.png'} />
-                {isMobile && <h3 className={'mobile'}>highplainsmedia.com</h3>}
-                {!isMobile && hoveredIndex === 4 && (
-                  <GridTileOverlay $isHovered={hoveredIndex === 4}>
+                {isMobile ? (<h3 className={'mobile'}>highplainsmedia.com</h3>)
+                : (
+                  <GridTileOverlay>
                     <h3>highplainsmedia.com</h3>
                   </GridTileOverlay>
                 )}
@@ -270,9 +271,9 @@ export default function Home() {
                 onMouseLeave={() => !isMobile && setHoveredIndex(null)} // Reset hover index
                 $isMobile={isMobile}
               >
-                {isMobile && <h3 className={'mobile'}>e-commerce</h3>}
-                {!isMobile && hoveredIndex === 5 && (
-                  <GridTileOverlay $isHovered={hoveredIndex === 5}>
+                {isMobile ? (<h3 className={'mobile'}>e-commerce</h3>)
+                : (
+                  <GridTileOverlay>
                     <h3>e-commerce</h3>
                   </GridTileOverlay>
                 )}
