@@ -226,7 +226,9 @@ const Project = ({ project }) => {
   const handleBack = () => {
     router.back();
   }
-  
+  console.log(project?.metadata)
+  const isService = project?.metadata?.tags?.filter(tag => tag?.sys?.id === 'services').length
+  console.log(isService)
   return (
     <>
       <Head>
@@ -242,7 +244,7 @@ const Project = ({ project }) => {
       {!isMobile && <CustomCursor hovered={hovered}/>}
       <Wrapper>
         <Container>
-            {project?.fields?.title && <HeaderPill title={project?.fields?.title} />}
+            {project?.fields?.title && <HeaderPill title={project?.fields?.title.replace('-', ' ')} />}
         </Container>
         {project?.fields?.desktopImage?.fields?.file?.url && 
         <Hero $image={project?.fields?.desktopImage?.fields?.file?.url}>
