@@ -28,6 +28,7 @@ const PillContainer = styled.div`
     box-shadow: inset 0px 4px 10px rgba(0, 0, 0, 0.6); /* Inset shadow for depth effect */
     text-transform: uppercase; 
     width: 35vw;
+    min-width: fit-content;
     z-index:1;
     position: relative;
     

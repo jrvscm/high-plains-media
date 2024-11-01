@@ -52,13 +52,16 @@ export default function Home() {
   return (
     <>
       <Head>
-        <meta charset="UTF-8" />
-        <title>High Plains Media | Leading Digital Agency</title>
-        <meta name="description" content="Elevate your business with High Plains Media, a leading digital agency specializing in tailored web development, SEO, and online marketing strategies." />
+        <meta charSet="UTF-8" />
+        <title>About Us | High Plains Media - Your Digital Growth Partner</title>
+        <meta 
+          name="description" 
+          content="Learn about High Plains Media, a digital agency with a focus on empowering small businesses through custom web development, mobile apps, and e-commerce solutions. Discover our mission, values, and dedication to helping you succeed online." 
+        />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/images/highplains-logo-v2.svg" />
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://www.highplainsmedia.com/" />
+        <link rel="canonical" href="https://www.highplainsmedia.com/about" />
       </Head>
       {SplashComponent}
       {!isMobile && <CustomCursor hovered={hovered}/>}

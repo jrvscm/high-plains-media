@@ -226,19 +226,21 @@ const Project = ({ project }) => {
   const handleBack = () => {
     router.back();
   }
-  console.log(project?.metadata)
   const isService = project?.metadata?.tags?.filter(tag => tag?.sys?.id === 'services').length
-  console.log(isService)
+
   return (
     <>
       <Head>
-        <meta charset="UTF-8" />
-        <title>Julie&apos;s Caring Heart Foundation Tournament | High Plains Media Project</title>
-        <meta name="description" content="Discover how High Plains Media created a custom website for Julie's Caring Heart Foundation to streamline player and sponsor signups, handle payments, and provide real-time registration data for their annual golf tournament." />
+        <meta charSet="UTF-8" />
+        <title>High Plains Media | {project?.fields?.title}</title>
+        <meta 
+          name="description" 
+          content={`Learn more about our work on ${project?.fields?.title.replace('-', ' ')}. We developed a custom solution featuring ${project?.fields?.projectHighlights}.`} 
+        />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/images/highplains-logo-v2.svg" />
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://www.highplainsmedia.com/projects/julieschf" />
+        <link rel="canonical" href={`https://www.highplainsmedia.com/projects/${project?.fields?.title}`} />
       </Head>
       {SplashComponent}
       {!isMobile && <CustomCursor hovered={hovered}/>}
@@ -248,7 +250,7 @@ const Project = ({ project }) => {
         </Container>
         {project?.fields?.desktopImage?.fields?.file?.url && 
         <Hero $image={project?.fields?.desktopImage?.fields?.file?.url}>
-          {project?.fields?.mobileImage?.fields?.file?.url && 
+          {!isService && project?.fields?.mobileImage?.fields?.file?.url && 
           <Phone $image={project?.fields?.mobileImage?.fields?.file?.url} />}
         </Hero>}
         <Technologies>
@@ -274,7 +276,7 @@ const Project = ({ project }) => {
           }
           <div>
           <AboutTheProjectHeader>
-            ABOUT THE PROJECT
+            {!isService ? 'ABOUT THE PROJECT' : project?.fields?.title.replace('-', ' ').toUpperCase()}
           </AboutTheProjectHeader>
           <AboutTheProjectP>
             {project?.fields?.outline}<br /><br />

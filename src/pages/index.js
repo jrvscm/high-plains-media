@@ -173,12 +173,15 @@ export default function Home() {
     <>
       <Head>
         <meta charSet="UTF-8" />
-        <title>High Plains Media | Leading Digital Agency</title>
-        <meta name="description" content="Elevate your business with High Plains Media, a leading digital agency specializing in tailored web development, SEO, and online marketing strategies." />
+        <title>Our Work | High Plains Media Projects Gallery</title>
+        <meta 
+          name="description" 
+          content="Explore High Plains Media's portfolio of custom websites, mobile applications, and e-commerce projects for small businesses. Discover how we bring ideas to life through innovative design and development." 
+        />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/images/highplains-logo-v2.svg" />
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://www.highplainsmedia.com/" />
+        <link rel="canonical" href="https://www.highplainsmedia.com/projects" />
       </Head>
       {SplashComponent}
       {!isMobile && <CustomCursor hovered={hoveredIndex !== null} />}
@@ -203,7 +206,7 @@ export default function Home() {
             </GridItem>
           </StyledLink>
 
-            <StyledLink href={''}>
+            <StyledLink href={'/projects/mobile-apps'}>
               <GridItem
                 onMouseEnter={() => !isMobile && setHoveredIndex(1)}  
                 onMouseLeave={() => !isMobile && setHoveredIndex(null)}
@@ -218,7 +221,7 @@ export default function Home() {
               </GridItem>
             </StyledLink>
 
-            <StyledLink href={''}>
+            <StyledLink href={'/projects/web-development'}>
               <GridItem
                 onMouseEnter={() => !isMobile && setHoveredIndex(2)}  // Set hover index for third tile
                 onMouseLeave={() => !isMobile && setHoveredIndex(null)} // Reset hover index
@@ -249,7 +252,7 @@ export default function Home() {
               </GridItem>
             </StyledLink>
 
-            <StyledLink href={'/projects/suitesleeps'}>
+            <StyledLink href={'/projects/highplainsmedia'}>
               <GridItem
                 onMouseEnter={() => !isMobile && setHoveredIndex(4)}  // Set hover index for fifth tile
                 onMouseLeave={() => !isMobile && setHoveredIndex(null)} // Reset hover index
@@ -265,7 +268,7 @@ export default function Home() {
               </GridItem>
             </StyledLink>
 
-            <StyledLink href={''}>
+            <StyledLink href={'/projects/ecommerce'}>
               <GridItem
                 onMouseEnter={() => !isMobile && setHoveredIndex(5)}  // Set hover index for sixth tile
                 onMouseLeave={() => !isMobile && setHoveredIndex(null)} // Reset hover index
