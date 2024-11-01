@@ -179,7 +179,8 @@ export default function Home() {
           content="Explore High Plains Media's portfolio of custom websites, mobile applications, and e-commerce projects for small businesses. Discover how we bring ideas to life through innovative design and development." 
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/images/highplains-logo-v2.svg" />
+        <link rel="icon" href="/images/highplains-logo-v2.svg" media="(prefers-color-scheme: dark)" />
+        <link rel="icon" href="/high-plains-favicon-dark.svg" media="(prefers-color-scheme: light)" />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://www.highplainsmedia.com/projects" />
       </Head>

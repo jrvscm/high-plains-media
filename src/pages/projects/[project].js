@@ -238,7 +238,8 @@ const Project = ({ project }) => {
           content={`Learn more about our work on ${project?.fields?.title.replace('-', ' ')}. We developed a custom solution featuring ${project?.fields?.projectHighlights}.`} 
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/images/highplains-logo-v2.svg" />
+        <link rel="icon" href="/images/highplains-logo-v2.svg" media="(prefers-color-scheme: dark)" />
+        <link rel="icon" href="/high-plains-favicon-dark.svg" media="(prefers-color-scheme: light)" />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href={`https://www.highplainsmedia.com/projects/${project?.fields?.title}`} />
       </Head>

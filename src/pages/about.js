@@ -59,7 +59,8 @@ export default function Home() {
           content="Learn about High Plains Media, a digital agency with a focus on empowering small businesses through custom web development, mobile apps, and e-commerce solutions. Discover our mission, values, and dedication to helping you succeed online." 
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/images/highplains-logo-v2.svg" />
+        <link rel="icon" href="/images/highplains-logo-v2.svg" media="(prefers-color-scheme: dark)" />
+        <link rel="icon" href="/high-plains-favicon-dark.svg" media="(prefers-color-scheme: light)" />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://www.highplainsmedia.com/about" />
       </Head>
