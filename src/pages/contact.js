@@ -106,7 +106,7 @@ export default function Home() {
     <>
       <Head>
         <meta charSet="UTF-8" />
-        <title>Contact Us | High Plains Media - Let's Build Your Digital Future</title>
+        <title>Contact Us | High Plains Media - Let&apos;s Build Your Digital Future</title>
         <meta 
           name="description" 
           content="Get in touch with High Plains Media to discuss your digital goals. Reach out to our team for web development, mobile app, and e-commerce solutions tailored to your business needs." 
