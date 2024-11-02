@@ -33,7 +33,7 @@ const FooterP = styled.p`
     li > a,
     a {
         transition: all .25s ease;
-        text-decoration: underline;
+        text-decoration: none;
         color: ${({ theme }) => theme.colors.lightGray};
         &:hover {
             filter: brightness(80%);
@@ -114,11 +114,9 @@ export const Footer = () => {
                     <Col lg={3} md={6} className="py-3">
                         <H4>COMPANY</H4>
                         <FooterList>
-                            <Li className="d-flex justify-content-start align-items-center py-1"><FooterP>Home</FooterP></Li>
-                            <Li className="d-flex justify-content-start align-items-center py-1"><FooterP>About</FooterP></Li>
-                            <Li className="d-flex justify-content-start align-items-center py-1"><FooterP>Services</FooterP></Li>
-                            <Li className="d-flex justify-content-start align-items-center py-1"><FooterP>Terms of Service</FooterP></Li>
-                            <Li className="d-flex justify-content-start align-items-center py-1"><FooterP>Privacy Policy</FooterP></Li>
+                            <Li className="d-flex justify-content-start align-items-center py-1"><FooterP><a href="https://www.highplainsmedia.com">Home</a></FooterP></Li>
+                            <Li className="d-flex justify-content-start align-items-center py-1"><FooterP><a href="https://www.highplainsmedia.com/about">About</a></FooterP></Li>
+                            <Li className="d-flex justify-content-start align-items-center py-1"><FooterP><a href="https://www.highplainsmedia.com/privacy">Privacy Policy</a></FooterP></Li>
                         </FooterList>
                     </Col>
                     <Col lg={3} md={6} className="py-3">
