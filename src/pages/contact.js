@@ -120,7 +120,7 @@ export default function Home() {
         <meta property="og:title" content="Contact Us | High Plains Media - Let&apos;s Build Your Digital Future" />
         <meta property="og:description" content="Get in touch with High Plains Media to discuss your digital goals. Reach out to our team for web development, mobile app, and e-commerce solutions tailored to your business needs." />
         <meta property="og:image" content="https://highplainsmedia.com/images/mobile-apps-min2.png"/>
-        <meta property="og:url" content="https://www.highplainsmedia.com/" />
+        <meta property="og:url" content="https://www.highplainsmedia.com/contact" />
         <meta property="og:type" content="website" />
 
         <meta name="twitter:card" content="summary_large_image" />
