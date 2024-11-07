@@ -226,6 +226,9 @@ const Project = ({ project }) => {
   const handleBack = () => {
     router.back();
   }
+  const handleClick = () => {
+    router.push('/contact');
+  }
   const isService = project?.metadata?.tags?.filter(tag => tag?.sys?.id === 'services').length
 
   return (
