@@ -289,7 +289,7 @@ const Project = ({ project }) => {
             )}
           </AboutTheProjectP>
           <BtnWrapper $isMobile={isMobile} md={6}>
-            <Button onClick={() => handleClick()} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} className="mt-2 btn-primary" style={{width: isMobile ? '100%' : ''}}>contact</Button>
+            <Button onClick={handleClick} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)} className="mt-2 btn-primary" style={{width: isMobile ? '100%' : ''}}>contact</Button>
           </BtnWrapper>
           </div>
         </AboutTheProjectWrapper>
