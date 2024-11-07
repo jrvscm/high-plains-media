@@ -115,12 +115,12 @@ export default function Home() {
         <link rel="icon" href="/images/highplains-logo-v2.svg" media="(prefers-color-scheme: dark)" />
         <link rel="icon" href="/high-plains-favicon-dark.svg" media="(prefers-color-scheme: light)" />
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://www.highplainsmedia.com/contact" />
+        <link rel="canonical" href="https://highplainsmedia.com/contact" />
 
         <meta property="og:title" content="Contact Us | High Plains Media - Let&apos;s Build Your Digital Future" />
         <meta property="og:description" content="Get in touch with High Plains Media to discuss your digital goals. Reach out to our team for web development, mobile app, and e-commerce solutions tailored to your business needs." />
         <meta property="og:image" content="https://highplainsmedia.com/images/mobile-apps-min2.png"/>
-        <meta property="og:url" content="https://www.highplainsmedia.com/contact" />
+        <meta property="og:url" content="https://highplainsmedia.com/contact" />
         <meta property="og:type" content="website" />
 
         <meta name="twitter:card" content="summary_large_image" />
