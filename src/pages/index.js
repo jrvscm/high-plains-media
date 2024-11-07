@@ -172,17 +172,28 @@ export default function Home() {
   return (
     <>
       <Head>
-        <meta charSet="UTF-8" />
-        <title>Our Work | High Plains Media Projects Gallery</title>
-        <meta 
-          name="description" 
-          content="Explore High Plains Media's portfolio of custom websites, mobile applications, and e-commerce projects for small businesses. Discover how we bring ideas to life through innovative design and development." 
-        />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/images/highplains-logo-v2.svg" media="(prefers-color-scheme: dark)" />
-        <link rel="icon" href="/high-plains-favicon-dark.svg" media="(prefers-color-scheme: light)" />
-        <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://www.highplainsmedia.com/projects" />
+      <meta charSet="UTF-8" />
+      <title>Our Work | High Plains Media Projects Gallery</title>
+      <meta 
+        name="description" 
+        content="Explore High Plains Media's portfolio of custom websites, mobile applications, and e-commerce projects for small businesses. Discover how we bring ideas to life through innovative design and development." 
+      />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <link rel="icon" href="/images/highplains-logo-v2.svg" media="(prefers-color-scheme: dark)" />
+      <link rel="icon" href="/high-plains-favicon-dark.svg" media="(prefers-color-scheme: light)" />
+      <meta name="robots" content="index, follow" />
+      <link rel="canonical" href="https://www.highplainsmedia.com/" />
+
+      <meta property="og:title" content="Our Work | High Plains Media Projects Gallery" />
+      <meta property="og:description" content="Explore our portfolio of custom websites, mobile applications, and e-commerce projects for small businesses." />
+      <meta property="og:image" content="https://www.highplainsmedia.com/public/images/mobile-apps-min2.png"/>
+      <meta property="og:url" content="https://www.highplainsmedia.com/" />
+      <meta property="og:type" content="website" />
+
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content="Our Work | High Plains Media Projects Gallery" />
+      <meta name="twitter:description" content="Explore our portfolio of custom websites, mobile applications, and e-commerce projects for small businesses." />
+      <meta name="twitter:image" content="https://www.highplainsmedia.com/public/images/mobile-apps-min2.png" />
       </Head>
       {SplashComponent}
       {!isMobile && <CustomCursor hovered={hoveredIndex !== null} />}
