@@ -1,234 +1,291 @@
-import { useEffect, useRef } from 'react';
+import { useState } from 'react';
 import Head from "next/head";
 import styled from 'styled-components';
-import { useInView } from 'react-intersection-observer';
 import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Button, { primaryHoverStyle, primaryButtonStyle, secondaryButtonStyle, secondaryHoverStyle } from '../components/Button';
-import Card from '../components/Card';
-import ImageLeftContentRight from '../components/ImageLeftContentRight';
-import { MdOutlinePhoneIphone, MdLaptop, MdOutlineShoppingCart, MdOutlineBrush, MdOutlineContentCopy, MdOutlineTrendingUp, MdFilterList } from "react-icons/md";
-import { IoMdAnalytics } from 'react-icons/io';
 import { device } from '../styles/breakpoints';
 import useResponsive from '../components/hooks/useResponsive';
-import WorkSection from '../components/WorkSection';
-import ReviewsCarousel from '../components/ReviewsCarousel';
-import NewsletterSection from '../components/NewsletterSection';
-import ContactSection from '../components/ContactSection';
-import { useRouter } from 'next/router';
-import { useHash } from '../components/contexts/HashContext';
-import { updateHash } from '../utils/routerUtil';
+import useSplashScreen from '../components/hooks/useSplashScreen';
+import Link from 'next/link';
 
-const Hero = styled.div`
-  height: 75vh;
-  background: url('/images/hero-bg.jpeg') top left;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
+import HeaderPill from '../components/HeaderPill';
+import CustomCursor from '../components/CustomCursor';
+
+const Wrapper = styled.div`
   position: relative;
-
-  &:before {
-    content: "";
-    background: rgba(255, 255, 255, 0.6);
-    position: absolute;
-    bottom: 0;
-    top: 0;
-    left: 0;
-    right: 0;
-  }
+  padding-bottom: 100px;
+  background: ${({ theme }) => theme.colors.backgroundGradient};
 
   @media ${device.tablet} {
-    background-attachment: scroll;
-  }
-
-  @media ${device.mobile} {
-    background-attachment: scroll;
+    background: ${({ theme }) => theme.colors.mobileBackgroundGradient};
   }
 `;
 
-const StyledContainer = styled(Container)`
-  opacity: 0;
-  height: 100%;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  position: relative;
-  flex-direction: column;
-
-  ${({ $isVisible, theme }) => $isVisible && theme.tokens.fadeInUpAnimation}
-`;
-
-const Span = styled.span`
-  color: ${({ theme }) => theme.colors.blue};
-`;
-
-const H1 = styled.h1`
-  ${({ theme }) => theme.fonts.font48ExtraBold};
-`;
-
-const H2 = styled.h1`
-  ${({ theme }) => theme.fonts.fontBody24Regular};
-`;
-
-const ButtonsWrapper = styled.div`
+const GridTileOverlay = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: ${({ theme }) => `${theme.colors.secondaryDark}F2`};
   display: flex;
   align-items: center;
   justify-content: center;
+  color: white;
+  font-size: 24px;
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  z-index: 2;
+  will-change: opacity, transform;
+
+  > h3 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 32px;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
+    color: white;
+    z-index: 3;
+  }
+`;
+
+const GridWrapper = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Two equal columns */
+  grid-template-rows: repeat(2, 1fr); /* Two equal rows */
+  gap: ${({ $isMobile }) => ($isMobile ? '16px' : '18px')}; /* Gap between grid items */
+  padding: 40px 0px; /* Padding around the grid */
+  position: relative;
+  width: 100%;
+  height: 100%;
+  z-index: 10; /* Ensure it stays above other content */
 
   @media ${device.tablet} {
-    flex-direction: column;
-    margin: 0 auto;
+    grid-template-columns: 1fr; /* One column on smaller screens */
+    grid-template-rows: auto; /* Auto rows on smaller screens */
+    padding: 50px 0px;
+  }
+`;
 
-    button {
-      min-width: 90vw;
-      &:last-of-type {
-        margin: 0px 0px 16px 0px;
-      }
+const GridItem = styled.div`
+  position: relative;
+  min-height: 480px;
+  border-radius: 15px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease-in-out;
+  cursor: pointer;
+
+  @media ${device.tablet} {
+    min-height: 250px;
+  }
+
+  &:hover {
+    > ${GridTileOverlay} {
+      opacity: 1;
+      visibility: visible;
     }
   }
-`;
 
-const Services = styled.section`
-  padding: ${({ theme }) => theme.spacing.xxxlg};
-  background: ${({ theme }) => theme.colors.white};
+  & img {
+    position: relative;
+    width: 100%;
+    height: auto;
+    z-index: 1;
+  }
 
-  @media ${device.tablet} {
-    padding: ${({ theme }) => `${theme.spacing.xlg} ${theme.spacing.sm}`};
+  & h3.mobile {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 24px;
+    color: #fff;
+    text-shadow: 0 0 5px rgba(0, 255, 255, 0.7), 0 0 10px rgba(0, 255, 255, 0.5);
+    padding: 10px;
+    border-radius: 0px;
+    background: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    bottom: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0;
+    text-align: center;
+    width: 100%;
   }
 `;
 
-const StyledRow = styled(Row)`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: ${({ theme }) => theme.spacing.md};
-  margin: 0 auto;
-  width: 100%;
+const StyledLink = styled(Link)`
+  &:nth-child(1) ${GridItem}{
+    background: #86C16B; /* Muted green */
+    &::before {
+      background: #F2E3C9; /* Pale beige */
+    }
+  }
+
+  &:nth-child(2) ${GridItem} {
+    background: url('/images/mobile-apps-min2.png') center center, linear-gradient(135deg, rgba(0,0,0,1), rgba(0,0,0,1));
+    background-size: cover;
+    z-index: 0;
+    &::before {
+      display: none;
+    }
+  }
+
+  &:nth-child(3) ${GridItem} {
+    background: #dfbccf; /* Muted Pink */
+    background: url('/images/web-development-tile.svg') left center;
+    background-size: cover;
+
+    &::before {
+      display: none;
+    }
+  }
+
+  &:nth-child(4) ${GridItem} {
+    background: #F9866F; /* Coral */
+    &::before {
+      background: #B3DDF2; /* Light sky blue */
+    }
+  }
+
+  &:nth-child(5) ${GridItem} {
+    background: #4D47A1; /* Coral */
+    &::before {
+      background: #C8B8E3; /* Light sky blue */
+    }
+  }
+
+  &:nth-child(6) ${GridItem} {
+    background: url('/images/ecommerce.png') center center, linear-gradient(135deg, rgba(0,0,0,1), rgba(0,0,0,1));
+    background-size: cover;
+
+    &::before {
+      display: none;
+    }
+  }
 `;
 
 export default function Home() {
-  const { hash, setHash } = useHash(); // Consume hash state from context
-  const router = useRouter();
+  const { isSplashVisible, SplashComponent } = useSplashScreen('/images/highplains-logo-v2.svg');
+  const [hoveredIndex, setHoveredIndex] = useState(null);
   const { isMobile } = useResponsive();
-  const cards = [
-    { title: "Website Development", Icon: MdLaptop, text: "Responsive and engaging websites that elevate your online presence." },
-    { title: 'Mobile Applications', Icon: MdOutlinePhoneIphone, text: "Custom mobile solutions for iOS and Android that enhance engagement." },
-    { title: "Digital Marketing", Icon: IoMdAnalytics, text: "Strategic digital marketing that boosts visibility and increases conversions." },
-    { title: "E-commerce", Icon: MdOutlineShoppingCart, text: "Seamless e-commerce solutions tailored for growth so you can start selling today." },
-    ...(!isMobile ? [
-      { title: "Content Strategy", Icon: MdOutlineContentCopy, text: "Content strategy that engages your audience, enhances SEO, and drives traffic to your site." },
-      { title: "Funnel Creation", Icon: MdFilterList, text: "Design effective marketing funnels that convert visitors into customers." },
-      { title: "SEO Optimization", Icon: MdOutlineTrendingUp, text: "Boost search engine ranking and increase visibility with our expert SEO strategies." },
-      { title: "Graphic Design", Icon: MdOutlineBrush, text: "Transform your projects and bring them to life with our graphic design services." }
-    ] : []), // Use an empty array if not mobile to spread nothing
-  ];
-  
-
-  const { ref: servicesRef, inView: servicesInView } = useInView({ threshold: 0.5, triggerOnce: true });
-  const { ref: heroRef, inView: heroInView } = useInView({ threshold: 0.5, triggerOnce: true });
-
-  //nav refs
-  const { ref: heroRefNav, inView: heroInViewNav } = useInView({ threshold: 0.5 });
-  const { ref: servicesRefNav, inView: servicesInViewNav } = useInView({ threshold: 0.5 });
-  const { ref: workSectionRefNav, inView: workSectionInViewNav } = useInView({ threshold: 0.5 });
-  const { ref: contactSectionRefNav, inView: contactSectionInViewNav } = useInView({ threshold: 0.5 });
-
-  useEffect(() => {
-    if (heroInViewNav) {
-      updateHash('', setHash);
-    } else if (servicesInViewNav) {
-      updateHash('services', setHash); // Pass setHash to update the context
-    } else if(workSectionInViewNav) {
-      updateHash('work', setHash);
-    } else if(contactSectionInViewNav) {
-      updateHash('contact', setHash);
-    }
-  }, [heroInViewNav, setHash, servicesInViewNav, contactSectionInViewNav, workSectionInViewNav]);
-
-  useEffect(() => {
-    const handleHashChange = () => {
-      const newHash = window.location.hash.substring(1);
-      setHash(newHash);
-    };
-
-    router.events.on('hashChangeComplete', handleHashChange);
-
-    handleHashChange(); // Handle initial load
-
-    return () => {
-      router.events.off('hashChangeComplete', handleHashChange);
-    };
-  }, [router, setHash]);
-
-  const contactSectionRef = useRef(null);
-
-  const scrollToContact = () => {
-    if (contactSectionRef.current) {
-      contactSectionRef.current.scrollToSection();
-    }
-  };
-
-  const headerMsg = !isMobile
-    ? 'Enhance your online reach and increase conversions through our AI-powered, project build-out. Our approach leverages the latest in AI technology to ensure every aspect of your project is optimized for success.'
-    : 'Enhance your online reach and increase conversions through our AI-powered, project build-out.'
 
   return (
     <>
       <Head>
-        <meta charset="UTF-8" />
-        <title>High Plains Media | Leading Digital Agency</title>
-        <meta name="description" content="Elevate your business with High Plains Media, a leading digital agency specializing in tailored web development, SEO, and online marketing strategies." />
+        <meta charSet="UTF-8" />
+        <title>Our Work | High Plains Media Projects Gallery</title>
+        <meta 
+          name="description" 
+          content="Explore High Plains Media's portfolio of custom websites, mobile applications, and e-commerce projects for small businesses. Discover how we bring ideas to life through innovative design and development." 
+        />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/high-plains-favicon.png" />
+        <link rel="icon" href="/images/highplains-logo-v2.svg" media="(prefers-color-scheme: dark)" />
+        <link rel="icon" href="/high-plains-favicon-dark.svg" media="(prefers-color-scheme: light)" />
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://www.highplainsmedia.com/" />
+        <link rel="canonical" href="https://www.highplainsmedia.com/projects" />
       </Head>
-      
-      <div ref={heroRefNav} id="hero-target"/>
-      <Hero ref={heroRef}>
-        <StyledContainer $isVisible={heroInView}>
-          <H1>Welcome to <Span>High Plains Media</Span></H1>
-          <H2>We are a team of talented engineers and designers building projects for the web</H2>
-          <ButtonsWrapper>
-            <Button variant="primary" $style={primaryButtonStyle} $hoverStyle={primaryHoverStyle} onClick={scrollToContact}>Schedule a Call</Button>
-            <Button variant="secondary" $style={secondaryButtonStyle} $hoverStyle={secondaryHoverStyle} onClick={scrollToContact}>Send an Email</Button>
-          </ButtonsWrapper>
-        </StyledContainer>
-      </Hero>
-
-      <div ref={servicesRefNav} id="services-target"/>
-      <Services ref={servicesRef} id="services" style={{ minHeight: '695px' }}>
+      {SplashComponent}
+      {!isMobile && <CustomCursor hovered={hoveredIndex !== null} />}
+      <Wrapper>
         <Container>
-          <StyledRow>
-            {(servicesInView || isMobile) && cards.map(({ title, Icon, text }, index) => (
-              <Card title={title} Icon={Icon} text={text} $delay={0.2 * index} $isVisible={servicesInView || isMobile} key={'service_' + index} overrideHref={false} />
-            ))}
-          </StyledRow>
+          <HeaderPill title={'work'} />
+          <GridWrapper $isMobile={isMobile} className={'container'}>
+          <StyledLink href={'/projects/julieschf'}>
+            <GridItem
+              onMouseEnter={() => !isMobile && setHoveredIndex(0)}
+              onMouseLeave={() => !isMobile && setHoveredIndex(null)}
+              $isMobile={isMobile}
+            >
+              <img src={'/images/sunshinePaintAndBody.png'} />
+              {isMobile ? (
+                <h3 className="mobile">julieschf.com</h3> 
+              ) : (
+                <GridTileOverlay>
+                  <h3>julieschf.com</h3>
+                </GridTileOverlay>
+              )}
+            </GridItem>
+          </StyledLink>
+
+            <StyledLink href={'/projects/mobile-apps'}>
+              <GridItem
+                onMouseEnter={() => !isMobile && setHoveredIndex(1)}  
+                onMouseLeave={() => !isMobile && setHoveredIndex(null)}
+                $isMobile={isMobile}
+              >
+                {isMobile ? (<h3 className={'mobile'}>Mobile Applications</h3>)
+                : (
+                  <GridTileOverlay>
+                    <h3>Mobile Applications</h3>
+                  </GridTileOverlay>
+                )}
+              </GridItem>
+            </StyledLink>
+
+            <StyledLink href={'/projects/web-development'}>
+              <GridItem
+                onMouseEnter={() => !isMobile && setHoveredIndex(2)}  // Set hover index for third tile
+                onMouseLeave={() => !isMobile && setHoveredIndex(null)} // Reset hover index
+                $isMobile={isMobile}
+              >
+                {isMobile ? (<h3 className={'mobile'}>Web Development</h3>)
+                : (
+                  <GridTileOverlay>
+                    <h3>Web Development</h3>
+                  </GridTileOverlay>
+                )}
+              </GridItem>
+            </StyledLink>
+
+            <StyledLink href={'/projects/suitesleeps'}>
+              <GridItem
+                onMouseEnter={() => !isMobile && setHoveredIndex(3)}  // Set hover index for fourth tile
+                onMouseLeave={() => !isMobile && setHoveredIndex(null)} // Reset hover index
+                $isMobile={isMobile}
+              >
+                <img src={'/images/suite-sleeps-mac.png'} />
+                {isMobile ? (<h3 className={'mobile'}>suitesleeps.com</h3>)
+                : (
+                  <GridTileOverlay>
+                    <h3>suitesleeps.com</h3>
+                  </GridTileOverlay>
+                )}
+              </GridItem>
+            </StyledLink>
+
+            <StyledLink href={'/projects/highplainsmedia'}>
+              <GridItem
+                onMouseEnter={() => !isMobile && setHoveredIndex(4)}  // Set hover index for fifth tile
+                onMouseLeave={() => !isMobile && setHoveredIndex(null)} // Reset hover index
+                $isMobile={isMobile}
+              >
+                <img src={'/images/tvs.png'} />
+                {isMobile ? (<h3 className={'mobile'}>highplainsmedia.com</h3>)
+                : (
+                  <GridTileOverlay>
+                    <h3>highplainsmedia.com</h3>
+                  </GridTileOverlay>
+                )}
+              </GridItem>
+            </StyledLink>
+
+            <StyledLink href={'/projects/ecommerce'}>
+              <GridItem
+                onMouseEnter={() => !isMobile && setHoveredIndex(5)}  // Set hover index for sixth tile
+                onMouseLeave={() => !isMobile && setHoveredIndex(null)} // Reset hover index
+                $isMobile={isMobile}
+              >
+                {isMobile ? (<h3 className={'mobile'}>e-commerce</h3>)
+                : (
+                  <GridTileOverlay>
+                    <h3>e-commerce</h3>
+                  </GridTileOverlay>
+                )}
+              </GridItem>
+            </StyledLink>
+          </GridWrapper>
         </Container>
-      </Services>
-
-      <ImageLeftContentRight 
-        title={'process'}
-        headline={'how our process '}
-        spanText={'works'}
-        subhead={headerMsg}
-      />
-
-      <div ref={workSectionRefNav} id="work-target"/>
-      <WorkSection
-        title={'work'}
-        headline={"projects we've"}
-        spanText={' Built'}
-        subhead={'Our experienced team leverages cutting-edge technology and in-depth knowledge to deliver exceptional digital solutions tailored to your needs.'}
-      />
-
-      <ReviewsCarousel imageSrc={'/images/tetons.jpg'} />
-
-      <div ref={contactSectionRefNav} id="contact-target"/>
-      <ContactSection ref={contactSectionRef} />
-
-      <NewsletterSection />
+      </Wrapper>
     </>
   );
 }

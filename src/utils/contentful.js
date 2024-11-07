@@ -20,4 +20,19 @@ const getBlogPostBySlug = async (slug) => {
   return entries.items[0];
 };
 
-export { getBlogPosts, getBlogPostBySlug };
+const getPortfolioProjects = async () => {
+  const entries = await client.getEntries({
+    content_type: 'project'
+  });
+  return entries.items;
+};
+
+const getProjectByTitle = async (title) => {
+  const entries = await client.getEntries({
+    content_type: 'project',
+    'fields.title': title
+  });
+  return entries.items[0];
+};
+
+export { getBlogPosts, getBlogPostBySlug, getProjectByTitle, getPortfolioProjects };

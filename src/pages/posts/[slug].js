@@ -95,7 +95,9 @@ const Post = ({ post }) => {
         <meta property="og:description" content={post?.fields?.description || 'Default description of the blog post'} />
         <meta property="og:image" content={post?.fields?.hero?.fields?.file?.url} />
         <meta property="og:type" content="article" />
-        <link rel="icon" href="/high-planes-favicon.png" />
+        <link rel="icon" href="/images/highplains-logo-v2.svg" media="(prefers-color-scheme: dark)" />
+        <link rel="icon" href="/high-plains-favicon-dark.svg" media="(prefers-color-scheme: light)" />
+
       </Head>
       <Section>
         {post?.fields?.hero?.fields?.file?.url && <PostHero $imageSrc={post.fields.hero.fields.file.url} />}

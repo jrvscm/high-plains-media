@@ -8,7 +8,7 @@ import { MdOutlineChevronRight } from "react-icons/md";
 import { FaFacebook, FaTwitter, FaInstagram, FaSkype, FaLinkedin } from 'react-icons/fa';
 
 const Section = styled.section`
-    background: ${({ theme }) => theme.colors.white};
+    background: ${({ theme }) => theme.colors.sectionBackground};
 `;
 
 const H3 = styled.h3`
@@ -26,7 +26,7 @@ const H4 = styled.h4`
 
 
 const Span = styled.span`
-    color: ${({ theme }) => theme.colors.blue};
+    color: ${({ theme }) => theme.colors.primary};
 `;
 
 const FooterP = styled.p`
@@ -57,13 +57,13 @@ const Li = styled.li`
     &:hover {
         & > p {
             cursor: pointer;
-            color: ${({ theme }) => theme.colors.blue};
+            color: ${({ theme }) => theme.colors.primary};
         }
     }
 `;
 
 const FooterIcon = styled(MdOutlineChevronRight)`
-    color: ${({ theme }) => theme.colors.blue};
+    color: ${({ theme }) => theme.colors.primary};
 `;
 
 const SocialLinksContainer = styled.div`
@@ -82,7 +82,7 @@ const SocialLink = styled.a`
   justify-content: center;
   width: 40px;  // Ensuring it's a perfect square
   height: 40px;
-  background-color: ${({ theme }) => theme.colors.blue};
+  background-color: ${({ theme }) => theme.colors.primary};
   color: white;
   margin: 0;
   border-radius: 5px;  // Slight rounding of corners
@@ -93,7 +93,7 @@ const SocialLink = styled.a`
 `;
 
 const CopyWrapper = styled(Row)`
-    background: ${({ theme }) => theme.colors.sectionBackground};
+    background: ${({ theme }) => theme.colors.white};
     width: 100vw;
     margin: 0;
     p {

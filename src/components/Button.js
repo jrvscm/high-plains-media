@@ -9,15 +9,15 @@ export const primaryButtonStyle = css`
 `;
 
 export const primaryHoverStyle = css`
-  border: ${({ theme }) => `1px solid ${theme.colors.blue}`};
+  border: ${({ theme }) => `1px solid ${theme.colors.primary}`};
   background: transparent;
   filter: blur(1px); 
 `;
 
 export const secondaryButtonStyle = css`
   margin: ${({theme}) => `${theme.spacing.lg} 0px ${theme.spacing.smd} ${theme.spacing.smd}`};
-  border: ${({theme}) => `1px solid ${theme.colors.blue}`};
-  color: ${({theme}) => theme.colors.blue};
+  border: ${({theme}) => `1px solid ${theme.colors.primary}`};
+  color: ${({theme}) => theme.colors.primary};
   height: 48px;
   display: flex;
   align-items: center;
@@ -44,14 +44,14 @@ const CalloutButton = styled.button.attrs({className: 'roboto-regular'})`
 
     transition: all .25s ease;
 
-    border: ${({ theme, $variant }) => $variant === 'primary' ? `1px solid ${theme.colors.blue}` : `1px solid ${theme.colors.white}`};
-    background: ${({ theme, $variant }) => $variant === 'primary' ? `${theme.colors.blue}` : 'transparent'};
+    border: ${({ theme, $variant }) => $variant === 'primary' ? `1px solid ${theme.colors.primary}` : `1px solid ${theme.colors.white}`};
+    background: ${({ theme, $variant }) => $variant === 'primary' ? `${theme.colors.primary}` : 'transparent'};
     color: #fff;
 
     &:hover {
-        border: ${({ theme, $variant }) => $variant === 'primary' ? `${theme.colors.white}` : `1px solid ${theme.colors.blue}`};
+        border: ${({ theme, $variant }) => $variant === 'primary' ? `${theme.colors.white}` : `1px solid ${theme.colors.primary}`};
         background: ${({ theme, $variant }) => $variant === 'primary' ? `${theme.colors.white}` : 'transparent'};
-        color: ${({ theme, $variant }) => $variant === 'primary' ? `${theme.colors.blue}` : `${theme.colors.blue}`};
+        color: ${({ theme, $variant }) => $variant === 'primary' ? `${theme.colors.primary}` : `${theme.colors.primary}`};
         filter: brightness(${({ $variant }) => $variant === 'primary' ? '100%' : '100%'});
         ${({$hoverStyle}) => $hoverStyle}
     };

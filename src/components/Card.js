@@ -45,7 +45,7 @@ const CardContainer = styled.div`
 `;
 
 const Background = styled.div`
-  background-color: ${({ theme }) => theme.colors.blue};
+  background-color: ${({ theme }) => theme.colors.primary};
   position: absolute;
   bottom: 0;
   left: 0;
@@ -67,7 +67,7 @@ const Content = styled.div`
 
   & svg {
     transition: color .4s ease;
-    color: ${({ $isHovered, theme }) => $isHovered ? theme.colors.white : theme.colors.blue};
+    color: ${({ $isHovered, theme }) => $isHovered ? theme.colors.white : theme.colors.primary};
   }
 
   & p {
@@ -110,7 +110,7 @@ const Image = styled.img`
   filter: ${({ $isBlur }) => $isBlur ? 'blur(10px)' : 'none'};
 `;
 
-const StyledLink = styled(Link)`
+const StyledLink = styled.span`
   text-decoration: none;
 `;
 

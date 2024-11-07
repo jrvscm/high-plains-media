@@ -1,10 +1,9 @@
 import '@/styles/reset.css';
-import "@/styles/globals.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import "@/styles/globals.css";
 import { ThemeProvider } from 'styled-components';
 import { HashProvider } from '../components/contexts/HashContext';
 import { theme } from '../styles/theme';
-
 import Layout from '../components/Layout';
 import { LoadingProvider } from '../components/contexts/LoadingContext';
 
