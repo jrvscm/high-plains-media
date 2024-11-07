@@ -122,9 +122,9 @@ export const Footer = () => {
                     <Col lg={3} md={6} className="py-3">
                         <H4>FOLLOW US</H4>
                         <FooterList>
-                            <Li className="d-flex justify-content-start align-items-center py-1"><StyledLink href={``}><FooterP>Github</FooterP></StyledLink></Li>
-                            <Li className="d-flex justify-content-start align-items-center py-1"><StyledLink href={``}><FooterP>Instagram</FooterP></StyledLink></Li>
-                            <Li className="d-flex justify-content-start align-items-center py-1"><StyledLink href={``}><FooterP>LinkedIn</FooterP></StyledLink></Li>
+                            <Li className="d-flex justify-content-start align-items-center py-1"><StyledLink href={`https://github.com/jrvscm`}><FooterP>Github</FooterP></StyledLink></Li>
+                            {/* <Li className="d-flex justify-content-start align-items-center py-1"><StyledLink href={``}><FooterP>Instagram</FooterP></StyledLink></Li> */}
+                            <Li className="d-flex justify-content-start align-items-center py-1"><StyledLink href={`https://www.linkedin.com/in/chris-jarvis-dev/`} target="_blank"><FooterP>LinkedIn</FooterP></StyledLink></Li>
                         </FooterList>
                     </Col>
                     <Col lg={3} md={6} className="py-3">
