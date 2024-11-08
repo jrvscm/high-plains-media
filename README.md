@@ -1,40 +1,76 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# My Portfolio
 
-## Getting Started
+[High Plains Media](https://highplainsmedia.com)
 
-First, run the development server:
+Welcome to my personal portfolio website! This project showcases my skills, projects, and experience, built to demonstrate my abilities as a developer and designer.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🚀 Tech Stack
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+- **Framework**: [Next.js](https://nextjs.org/)
+- **Frontend**: [React](https://reactjs.org/), [styled-components](https://styled-components.com/)
+- **CMS**: [Contentful](https://www.contentful.com/) for managing and updating content dynamically
+- **Forms**: [Netlify Forms](https://docs.netlify.com/forms/setup/) for handling contact form submissions
+- **Deployment**: [Netlify](https://www.netlify.com/)
+- **Payments**: [Stripe](https://stripe.com/) for handling payments
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## 🎯 Features
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- **Dynamic Content**: All content is managed in Contentful, allowing easy updates without code changes.
+- **Responsive Design**: The site is fully responsive, ensuring an optimized experience across all devices.
+- **Contact Form**: A simple and effective contact form powered by Netlify Forms for handling submissions.
+- **Fast and Secure Hosting**: Hosted on Netlify, providing fast load times, HTTPS, and continuous deployment.
+- **Payment integration via Stripe API**: Stripe payments are integrated and can set them up with your own stripe account.
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+## 🛠 Installation & Setup
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+To run this project locally, follow these steps:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/your-username/portfolio-site.git
+   cd portfolio-site
+   ```
+   
+2. **Install dependencies:**
 
-## Deploy on Vercel
+   ```bash
+   npm install
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+3. **Set up environment variables:**
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- Create a .env.local file at the root of your project.
+
+- Add your Contentful and Netlify environment variables as shown below:
+
+  ```bash
+  CONTENTFUL_SPACE_ID=
+  CONTENTFUL_ACCESS_TOKEN=
+  NEXT_PUBLIC_STRIPE_PUBLISHABLE_API_KEY=
+  ```
+
+4. **Run the application:**
+
+   ```bash
+    npm run dev
+    Your site should now be running on http://localhost:3000
+   ```
+   
+
+## 📂 Project Structure
+
+
+Here's a brief overview of the main folders and files:
+
+- **/components:** Reusable components used throughout the site.
+- **/pages:** All pages of the site, leveraging Next.js' file-based routing.
+- **/styles:** Global styles and theme setup using styled-components.
+- **/utils:** Utility files such as communication with Contentful
+  
+
+## 📦 Deployment
+
+The project is continuously deployed via Netlify. Commits pushed to the main branch are automatically deployed.
